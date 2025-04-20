@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 16.52 s <<< FAILURE! -- in uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
-uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testService -- Time elapsed: 0.056 s <<< FAILURE!
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 16.46 s <<< FAILURE! -- in uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
+uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testService -- Time elapsed: 0.068 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <200 OK> but was: <404 NOT_FOUND>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)

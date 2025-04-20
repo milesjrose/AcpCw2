@@ -5,9 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
-import uk.ac.ed.acp.cw2.model.Message;
+import uk.ac.ed.acp.cw2.domain.ProcMessage;
 import uk.ac.ed.acp.cw2.model.MessageRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,20 +49,29 @@ public class MainService {
     public void processMessages(MessageRequest request) {
         logger.info("Processing messages; topic:{}, good_queue:{}, bad_queue:{}, count:{}",
             request.readTopic, request.writeQueueGood, request.writeQueueBad, request.messageCount);
-        
-        MessageProccessor messageProccessor = new MessageProccessor(request,  mongoDbService, rabbitMqService);
-        
-        int remainingMessages = request.messageCount;
 
-        // Process messages until there are no more messages to process
-        while (remainingMessages > 0) {
-            // Get messages from the topic, if there are no messages left, just return the received messages
-            List<Message> messages = kafkaService.receiveMessages(request.readTopic, 5000, remainingMessages);
-            remainingMessages -= messages.size();
-            messageProccessor.addMessages(messages);    // Add messages to the message processor.
-            messageProccessor.checkMessages();          // Check if the messages are good or bad, and add totals.
-            messageProccessor.processMessages();        // Store and queue good and bad messages.
+        int offset = 0;
+        List<ProcMessage> messages = new ArrayList<>();
+
+        // Get messages
+        while (messages.size() < request.messageCount){
+            // Get JSON strings from topic
+            List<String> messageStrings = kafkaService.receiveFromTopic(request.readTopic, 5000);
+            // Remove any already proccessed items
+            messageStrings.subList(0, Math.min(offset, messageStrings.size())).clear();
+            // Update offset
+            offset += messageStrings.size();
+            // Convert strings to messages
+            for (String messageString : messageStrings){
+                try {
+                    ProcMessage message = new ProcMessage(messageString);
+                    messages.add(message);
+                } catch (Exception ignored) {}
+            }
         }
-        messageProccessor.sendTotalValues(); // Send totals to queues.
+
+        // Proccess messages
+        MessageProccessor messageProccessor = new MessageProccessor(request,  mongoDbService, rabbitMqService);
+        messageProccessor.proccessMessages(messages);
     }
 }

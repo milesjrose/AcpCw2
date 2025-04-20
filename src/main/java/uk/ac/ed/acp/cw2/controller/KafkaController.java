@@ -1,12 +1,15 @@
 package uk.ac.ed.acp.cw2.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import uk.ac.ed.acp.cw2.model.Message;
 import uk.ac.ed.acp.cw2.service.KafkaService;
 import org.springframework.http.ResponseEntity;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,5 +58,16 @@ public class KafkaController {
             logger.error("Error receiving messages from Kafka topic", e);
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @PostMapping("/sendMessage/{topic}")
+    public ResponseEntity<Void> sendMessage(@PathVariable String topic, @RequestBody List<Message> messages) {
+        List<String> messageStrings = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        for (Message message : messages){
+            messageStrings.add(message.toString(objectMapper));
+        }
+        kafkaService.send(topic, messageStrings);
+        return ResponseEntity.ok().build();
     }
 }

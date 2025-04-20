@@ -9,6 +9,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
 
+import java.util.Random;
+
 /**
  * Service class responsible for managing cache storage using Redis.
  * Provides functionality to retrieve and store key-value pairs in the cache.
@@ -49,15 +51,40 @@ public class MongoDbService {
         }
     }
 
-    public void storeInCache(String cacheKey, ObjectNode cacheValue) {
+    public String storeInCache(ObjectNode cacheValue) {
+        String key = generateRandomKey();
         try {
-            // Convert ObjectNode to JSON string
             String jsonString = objectMapper.writeValueAsString(cacheValue);
-            // Store the JSON string in cache
-            storeInCache(cacheKey, jsonString);
+            storeInCache(key, jsonString);
         } catch (Exception e) {
             logger.error("Error converting ObjectNode to JSON string: {}", e.getMessage());
             throw new RuntimeException("Failed to store ObjectNode in cache", e);
         }
+        return key;
+    }
+
+    
+    /**
+     * Generates a random 10-character key in the format "12345-xxxxx"
+     * where the first part is numeric and the second part is alphanumeric
+     * 
+     * @return a random 10-character key
+     */
+    public String generateRandomKey() {
+        // Generate a random 5-digit number for the first part
+        int numericPart = 10000 + new Random().nextInt(90000);
+        
+        // Generate a random 5-character alphanumeric string for the second part
+        String alphanumericChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder alphanumericPart = new StringBuilder();
+        Random random = new Random();
+        
+        for (int i = 0; i < 5; i++) {
+            int index = random.nextInt(alphanumericChars.length());
+            alphanumericPart.append(alphanumericChars.charAt(index));
+        }
+        
+        // Combine the parts with a hyphen
+        return numericPart + "-" + alphanumericPart.toString();
     }
 }

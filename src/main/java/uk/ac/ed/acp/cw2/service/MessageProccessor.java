@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.ac.ed.acp.cw2.model.Message;
+import uk.ac.ed.acp.cw2.domain.ProcMessage;
 import uk.ac.ed.acp.cw2.model.MessageRequest;
 
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ public class MessageProccessor {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private MessageRequest request;
-    private List<Message> uncheckedMessages;
-    private List<Message> goodMessages;
-    private List<Message> badMessages;
+    private List<ProcMessage> uncheckedMessages;
+    private List<ProcMessage> goodMessages;
+    private List<ProcMessage> badMessages;
     private int goodTotalValue;
     private int badTotalValue;
     private final MongoDbService mongoDbService;
@@ -36,13 +36,20 @@ public class MessageProccessor {
         this.badTotalValue = 0;
     }
 
-    public void addMessages(List<Message> messages) {
+    public void addMessages(List<ProcMessage> messages) {
         uncheckedMessages.addAll(messages);
     }
 
+    public void proccessMessages(List<ProcMessage> messages){
+        addMessages(messages);      // Add messages to the message processor.
+        checkMessages();            // Check if the messages are good or bad, and add totals.
+        queueStoreMessages();       // Store and queue good and bad messages.
+        sendTotalValues();          // Send totals to queues.
+
+    }
     public void checkMessages() {
         try{
-            for (Message message : uncheckedMessages) {
+            for (ProcMessage message : uncheckedMessages) {
                 if (message.checkGood(goodTotalValue)) {
                     goodMessages.add(message);
                 goodTotalValue += message.getValue();
@@ -59,10 +66,10 @@ public class MessageProccessor {
     }
 
     /* Store and queue good and bad messages */
-    public void processMessages() {
+    public void queueStoreMessages() {
         try{
             // Store and queue good messages
-            for (Message message : goodMessages) {
+            for (ProcMessage message : goodMessages) {
                 message.setUuid(storeMessageMongo(message));
         }
         queueGood();
@@ -95,11 +102,9 @@ public class MessageProccessor {
     }
 
     /* Store message in mongo */
-    private String storeMessageMongo(Message message) {
-        try{    
-            String uuid = message.getUid();
-            mongoDbService.storeInCache(uuid, message.getGoodJsonNode());
-            return uuid;
+    private String storeMessageMongo(ProcMessage message) {
+        try{
+            return mongoDbService.storeInCache(message.getStoreJsonNode());
         }
         catch (Exception e){
             logger.error("Error storing message in mongo", e);
@@ -111,7 +116,7 @@ public class MessageProccessor {
     private void queueGood() {
         try{
             List<ObjectNode> messages = new ArrayList<>();
-            for (Message message : goodMessages) {
+            for (ProcMessage message : goodMessages) {
                 messages.add(message.getGoodJsonNode());
             }
             rabbitMqService.pushMessages(request.writeQueueGood, messages);
@@ -125,7 +130,7 @@ public class MessageProccessor {
     private void queueBad() {
         try{
             List<ObjectNode> messages = new ArrayList<>();
-            for (Message message : badMessages) {
+            for (ProcMessage message : badMessages) {
                 messages.add(message.getBadJsonNode());
             }
             rabbitMqService.pushMessages(request.writeQueueBad, messages);

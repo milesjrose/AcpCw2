@@ -9,15 +9,9 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import uk.ac.ed.acp.cw2.controller.KafkaController;
 import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
-import uk.ac.ed.acp.cw2.model.Message;
+import uk.ac.ed.acp.cw2.domain.ProcMessage;
 
 import java.time.Duration;
 import java.util.*;
@@ -140,8 +134,8 @@ public class KafkaService {
                 }
             }
 
-            logger.info("Returned in {}, timeout was {} (max:{})",
-                    System.currentTimeMillis() - startTime, timeoutInMsec, timeoutInMsec + 200);
+            logger.info("Returned {} messages in {} ms, timeout was {} ms (max:{} ms)",
+                    messages.size(), System.currentTimeMillis() - startTime, timeoutInMsec, timeoutInMsec + 200);
             return messages;
         } catch (Exception e) {
             logger.error("Error receiving messages from Kafka topic", e);
@@ -149,74 +143,72 @@ public class KafkaService {
         }
     }
 
+
     public boolean pushToTopic(String writeTopic, int messageCount){
         logger.info("Pushing {} messages to topic {}", messageCount, writeTopic);
         Properties kafkaProps = getKafkaProperties(environment);
+        List<String> messages = new ArrayList<>();
 
-        try (var producer = new KafkaProducer<String, String>(kafkaProps)) {
-            for (int i = 0; i < messageCount; i++) {
-                ObjectNode message = objectMapper.createObjectNode();
-                message.put("uid", uid);
-                message.put("counter", i);
+        for (int i = 0; i < messageCount; i++) {
+            try{
+            ObjectNode message = objectMapper.createObjectNode();
+            message.put("uid", uid);
+            message.put("counter", i);
 
-                String jsonMessage = objectMapper.writeValueAsString(message);
-                ProducerRecord<String, String> record = new ProducerRecord<>(writeTopic, jsonMessage);
-
-                producer.send(record, (metadata, exception) -> {
-                    if (exception != null) {
-                        logger.error("Error sending message to Kafka", exception);
-                    } else {
-                        logger.debug("Sent message {} to topic {}", jsonMessage, writeTopic);
-                    }
-                }).get(1000, TimeUnit.MILLISECONDS);
+            String jsonMessage = objectMapper.writeValueAsString(message);
+            messages.add(jsonMessage);
             }
-            return true;
-        } catch (Exception e) {
-            logger.error("Error pushing messages to Kafka topic", e);
-            return false;
+            catch (Exception e){
+                logger.error("Error creating message {}", i, e);
+            }
         }
+        send(writeTopic, messages);
+        return true;
     }
 
-    public List<Message> receiveMessages(String readTopic, int idleTimeoutMsec, int count) {
-        logger.info("Reading {} messages from topic {} with timeout {} msec", count, readTopic, idleTimeoutMsec);
+    public void send(String topic, String message){
         Properties kafkaProps = getKafkaProperties(environment);
-        List<Message> messages = new ArrayList<>();
-        long startTime = System.currentTimeMillis();
-        long lastTime;
-
-        try (var consumer = new KafkaConsumer<String, String>(kafkaProps)) {
-            consumer.subscribe(Collections.singletonList(readTopic));
-            lastTime = System.currentTimeMillis();
-
-            while (System.currentTimeMillis() - lastTime < idleTimeoutMsec && messages.size() < count) {
-
-                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(10));
-                for (ConsumerRecord<String, String> record : records) {
-                    try {
-                        // Create a Message object directly from the JSON string
-                        Message message = new Message(record.value());
-                        messages.add(message);
-                        logger.debug("Created Message object from: {}", record.value());
-                        lastTime = System.currentTimeMillis();
-                        
-                        // Break if we've received the requested number of messages
-                        if (messages.size() >= count) {
-                            break;
-                        }
-                    } catch (Exception e) {
-                        logger.error("Error creating Message from Kafka record: {}", record.value(), e);
-                    }
-                }
-            }
-
-            logger.info("Returned {}/{} messages in {} ms, (timeout: {} ms)",
-                    messages.size(), count, System.currentTimeMillis() - startTime, idleTimeoutMsec);
-            return messages;
-        } catch (Exception e) {
-            logger.error("Error receiving messages from Kafka topic", e);
-            return new ArrayList<>();
+        try(var producer = new KafkaProducer<String, String>(kafkaProps)) {
+            producer.send(new ProducerRecord<>(topic, message), (recordMetadata, ex) -> {
+                if (ex != null)
+                    ex.printStackTrace();
+                else
+                    logger.info(String.format("Produced event to topic %s: message: %s", topic, message));
+            }).get(1000, TimeUnit.MILLISECONDS);
+        } catch (ExecutionException e) {
+            logger.error("execution exc: " + e);
+            throw new RuntimeException(e);
+        } catch (TimeoutException e) {
+            logger.error("timeout exc: " + e);
+        } catch (InterruptedException e) {
+            logger.error("interrupted exc: " + e);
+            throw new RuntimeException(e);
         }
     }
 
+    public void send(String topic, List<String> messages){
+        for (String message : messages){
+            send(topic, message);
+        }
+    }
 
+    public void send(String topic, String key, String value) {
+        Properties kafkaProps = getKafkaProperties(environment);
+        try (var producer = new KafkaProducer<String, String>(kafkaProps)){
+            producer.send(new ProducerRecord<>(topic, key, value), (recordMetadata, ex) -> {
+                if (ex != null)
+                    ex.printStackTrace();
+                else
+                    logger.info(String.format("Produced event to topic %s: key = %-10s value = %s%n", topic, key, value));
+            }).get(1000, TimeUnit.MILLISECONDS);
+        } catch (ExecutionException e) {
+            logger.error("execution exc: " + e);
+            throw new RuntimeException(e);
+        } catch (TimeoutException e) {
+            logger.error("timeout exc: " + e);
+        } catch (InterruptedException e) {
+            logger.error("interrupted exc: " + e);
+            throw new RuntimeException(e);
+        }
+    }
 }
