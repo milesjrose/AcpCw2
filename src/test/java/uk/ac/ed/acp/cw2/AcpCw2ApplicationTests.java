@@ -12,6 +12,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import uk.ac.ed.acp.cw2.model.MessageRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import uk.ac.ed.acp.cw2.service.RabbitMqService;
 
 import java.util.List;
 
@@ -35,9 +38,11 @@ class AcpCw2ApplicationTests {
     private String getRabbitUrl() {return getBaseUrl() + "/rabbitmq";}
     private String getKafkaUrl() {return getBaseUrl() + "/kafka";}
     private static final String uid = "s2093547";
+    private static final Logger logger = LoggerFactory.getLogger(AcpCw2ApplicationTests.class);
 
     @Test
     void testRabbitMQ() throws Exception {
+        logger.info("--------------STARTING RABBIT MQ TEST-------------");
         int messageCount = 5;
         ResponseEntity<Void> sendResponse = restTemplate.exchange(
                 getRabbitUrl() + "/" + queueName + "/" + messageCount,
@@ -79,6 +84,7 @@ class AcpCw2ApplicationTests {
 
     @Test
     void testKafkaSent() throws Exception {
+        logger.info("-----------STARTING KAFKA TEST-------------");
         int messageCount = 5;
 
         ResponseEntity<Void> sendResponse = restTemplate.exchange(
@@ -120,7 +126,9 @@ class AcpCw2ApplicationTests {
         System.out.println("Kafka Message - uid: " + messageUid + ", counter: " + counter);
     }
 
+    @Test
     void testService() throws Exception {
+        logger.info("--------------STARTING SERVICE TEST----------------");
         MessageRequest request = new MessageRequest();
         request.readTopic = topicName;
         request.writeQueueGood = "good-queue";
@@ -128,7 +136,7 @@ class AcpCw2ApplicationTests {
         request.messageCount = 5;
 
         ResponseEntity<Void> response = restTemplate.exchange(
-                getBaseUrl() + "/service",
+                getBaseUrl() + "/proccessMessages",
                 HttpMethod.POST,
                 new HttpEntity<>(request),
                 Void.class

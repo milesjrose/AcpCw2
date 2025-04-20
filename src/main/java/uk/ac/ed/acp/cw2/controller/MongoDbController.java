@@ -11,7 +11,7 @@ import uk.ac.ed.acp.cw2.service.MongoDbService;
  * key-value pairs in the cache.
  */
 @RestController
-@RequestMapping("/api/v1/mongodb")
+@RequestMapping("/mongodb")
 public class MongoDbController {
 
     private static final Logger logger = LoggerFactory.getLogger(MongoDbController.class);

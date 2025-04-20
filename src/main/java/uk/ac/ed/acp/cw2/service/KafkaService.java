@@ -27,7 +27,7 @@ import java.util.concurrent.TimeoutException;
 
 @Service
 public class KafkaService {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaController.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaService.class);
     private final RuntimeEnvironment environment;
     private final String[] stockSymbols = "AAPL,MSFT,GOOG,AMZN,TSLA,JPMC,CATP,UNIL,LLOY".split(",");
     private final String uid = "s2093547";
@@ -166,7 +166,7 @@ public class KafkaService {
                     if (exception != null) {
                         logger.error("Error sending message to Kafka", exception);
                     } else {
-                        logger.info("Sent message {} to topic {}", jsonMessage, writeTopic);
+                        logger.debug("Sent message {} to topic {}", jsonMessage, writeTopic);
                     }
                 }).get(1000, TimeUnit.MILLISECONDS);
             }
@@ -217,4 +217,6 @@ public class KafkaService {
             return new ArrayList<>();
         }
     }
+
+
 }

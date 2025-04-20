@@ -46,8 +46,8 @@ public class MainService {
     }
 
     public void processMessages(MessageRequest request) {
-        logger.info("Processing messages from topic: {}, writing to good queue: {}, writing to bad queue: {}, with message count: {}", 
-            request);
+        logger.info("Processing messages; topic:{}, good_queue:{}, bad_queue:{}, count:{}",
+            request.readTopic, request.writeQueueGood, request.writeQueueBad, request.messageCount);
         
         MessageProccessor messageProccessor = new MessageProccessor(request,  mongoDbService, rabbitMqService);
         
@@ -56,7 +56,7 @@ public class MainService {
         // Process messages until there are no more messages to process
         while (remainingMessages > 0) {
             // Get messages from the topic, if there are no messages left, just return the received messages
-            List<Message> messages = kafkaService.receiveMessages(request.readTopic, 5000, remainingMessages);;
+            List<Message> messages = kafkaService.receiveMessages(request.readTopic, 5000, remainingMessages);
             remainingMessages -= messages.size();
             messageProccessor.addMessages(messages);    // Add messages to the message processor.
             messageProccessor.checkMessages();          // Check if the messages are good or bad, and add totals.

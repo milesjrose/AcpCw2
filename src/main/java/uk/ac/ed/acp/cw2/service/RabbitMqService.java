@@ -137,7 +137,7 @@ public class RabbitMqService {
             for (ObjectNode message : messages) {
                 String jsonMessage = objectMapper.writeValueAsString(message);
                 channel.basicPublish("", queueName, null, jsonMessage.getBytes());
-                logger.info("Sent message {} to queue {}", jsonMessage, queueName);
+                logger.debug("Sent message {} to queue {}", jsonMessage, queueName);
             }
 
         } catch (Exception e) {

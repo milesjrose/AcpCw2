@@ -13,7 +13,7 @@ import uk.ac.ed.acp.cw2.model.MessageRequest;
  * and managing key-value pairs through POST requests.
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("")
 public class ServiceController {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceController.class);

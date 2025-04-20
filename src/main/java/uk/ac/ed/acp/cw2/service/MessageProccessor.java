@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessageProccessor {
-    private static final Logger logger = LoggerFactory.getLogger(Message.class);
+    private static final Logger logger = LoggerFactory.getLogger(MessageProccessor.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private MessageRequest request;
@@ -41,66 +41,97 @@ public class MessageProccessor {
     }
 
     public void checkMessages() {
-        for (Message message : uncheckedMessages) {
-            if (message.checkGood(goodTotalValue)) {
-                goodMessages.add(message);
+        try{
+            for (Message message : uncheckedMessages) {
+                if (message.checkGood(goodTotalValue)) {
+                    goodMessages.add(message);
                 goodTotalValue += message.getValue();
             } else {
                 badMessages.add(message);
                 badTotalValue += message.getValue();
             }
-            uncheckedMessages.remove(message);
+            }
+            uncheckedMessages.clear();
+        }
+        catch (Exception e){
+            logger.error("Error checking messages", e);
         }
     }
 
     /* Store and queue good and bad messages */
     public void processMessages() {
-        // Store and queue good messages
-        for (Message message : goodMessages) {
-            message.setUuid(storeMessageMongo(message));
+        try{
+            // Store and queue good messages
+            for (Message message : goodMessages) {
+                message.setUuid(storeMessageMongo(message));
         }
         queueGood();
         // Queue bad messages
         queueBad();
         // Clear lists
-        goodMessages.clear();
-        badMessages.clear();
+            goodMessages.clear();
+            badMessages.clear();
+        }
+        catch (Exception e){
+            logger.error("Error processing messages", e);
+        }
     }
 
     /* Send total values to queues*/
     public void sendTotalValues() {
-        ObjectNode goodTotalMessage = objectMapper.createObjectNode();
-        goodTotalMessage.put("TOTAL", goodTotalValue);
+        try{
+            ObjectNode goodTotalMessage = objectMapper.createObjectNode();
+            goodTotalMessage.put("TOTAL", goodTotalValue);
 
         ObjectNode badTotalMessage = objectMapper.createObjectNode();
         badTotalMessage.put("TOTAL", badTotalValue);
 
-        rabbitMqService.pushMessage(request.writeQueueGood, goodTotalMessage);
-        rabbitMqService.pushMessage(request.writeQueueBad, badTotalMessage);
+            rabbitMqService.pushMessage(request.writeQueueGood, goodTotalMessage);
+            rabbitMqService.pushMessage(request.writeQueueBad, badTotalMessage);
+        }
+        catch (Exception e){
+            logger.error("Error sending total values", e);
+        }
     }
 
     /* Store message in mongo */
     private String storeMessageMongo(Message message) {
-        String uuid = message.getUid();
-        mongoDbService.storeInCache(uuid, message.getGoodJsonNode());
-        return uuid;
+        try{    
+            String uuid = message.getUid();
+            mongoDbService.storeInCache(uuid, message.getGoodJsonNode());
+            return uuid;
+        }
+        catch (Exception e){
+            logger.error("Error storing message in mongo", e);
+            return null;
+        }
     }
 
     /* Queue good messages */
     private void queueGood() {
-        List<ObjectNode> messages = new ArrayList<>();
-        for (Message message : goodMessages) {
-            messages.add(message.getGoodJsonNode());
+        try{
+            List<ObjectNode> messages = new ArrayList<>();
+            for (Message message : goodMessages) {
+                messages.add(message.getGoodJsonNode());
+            }
+            rabbitMqService.pushMessages(request.writeQueueGood, messages);
         }
-        rabbitMqService.pushMessages(request.writeQueueGood, messages);
+        catch (Exception e){
+            logger.error("Error queuing good messages", e);
+        }
     }
 
     /* Queue bad messages */
     private void queueBad() {
-        List<ObjectNode> messages = new ArrayList<>();
-        for (Message message : badMessages) {
-            messages.add(message.getBadJsonNode());
+        try{
+            List<ObjectNode> messages = new ArrayList<>();
+            for (Message message : badMessages) {
+                messages.add(message.getBadJsonNode());
+            }
+            rabbitMqService.pushMessages(request.writeQueueBad, messages);
         }
-        rabbitMqService.pushMessages(request.writeQueueBad, messages);
+        catch (Exception e){
+            logger.error("Error queuing bad messages", e);
+        }
     }
 }
