@@ -74,4 +74,83 @@ public class RuntimeEnvironment {
 
         return settings;
     }
+
+
+    // KAFKA_BOOTSTRAP_SERVERS
+    public String getKafkaBootstrapServers() {
+        return kafkaBootstrapServers;
+    }
+    public void setKafkaBootstrapServers(String kafkaBootstrapServers) {
+        this.kafkaBootstrapServers = kafkaBootstrapServers;
+    }
+
+    // KAFKA_INBOUND_TOPIC
+    public String getKafkaInboundTopic() {
+        return kafkaInboundTopic;
+    }
+    public void setKafkaInboundTopic(String kafkaInboundTopic) {
+        this.kafkaInboundTopic = kafkaInboundTopic;
+    }
+
+    // KAFKA_OUTBOUND_TOPIC
+    public String getKafkaOutboundTopic() {
+        return kafkaOutboundTopic;
+    }
+    public void setKafkaOutboundTopic(String kafkaOutboundTopic) {
+        this.kafkaOutboundTopic = kafkaOutboundTopic;
+    }
+
+    // REDIS_HOST
+    public String getRedisHost() {
+        return redisHost;
+    }
+    public void setRedisHost(String redisHost) {
+        this.redisHost = redisHost;
+    }
+
+    // REDIS_PORT
+    public int getRedisPort() {
+        return redisPort;
+    }
+    public void setRedisPort(int redisPort) {
+        this.redisPort = redisPort;
+    }
+
+    // RABBITMQ_HOST
+    public String getRabbitMqHost() {
+        return rabbitMqHost;
+    }
+    public void setRabbitMqHost(String rabbitMqHost) {
+        this.rabbitMqHost = rabbitMqHost;
+    }
+
+    // RABBITMQ_PORT
+    public int getRabbitMqPort() {
+        return rabbitMqPort;
+    }
+    public void setRabbitMqPort(int rabbitMqPort) {
+        this.rabbitMqPort = rabbitMqPort;
+    }
+
+    // Optional Kafka security fields
+    public String getKafkaSecurityProtocol() {
+        return kafkaSecurityProtocol;
+    }
+    public void setKafkaSecurityProtocol(String kafkaSecurityProtocol) {
+        this.kafkaSecurityProtocol = kafkaSecurityProtocol;
+    }
+
+    public String getKafkaSaslMechanism() {
+        return kafkaSaslMechanism;
+    }
+    public void setKafkaSaslMechanism(String kafkaSaslMechanism) {
+        this.kafkaSaslMechanism = kafkaSaslMechanism;
+    }
+
+    public String getKafkaSaslJaasConfig() {
+        return kafkaSaslJaasConfig;
+    }
+    public void setKafkaSaslJaasConfig(String kafkaSaslJaasConfig) {
+        this.kafkaSaslJaasConfig = kafkaSaslJaasConfig;
+    }
 }

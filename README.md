@@ -104,7 +104,7 @@ After the above installation you should have a docker dashboard entry which show
 
 Clicking on the link (or http://localhost:8001/redis-stack/browser in the browser) will launch the Redis app where you can see your keys, etc. 
 
-As soon as you triggered the cache endpoint in the ACP CW2 service using e.g. PUT http://127.0.0.1:8080/cache/myKey/This%20is%20a%20string it should show up like:
+As soon as you triggered the cache endpoint in the ACP CW2 mainService using e.g. PUT http://127.0.0.1:8080/cache/myKey/This%20is%20a%20string it should show up like:
 
 ![redis mgmt.png](assets/redis%20mgmt.png)
 ### Installing rabbitMQ
