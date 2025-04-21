@@ -18,8 +18,8 @@ public class MessageProcessor {
     private List<ProcMessage> uncheckedMessages;
     private List<ProcMessage> goodMessages;
     private List<ProcMessage> badMessages;
-    private int goodTotalValue;
-    private int badTotalValue;
+    private float goodTotalValue;
+    private float badTotalValue;
     private final MongoDbService mongoDbService;
     private final RabbitMqService rabbitMqService;
 
@@ -48,6 +48,7 @@ public class MessageProcessor {
 
     }
     public void checkMessages() {
+        logger.info("goodTotal: {}, badTotal: {}", goodTotalValue, badTotalValue);
         try{
             for (ProcMessage message : uncheckedMessages) {
                 if (message.checkGood(goodTotalValue)) {

@@ -14,9 +14,9 @@ public class ProcMessage {
     private static final Logger logger = LoggerFactory.getLogger(ProcMessage.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
     
-    private final ObjectNode jsonData;
+    public final ObjectNode jsonData;
     private String uuid;
-    private int runningTotalValue;
+    private float runningTotalValue;
 
     // Getters and setters
     public void setUuid(String uuid) {this.uuid = uuid;}
@@ -24,7 +24,7 @@ public class ProcMessage {
     public String getUid() {return jsonData.get("uid").asText();}
     public String getKey() {return jsonData.get("key").asText();}
     public String getComment() {return jsonData.get("comment").asText();}
-    public Integer getValue() {return jsonData.get("value").asInt();}
+    public float getValue() {return (float) jsonData.get("value").asDouble();}
 
     public ProcMessage(String jsonString) throws JsonProcessingException {
         logger.debug("Creating message with string {}", jsonString);
@@ -55,10 +55,10 @@ public class ProcMessage {
         logger.debug("Created message with data{}", jsonData);
     }
 
-    public boolean checkGood(int runningTotalValue) {
+    public boolean checkGood(float runningTotalValue) {
         try{
             String key = getKey();
-            if (key.length() == 4 || key.length() == 5) {
+            if (key.length() == 3 || key.length() == 4) {
                 this.runningTotalValue = runningTotalValue + getValue();
                 return true;
             }

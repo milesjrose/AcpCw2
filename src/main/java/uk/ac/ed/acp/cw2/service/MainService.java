@@ -56,7 +56,7 @@ public class MainService {
         // Get messages
         while (messages.size() < request.messageCount){
             // Get JSON strings from topic
-            List<String> messageStrings = kafkaService.receiveFromTopic(request.readTopic, 5000);
+            List<String> messageStrings = kafkaService.receiveFromTopic(request.readTopic, 5000, request.messageCount+offset);
             // Remove any already proccessed items
             messageStrings.subList(0, Math.min(offset, messageStrings.size())).clear();
             // Update offset

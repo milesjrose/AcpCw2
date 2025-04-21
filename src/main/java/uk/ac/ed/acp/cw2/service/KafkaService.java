@@ -112,17 +112,18 @@ public class KafkaService {
         return result;
     }
 
-    public List<String> receiveFromTopic(String readTopic, int timeoutInMsec) {
+    public List<String> receiveFromTopic(String readTopic, int timeoutInMsec, int count) {
         logger.info("Reading messages from topic {} with timeout {} msec", readTopic, timeoutInMsec);
         Properties kafkaProps = getKafkaProperties(environment);
         List<String> messages = new ArrayList<>();
         long startTime = System.currentTimeMillis();
         long maxExecutionTime = timeoutInMsec + 200;
+        boolean ingoreCount = (count == 0);
 
         try (var consumer = new KafkaConsumer<String, String>(kafkaProps)) {
             consumer.subscribe(Collections.singletonList(readTopic));
 
-            while (System.currentTimeMillis() - startTime < maxExecutionTime) {
+            while (System.currentTimeMillis() - startTime < maxExecutionTime && (ingoreCount || messages.size()<count)) {
                 if (System.currentTimeMillis() - startTime >= timeoutInMsec) {
                     break;
                 }
@@ -141,6 +142,9 @@ public class KafkaService {
             logger.error("Error receiving messages from Kafka topic", e);
             return null;
         }
+    }
+    public List<String> receiveFromTopic(String readTopic, int timeoutInMsec){
+        return receiveFromTopic(readTopic, timeoutInMsec, 0);
     }
 
 
@@ -187,6 +191,7 @@ public class KafkaService {
     }
 
     public void send(String topic, List<String> messages){
+        logger.info("Pushing {} messages to {}", messages.size(), topic);
         for (String message : messages){
             send(topic, message);
         }

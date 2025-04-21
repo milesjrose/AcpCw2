@@ -21,7 +21,7 @@ public class MongoDbController {
         this.mongoDbService = mongoDbService;
     }
 
-    /*
+
     @GetMapping("/cache/{cacheKey}")
     public String retrieveFromCache(@PathVariable String cacheKey) {
         return mongoDbService.retrieveFromCache(cacheKey);
@@ -31,5 +31,5 @@ public class MongoDbController {
     public void storeInCache(@PathVariable String cacheKey, @PathVariable String cacheValue) {
         mongoDbService.storeInCache(cacheKey, cacheValue);
     }
-    */
+
 }

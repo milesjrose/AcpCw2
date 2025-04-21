@@ -42,7 +42,7 @@ public class MongoDbService {
     }
 
     public void storeInCache(String cacheKey, String cacheValue) {
-        logger.info(String.format("Storing %s in cache with key %s", cacheValue, cacheKey));
+        logger.debug(String.format("Storing %s in cache with key %s", cacheValue, cacheKey));
         try (JedisPool pool = new JedisPool(environment.getRedisHost(), environment.getRedisPort()); Jedis jedis = pool.getResource()) {
             jedis.set(cacheKey, cacheValue);
         } catch (Exception e) {
