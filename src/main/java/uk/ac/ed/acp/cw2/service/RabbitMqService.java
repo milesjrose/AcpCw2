@@ -120,7 +120,7 @@ public class RabbitMqService {
                 }
                 Thread.sleep(10);
             }
-            logger.info("Returned in {}, timeout was {} (max:{})", System.currentTimeMillis() - startTime, timeoutInMsec, timeoutInMsec + 200);
+            logger.info("Returned {} messages in {}, timeout was {} (max:{})", messages.size(), System.currentTimeMillis() - startTime, timeoutInMsec, timeoutInMsec + 200);
             return messages;
         } catch (Exception e) {
             logger.error("Error receiving messages from queue", e);
@@ -140,6 +140,8 @@ public class RabbitMqService {
                 logger.debug("Sent message {} to queue {}", jsonMessage, queueName);
             }
 
+            logger.info("Sent {} messages to {}", messages.size(), queueName);
+
         } catch (Exception e) {
             logger.error("Error pushing messages to queue", e);
             throw new RuntimeException(e);
@@ -153,7 +155,7 @@ public class RabbitMqService {
             channel.queueDeclare(queueName, false, false, false, null);
             String jsonMessage = objectMapper.writeValueAsString(message);
             channel.basicPublish("", queueName, null, jsonMessage.getBytes());
-            logger.info("Sent message {} to queue {}", jsonMessage, queueName);
+            logger.debug("Sent message {} to queue {}", jsonMessage, queueName);
         } catch (Exception e) {
             logger.error("Error pushing message to queue", e);
             throw new RuntimeException(e);

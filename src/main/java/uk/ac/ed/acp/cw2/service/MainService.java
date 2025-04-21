@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
 import uk.ac.ed.acp.cw2.domain.ProcMessage;
-import uk.ac.ed.acp.cw2.model.MessageRequest;
+import uk.ac.ed.acp.cw2.model.ProcessRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class MainService {
         return "s2093547";
     }
 
-    public void processMessages(MessageRequest request) {
+    public void processMessages(ProcessRequest request) {
         logger.info("Processing messages; topic:{}, good_queue:{}, bad_queue:{}, count:{}",
             request.readTopic, request.writeQueueGood, request.writeQueueBad, request.messageCount);
 
@@ -72,7 +72,7 @@ public class MainService {
         }
 
         // Proccess messages
-        MessageProccessor messageProccessor = new MessageProccessor(request,  mongoDbService, rabbitMqService);
-        messageProccessor.proccessMessages(messages);
+        MessageProcessor messageProcessor = new MessageProcessor(request,  mongoDbService, rabbitMqService);
+        messageProcessor.proccessMessages(messages);
     }
 }

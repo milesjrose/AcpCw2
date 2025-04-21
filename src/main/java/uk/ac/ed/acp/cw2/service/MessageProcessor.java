@@ -5,16 +5,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.ac.ed.acp.cw2.domain.ProcMessage;
-import uk.ac.ed.acp.cw2.model.MessageRequest;
+import uk.ac.ed.acp.cw2.model.ProcessRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageProccessor {
-    private static final Logger logger = LoggerFactory.getLogger(MessageProccessor.class);
+public class MessageProcessor {
+    private static final Logger logger = LoggerFactory.getLogger(MessageProcessor.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    private MessageRequest request;
+    private ProcessRequest request;
     private List<ProcMessage> uncheckedMessages;
     private List<ProcMessage> goodMessages;
     private List<ProcMessage> badMessages;
@@ -23,9 +23,9 @@ public class MessageProccessor {
     private final MongoDbService mongoDbService;
     private final RabbitMqService rabbitMqService;
 
-    public MessageProccessor(MessageRequest request,
-                             MongoDbService mongoDbService,
-                             RabbitMqService rabbitMqService) {
+    public MessageProcessor(ProcessRequest request,
+                            MongoDbService mongoDbService,
+                            RabbitMqService rabbitMqService) {
         this.request = request;
         this.mongoDbService = mongoDbService;
         this.rabbitMqService = rabbitMqService;

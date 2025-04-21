@@ -173,7 +173,7 @@ public class KafkaService {
                 if (ex != null)
                     ex.printStackTrace();
                 else
-                    logger.info(String.format("Produced event to topic %s: message: %s", topic, message));
+                    logger.debug(String.format("Produced event to topic %s: message: %s", topic, message));
             }).get(1000, TimeUnit.MILLISECONDS);
         } catch (ExecutionException e) {
             logger.error("execution exc: " + e);
@@ -199,7 +199,7 @@ public class KafkaService {
                 if (ex != null)
                     ex.printStackTrace();
                 else
-                    logger.info(String.format("Produced event to topic %s: key = %-10s value = %s%n", topic, key, value));
+                    logger.debug(String.format("Produced event to topic %s: key = %-10s value = %s%n", topic, key, value));
             }).get(1000, TimeUnit.MILLISECONDS);
         } catch (ExecutionException e) {
             logger.error("execution exc: " + e);

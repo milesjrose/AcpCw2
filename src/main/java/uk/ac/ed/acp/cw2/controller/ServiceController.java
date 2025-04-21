@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ed.acp.cw2.service.MainService;
-import uk.ac.ed.acp.cw2.model.MessageRequest;
+import uk.ac.ed.acp.cw2.model.ProcessRequest;
 
 /**
  * Controller class that handles various HTTP endpoints for the application.
@@ -34,7 +34,7 @@ public class ServiceController {
     }
 
     @PostMapping("/processMessages")
-    public ResponseEntity<Void> processMessages(@RequestBody MessageRequest request) {
+    public ResponseEntity<Void> processMessages(@RequestBody ProcessRequest request) {
         try {
             mainService.processMessages(request);
             return ResponseEntity.ok().build();
