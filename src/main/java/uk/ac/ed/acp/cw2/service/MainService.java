@@ -68,6 +68,7 @@ public class MainService {
                     messages.add(message);
                 } catch (Exception ignored) {}
             }
+            logger.info("Received {}/{} valid messages", messages.size(), request.messageCount);
         }
 
         // Proccess messages
