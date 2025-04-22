@@ -1,0 +1,6 @@
+@echo off
+echo removing containers...
+call remove-all.bat
+timeout /t 1 /nobreak >nul
+echo starting containers...
+call setup.bat
