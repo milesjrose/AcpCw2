@@ -32,4 +32,9 @@ public class MongoDbController {
         mongoDbService.storeInCache(cacheKey, cacheValue);
     }
 
+    @PostMapping("/cache/rm/{cacheKey}")
+    public void removeFromCache(@PathVariable String cacheKey){
+        mongoDbService.removeFromCache(cacheKey);
+    }
+
 }

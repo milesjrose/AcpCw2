@@ -9,7 +9,7 @@ public class Message {
     public String uid;
     public String key;
     public String comment;
-    public float value;
+    public Float value;
 
     public String toString(ObjectMapper objectMapper){
         ObjectNode message = objectMapper.createObjectNode();

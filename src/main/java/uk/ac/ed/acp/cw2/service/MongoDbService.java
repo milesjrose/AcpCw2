@@ -25,10 +25,17 @@ public class MongoDbService {
         this.environment = environment;
     }
 
+    public Boolean checkKey(String key){
+        try (JedisPool pool = new JedisPool(environment.getRedisHost(), environment.getRedisPort()); Jedis jedis = pool.getResource()) {
+            logger.info("Checking {}", key);
+            return (jedis.exists(key));
+        }
+    }
+
     public String retrieveFromCache(String cacheKey) {
         logger.info(String.format("Retrieving %s from cache", cacheKey));
         try (JedisPool pool = new JedisPool(environment.getRedisHost(), environment.getRedisPort()); Jedis jedis = pool.getResource()) {
-            logger.info("Redis connection established");
+            logger.debug("Redis connection established");
 
             String result = null;
             if (jedis.exists(cacheKey)) {
@@ -51,6 +58,15 @@ public class MongoDbService {
         }
     }
 
+    public void storeInCache(String cacheKey, ObjectNode cacheValue) {
+        try {
+            String jsonString = objectMapper.writeValueAsString(cacheValue);
+            storeInCache(cacheKey, jsonString);
+        } catch (Exception e) {
+            logger.error("Error converting ObjectNode to JSON string: {}", e.getMessage());
+        }
+    }
+
     public String storeInCache(ObjectNode cacheValue) {
         String key = generateRandomKey();
         try {
@@ -63,6 +79,14 @@ public class MongoDbService {
         return key;
     }
 
+    public void removeFromCache(String cacheKey){
+        try (JedisPool pool = new JedisPool(environment.getRedisHost(), environment.getRedisPort()); Jedis jedis = pool.getResource()) {
+            jedis.del(cacheKey);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
+    }
     
     /**
      * Generates a random 10-character key in the format "12345-xxxxx"

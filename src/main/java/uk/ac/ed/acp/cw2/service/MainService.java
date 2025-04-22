@@ -75,4 +75,18 @@ public class MainService {
         MessageProcessor messageProcessor = new MessageProcessor(request,  mongoDbService, rabbitMqService);
         messageProcessor.proccessMessages(messages);
     }
+
+    public void transformMessages(TransformRequest request){
+        logger.info("Transforming messages; read_queue:{}, write_queue:{}, count:{}",
+            request.readQueue, request.writeQueue, request.messageCount);
+
+        List<String> messageStrings = rabbitMqService.receiveFromQueue(request.readQueue, 0);
+        List<TransformMessage> messages = new ArrayList<>();
+        for (String messageString : messageStrings){
+            try {
+                messages.add(new TransformMessage(messageString));
+            } catch (Exception ignored) {}
+        }
+        
+    }
 }
