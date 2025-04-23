@@ -33,26 +33,37 @@ public class StorageService {
         this.delUrl = storageServiceUrl + "/api/v1/blob/";
     }
 
+    // ================================ Push ================================
+
     public BlobPacket pushBlob(BlobPacket packet) {
-        logger.info("Pushing blob to storage service: {}", packet.pushJson());
         HttpEntity<String> request = new HttpEntity<>(packet.pushJson(), Headers.createJsonHeaders());
         try{
             ResponseEntity<String> response = restTemplate.postForEntity(pushUrl, request, String.class);
             if (response.getStatusCode().equals(HttpStatus.valueOf(200))) {
                 packet.uuid = Parser.parseString(response.getBody());
-                logger.info("Uploaded string to storage service: {} ({})", response.getBody(), packet.uuid);
+                logger.info("Pushed to {} in {}: {} ", packet.datasetName, packet.uuid, response.getBody());
                 return packet;
             } else {
                     throw new Exception(String.format("Bad response: %s", response.getStatusCode()));
             }
         } catch (Exception e) {
-            logger.error("Failed to push blob to storage service: {}", e.getMessage());
+            logger.error("Error pushing blob: {}", e.getMessage());
             return null;
         } 
     }
 
+    public String pushBlob(String datasetName, String data) {
+        BlobPacket packet = new BlobPacket(datasetName, data);
+        return pushBlob(packet).uuid;
+    }
+
+    public String pushBlob(ObjectNode node) {
+        return pushBlob(defualtStoreName, node.toString().replace("\"", "\\\""));
+    }
+
+    // ================================ Receive ================================
+
     public BlobPacket receiveBlob(BlobPacket packet) {
-        logger.info("Receiving blob from storage service: {}", packet.uuid);
         if (packet.uuid == null) {
             logger.error("UUID is null");
             return null;
@@ -71,7 +82,7 @@ public class StorageService {
                 if (receivedPacket != null) {
                     packet.datasetName = receivedPacket.datasetName;
                     packet.data = receivedPacket.data;
-                    logger.info("Received blob from storage service: {} ({}, {})", response.getBody(), packet.datasetName, packet.data);
+                    logger.info("Received from {} in {}: {}", packet.uuid, packet.datasetName, packet.data);
                     return packet;
                 } else {
                     throw new Exception(String.format("Null blob: %s", response.getStatusCode()));
@@ -80,10 +91,17 @@ public class StorageService {
                 throw new Exception(String.format("Bad response: %s", response.getStatusCode()));
             }
         } catch (Exception e) {
-            logger.error("Failed to receive blob from storage service: {} {}", url, e.getMessage());
+            logger.error("Error receiving blob: {} {}", url, e.getMessage());
             return null;
         }
     }
+
+    public BlobPacket receiveBlob(String uuid) {
+        BlobPacket packet = new BlobPacket(uuid);
+        return receiveBlob(packet);
+    }
+
+    // ================================ Delete ================================
 
     public boolean deleteBlob(String uuid) {
         if (uuid == null) {
@@ -101,33 +119,19 @@ public class StorageService {
             );
 
             if (response.getStatusCode().equals(HttpStatus.valueOf(200))) {
-                logger.info("Deleted blob from storage service: {}", uuid);
+                logger.info("Deleted blob: {}", uuid);
                 return true;
             } else {
                 throw new Exception(String.format("Bad response: %s", response.getStatusCode()));
             }
         } catch (Exception e) {
-            logger.error("Failed to delete blob from storage service: {} {}", url, e.getMessage());
+            logger.error("Error deleting blob: {} {}", url, e.getMessage());
             return false;
         }
     }
 
-    public String pushBlob(String datasetName, String data) {
-        BlobPacket packet = new BlobPacket(datasetName, data);
-        return pushBlob(packet).uuid;
-    }
-
-    public BlobPacket receiveBlob(String uuid) {
-        BlobPacket packet = new BlobPacket(uuid);
-        return receiveBlob(packet);
-    }
-
     public boolean deleteBlob(BlobPacket packet) {
         return deleteBlob(packet.uuid);
-    }
-
-    public String pushBlob(ObjectNode node) {
-        return pushBlob(defualtStoreName, node.toString().replace("\"", "\\\""));
     }
 
 } 

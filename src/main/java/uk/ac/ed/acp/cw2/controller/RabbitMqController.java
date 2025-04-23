@@ -23,16 +23,6 @@ public class RabbitMqController {
         this.rabbitMqService = rabbitMqService;
     }
 
-    @PostMapping("/sendStockSymbols/{queueName}/{symbolCount}")
-    public void sendStockSymbols(@PathVariable String queueName, @PathVariable int symbolCount) {
-        rabbitMqService.sendStockSymbols(queueName, symbolCount);
-    }
-
-    @GetMapping("/receiveStockSymbols/{queueName}/{consumeTimeMsec}")
-    public List<String> receiveStockSymbols(@PathVariable String queueName, @PathVariable int consumeTimeMsec) {
-        return rabbitMqService.receiveStockSymbols(queueName, consumeTimeMsec);
-    }
-
     @PutMapping("/{queueName}/{messageCount}")
     public ResponseEntity<Void> pushToQueue(@PathVariable String queueName, @PathVariable int messageCount) {
         try {

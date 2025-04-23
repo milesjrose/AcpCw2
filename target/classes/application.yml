@@ -34,12 +34,3 @@ logging:
   pattern:
     console: "%d{HH:mm:ss.SSS} %-5level %logger{20} - %msg%n"
 
-azure:
-  storage:
-    connection-string: ${AZURE_STORAGE_CONNECTION_STRING}
-    container-name: ${AZURE_STORAGE_CONTAINER_NAME}
-
-acp:
-  storage:
-    service: ${ACP_STORAGE_SERVICE}
-

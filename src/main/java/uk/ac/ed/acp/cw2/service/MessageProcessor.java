@@ -14,6 +14,8 @@ public class MessageProcessor {
     private static final Logger logger = LoggerFactory.getLogger(MessageProcessor.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
+    public static final List<String> requiredFields = List.of("uid", "key", "comment", "value");
+
     private ProcessRequest request;
     private List<ProcMessage> uncheckedMessages;
     private List<ProcMessage> goodMessages;
@@ -22,13 +24,16 @@ public class MessageProcessor {
     private float badTotalValue;
     private final StorageService storageService;
     private final RabbitMqService rabbitMqService;
+    private final KafkaService kafkaService;
 
     public MessageProcessor(ProcessRequest request,
                             StorageService storageService,
-                            RabbitMqService rabbitMqService) {
+                            RabbitMqService rabbitMqService,
+                            KafkaService kafkaService) {
         this.request = request;
         this.storageService = storageService;
         this.rabbitMqService = rabbitMqService;
+        this.kafkaService = kafkaService;
         this.uncheckedMessages = new ArrayList<>();
         this.goodMessages = new ArrayList<>();
         this.badMessages = new ArrayList<>();
@@ -36,18 +41,30 @@ public class MessageProcessor {
         this.badTotalValue = 0;
     }
 
-    public void addMessages(List<ProcMessage> messages) {
-        uncheckedMessages.addAll(messages);
-    }
-
-    public void proccessMessages(List<ProcMessage> messages){
-        addMessages(messages);      // Add messages to the message processor.
+    public void proccessMessages(){
+        logger.info("Processing messages; topic:{}, good_queue:{}, bad_queue:{}, count:{}",
+            request.readTopic, request.writeQueueGood, request.writeQueueBad, request.messageCount);
+        receiveMessages();
         checkMessages();            // Check if the messages are good or bad, and add totals.
         queueStoreMessages();       // Store and queue good and bad messages.
         sendTotalValues();          // Send totals to queues.
-
     }
-    public void checkMessages() {
+
+    // Get messages from kafka
+    private void receiveMessages(){
+        List<String> messages = kafkaService.receiveValidMessagesFromTopic(request.readTopic, request.messageCount, requiredFields);
+        for (String messageString : messages){
+            try {
+                ProcMessage message = new ProcMessage(messageString);
+                uncheckedMessages.add(message);
+            } catch (Exception e) {
+                logger.error("Error creating message", e);
+            }
+        }
+    }
+
+    // Check if the messages are good or bad, and add totals.       
+    private void checkMessages() {
         logger.info("goodTotal: {}, badTotal: {}", goodTotalValue, badTotalValue);
         try{
             for (ProcMessage message : uncheckedMessages) {
@@ -66,12 +83,12 @@ public class MessageProcessor {
         }
     }
 
-    /* Store and queue good and bad messages */
-    public void queueStoreMessages() {
+    // Store and queue good and bad messages
+    private void queueStoreMessages() {
         try{
             // Store and queue good messages
             for (ProcMessage message : goodMessages) {
-                message.setUuid(storeMessageMongo(message));
+                message.setUuid(storeMessage(message));
         }
         queueGood();
         // Queue bad messages
@@ -85,8 +102,8 @@ public class MessageProcessor {
         }
     }
 
-    /* Send total values to queues*/
-    public void sendTotalValues() {
+    // Send total values to queues
+    private void sendTotalValues() {
         try{
             ObjectNode goodTotalMessage = objectMapper.createObjectNode();
             goodTotalMessage.put("TOTAL", goodTotalValue);
@@ -102,8 +119,8 @@ public class MessageProcessor {
         }
     }
 
-    /* Store message in mongo */
-    private String storeMessageMongo(ProcMessage message) {
+    // Store message in storage
+    private String storeMessage(ProcMessage message) {
         try{
             return storageService.pushBlob(message.getStoreJsonNode());
         }
@@ -113,7 +130,7 @@ public class MessageProcessor {
         }
     }
 
-    /* Queue good messages */
+    // Queue good messages
     private void queueGood() {
         try{
             List<ObjectNode> messages = new ArrayList<>();
@@ -127,7 +144,7 @@ public class MessageProcessor {
         }
     }
 
-    /* Queue bad messages */
+    // Queue bad messages
     private void queueBad() {
         try{
             List<ObjectNode> messages = new ArrayList<>();

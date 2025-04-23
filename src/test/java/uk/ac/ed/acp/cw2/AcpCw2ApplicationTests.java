@@ -9,9 +9,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.ac.ed.acp.cw2.domain.TranDecoder;
+
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
-import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.service.MessageTransformer;
 import uk.ac.ed.acp.cw2.service.CacheService;
 import uk.ac.ed.acp.cw2.utilities.RandomGenerator;
@@ -22,7 +21,6 @@ import uk.ac.ed.acp.cw2.utilities.local;
 import jakarta.annotation.PostConstruct;
 import uk.ac.ed.acp.cw2.model.BlobPacket;
 import uk.ac.ed.acp.cw2.service.StorageService;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -285,23 +283,9 @@ class AcpCw2ApplicationTests {
         TransformRequest request1 = PacketGenerator.transformRequest();
         request1.messageCount = request.messageCount;
         rabbitMqService.pushMessages(request1.readQueue, data.getPackets());
-        // Perform ourselves to keep the transformer object
-        logger.info("Transforming messages; read_queue:{}, write_queue:{}, count:{}",
-                request1.readQueue, request1.writeQueue, request1.messageCount);
-
-        List<String> messageStrings = rabbitMqService.receiveFromQueue(request1.readQueue, 500);
-        List<TransformMessage> msgObjects = new ArrayList<>();
-        TranDecoder decoder = new TranDecoder();
-        for (String messageString : messageStrings){
-            try {
-                msgObjects.add(decoder.decode(messageString));
-            } catch (Exception e) {
-                logger.error("Error decoding packet {}", messageString);
-            }
-        }
-        logger.info("Handing {} messages to the transformer", msgObjects.size());
-        MessageTransformer transformer = new MessageTransformer(request1, msgObjects, cacheService, rabbitMqService);
-        transformer.processMessages();
+        // Call ourselfs to keep the transformer object
+        MessageTransformer transformer = new MessageTransformer(request1, cacheService, rabbitMqService);
+        transformer.transformMessages();
         // Receive these messages
         List<String> manual_messages = http.recRabbit(request1.writeQueue, 500);
 

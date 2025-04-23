@@ -25,7 +25,7 @@ public class CacheService {
 
     public Boolean checkKey(String key){
         try (JedisPool pool = new JedisPool(environment.getRedisHost(), environment.getRedisPort()); Jedis jedis = pool.getResource()) {
-            logger.info("Checking {}", key);
+            logger.debug("Checking {}", key);
             return (jedis.exists(key));
         }
     }
