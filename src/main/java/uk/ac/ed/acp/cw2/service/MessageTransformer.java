@@ -3,6 +3,7 @@ package uk.ac.ed.acp.cw2.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.ac.ed.acp.cw2.model.*;
@@ -12,15 +13,22 @@ import java.util.List;
 public class MessageTransformer {
     private static final Logger logger = LoggerFactory.getLogger(MessageTransformer.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
+    @Getter
     private List<TransformMessage> messages;
     private MongoDbService mongoDbService;
     private RabbitMqService rabbitMqService;
+    @Getter
     private Integer totalMessagesWritten;   // Number of messages written to queue
+    @Getter
     private Integer totalMessagesProcessed; // Number of messages processed
+    @Getter
     private Integer totalRedisUpdates;      // Number of redis updates
+    @Getter
     private Float totalValueWritten;        // Total value written to queue
+    @Getter
     private Float totalAdded;               // Total value of 10.5s added to messages
     private TransformRequest transformRequest;
+
 
     public MessageTransformer(TransformRequest transformRequest, List<TransformMessage> messages, MongoDbService mongoDbService, RabbitMqService rabbitMqService){
         this.totalMessagesWritten = 0;
@@ -90,6 +98,7 @@ public class MessageTransformer {
 
     private void queueMessage(TransformMessage message){
         rabbitMqService.pushMessage(transformRequest.writeQueue, message.toJson(objectMapper));
+        totalValueWritten += message.value;
         totalMessagesWritten++;
     }
 

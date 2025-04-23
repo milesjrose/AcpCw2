@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.model.TransformNormal;
 import uk.ac.ed.acp.cw2.model.TransformRequest;
@@ -21,20 +22,30 @@ public class PacketGenerator {
     private static Random random = new Random();
 
     public static class TransformData{
+        
 
+        @Getter
         Float totalValueWritten;
+        @Getter
         Integer tombstoneCount;
+        @Getter
         Integer normalCount;
+        @Getter
         Integer totalRedisUpdates;
+        @Getter
         Integer totalMessagesWritten;
+        @Getter
         Float totalAdded;
-        List<String> keys;
+        @Getter
+        Integer totalMessagesProcessed;
 
+        List<String> keys;
         List<Integer> versions;
         List<Integer> tombstoneIndices;
-
+        @Getter
         List<TransformMessage> messages;
-        public List<ObjectNode> packets;
+        @Getter
+        List<ObjectNode> packets;
         public Integer messageCount(){
             return tombstoneCount + normalCount;
         }
@@ -44,9 +55,14 @@ public class PacketGenerator {
             tombstoneCount = 0;
             normalCount = 0;
             totalRedisUpdates = 0;
+            totalMessagesWritten = 0;
+            totalAdded = 0f;
+            totalMessagesProcessed = 0;
             keys = new ArrayList<>();
             versions = new ArrayList<>();
             tombstoneIndices = new ArrayList<>();
+            messages = new ArrayList<>();
+            packets = new ArrayList<>();
         }
 
         public void add(TransformNormal msg){
@@ -60,7 +76,10 @@ public class PacketGenerator {
             }
             queueAdd(msg.value);
             messages.add(msg);
+            keys.add(msg.key);
+            versions.add(msg.version);
             packets.add(msg.toJson(objectMapper));
+            totalMessagesProcessed += 1;
         }
 
         public void add(TransformTombstone msg){
@@ -70,6 +89,8 @@ public class PacketGenerator {
             totalValueWritten += msg.value;
             packets.add(msg.toJson(objectMapper));
             messages.add(msg);
+            totalRedisUpdates += 1;
+            totalMessagesProcessed += 1;
         }
 
         public Boolean isTombstone(Integer i){
@@ -77,7 +98,10 @@ public class PacketGenerator {
         }
 
         public String getRandomKey(){
-            return keys.get(RandomGenerator.generateInteger(keys.size()-1, 0));
+            if(keys.size()>0){
+                return keys.get(RandomGenerator.generateInteger(keys.size()-1, 0));
+            }
+            else return "noKey";
         }
 
         public void redisAdd(){

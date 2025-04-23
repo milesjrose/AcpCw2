@@ -14,9 +14,15 @@ import uk.ac.ed.acp.cw2.model.ProcessRequest;
 import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.service.MainService;
 import uk.ac.ed.acp.cw2.service.MessageTransformer;
+import uk.ac.ed.acp.cw2.service.MongoDbService;
 import uk.ac.ed.acp.cw2.utilities.RandomGenerator;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import uk.ac.ed.acp.cw2.model.TransformRequest;
+import uk.ac.ed.acp.cw2.service.RabbitMqService;
+import uk.ac.ed.acp.cw2.utilities.cacheEntry;
+import uk.ac.ed.acp.cw2.utilities.local;
+import jakarta.annotation.PostConstruct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +30,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import uk.ac.ed.acp.cw2.utilities.PacketGenerator;
-import uk.ac.ed.acp.cw2.model.TransformRequest;
-import uk.ac.ed.acp.cw2.service.RabbitMqService;
-import uk.ac.ed.acp.cw2.utilities.local;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,10 +50,19 @@ class AcpCw2ApplicationTests {
     private RabbitMqService rabbitMqService;
 
     @Autowired
+    private MongoDbService mongoDbService;
+
+    @Autowired
     private MainService mainService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final local http = new local(restTemplate, "http://localhost:" + port);
+    private local http;
+
+    @PostConstruct
+    public void init() {
+        this.http = new local(restTemplate, "http://localhost:" + port);
+    }
+
     private static final String uid = "s2093547";
     private static final Logger logger = LoggerFactory.getLogger(AcpCw2ApplicationTests.class);
 
@@ -244,22 +260,24 @@ class AcpCw2ApplicationTests {
 
         // Push test data to queue
         PacketGenerator.TransformData data = PacketGenerator.generateTransformMessage(10);
-        rabbitMqService.pushMessages(request.readQueue, data.packets);
+        rabbitMqService.pushMessages(request.readQueue, data.getPackets());
         // Hit endpoint
         http.tranMsg(request);
-
         // get trans messages
         List<String> messages = http.recRabbit(request.writeQueue, 500);
+        // Get all cache entries
+        List<cacheEntry> entries = http.clearCacheEntries(data.getMessages(), mongoDbService);
+
 
         // Now do again, but keep the object to compare.
         TransformRequest request1 = PacketGenerator.transformRequest();
         request1.messageCount = request.messageCount;
-        rabbitMqService.pushMessages(request1.readQueue, data.packets);
+        rabbitMqService.pushMessages(request1.readQueue, data.getPackets());
         // Perform ourselves to keep the transformer object
         logger.info("Transforming messages; read_queue:{}, write_queue:{}, count:{}",
-                request.readQueue, request.writeQueue, request.messageCount);
+                request1.readQueue, request1.writeQueue, request1.messageCount);
 
-        List<String> messageStrings = rabbitMqService.receiveFromQueue(request.readQueue, 500);
+        List<String> messageStrings = rabbitMqService.receiveFromQueue(request1.readQueue, 500);
         List<TransformMessage> msgObjects = new ArrayList<>();
         TranDecoder decoder = new TranDecoder();
         for (String messageString : messageStrings){
@@ -269,15 +287,23 @@ class AcpCw2ApplicationTests {
                 logger.error("Error decoding packet {}", messageString);
             }
         }
-        logger.info("Handing {} messages to the transformer", messages.size());
-        MessageTransformer transformer = new MessageTransformer(request, messages, mongoDbService, rabbitMqService);
+        logger.info("Handing {} messages to the transformer", msgObjects.size());
+        MessageTransformer transformer = new MessageTransformer(request1, msgObjects, mongoDbService, rabbitMqService);
         transformer.processMessages();
         // Receive these messages
         List<String> manual_messages = http.recRabbit(request1.writeQueue, 500);
 
         // Now compare
-
-
-
+        for (int i = 0; i < messages.size(); i++) {
+            assertEquals(messages.get(i), manual_messages.get(i), String.format("Returned differing messages at index: %d -> original packet:%s", i, data.getPackets().get(i).toString()));
+        }
+        for (int i = 0; i < entries.size(); i++) {
+            assertEquals(transformer.getMessages().get(i), data.getMessages().get(i), String.format("Returned differing messages at index: %d -> original packet:%s", i, data.getPackets().get(i).toString()));
+        }
+        assertEquals(transformer.getTotalValueWritten(), data.getTotalValueWritten());
+        assertEquals(transformer.getTotalMessagesWritten(), data.getTotalMessagesWritten());
+        assertEquals(transformer.getTotalMessagesProcessed(), data.getTotalMessagesProcessed());
+        assertEquals(transformer.getTotalRedisUpdates(), data.getTotalRedisUpdates());
+        assertEquals(transformer.getTotalAdded(), data.getTotalAdded());
     }
 }

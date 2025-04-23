@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="52.865" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="43.523" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\miles\AppData\Local\Temp\surefire2875712324992956223\surefirebooter-20250422232720935_3.jar C:\Users\miles\AppData\Local\Temp\surefire2875712324992956223 2025-04-22T23-27-20_717-jvmRun1 surefire-20250422232720935_1tmp surefire_0-20250422232720935_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\miles\AppData\Local\Temp\surefire18065116199248916723\surefirebooter-20250423025011763_3.jar C:\Users\miles\AppData\Local\Temp\surefire18065116199248916723 2025-04-23T02-50-11_612-jvmRun1 surefire-20250423025011763_1tmp surefire_0-20250423025011763_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\miles\Documents\GitHub\AcpCw2\target\test-classes;C:\Users\miles\Documents\GitHub\AcpCw2\target\classes;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.4.3\spring-boot-starter-web-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.3\spring-boot-starter-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot\3.4.3\spring-boot-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.3\spring-boot-autoconfigure-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.3\spring-boot-starter-logging-3.4.3.jar;C:\Users\miles\.m2\repository\ch\qos\logback\logback-classic\1.5.16\logback-classic-1.5.16.jar;C:\Users\miles\.m2\repository\ch\qos\logback\logback-core\1.5.16\logback-core-1.5.16.jar;C:\Users\miles\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\miles\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\miles\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar;C:\Users\miles\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\miles\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.3\spring-boot-starter-json-3.4.3.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.2\jackson-databind-2.18.2.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.2\jackson-core-2.18.2.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.2\jackson-datatype-jdk8-2.18.2.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.2\jackson-datatype-jsr310-2.18.2.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.2\jackson-module-parameter-names-2.18.2.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.4.3\spring-boot-starter-tomcat-3.4.3.jar;C:\Users\miles\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.36\tomcat-embed-core-10.1.36.jar;C:\Users\miles\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.36\tomcat-embed-websocket-10.1.36.jar;C:\Users\miles\.m2\repository\org\springframework\spring-web\6.2.3\spring-web-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-beans\6.2.3\spring-beans-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-webmvc\6.2.3\spring-webmvc-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-context\6.2.3\spring-context-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-expression\6.2.3\spring-expression-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.3\spring-boot-starter-test-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-test\3.4.3\spring-boot-test-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.3\spring-boot-test-autoconfigure-3.4.3.jar;C:\Users\miles\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\miles\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\miles\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\miles\.m2\repository\net\minidev\json-smart\2.5.2\json-smart-2.5.2.jar;C:\Users\miles\.m2\repository\net\minidev\accessors-smart\2.5.2\accessors-smart-2.5.2.jar;C:\Users\miles\.m2\repository\org\ow2\asm\asm\9.7.1\asm-9.7.1.jar;C:\Users\miles\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\miles\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\miles\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\miles\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\miles\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\miles\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\miles\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\miles\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\miles\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\miles\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\miles\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\miles\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\miles\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\miles\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\miles\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\miles\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\miles\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\miles\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\miles\.m2\repository\org\springframework\spring-core\6.2.3\spring-core-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-jcl\6.2.3\spring-jcl-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-test\6.2.3\spring-test-6.2.3.jar;C:\Users\miles\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;C:\Users\miles\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\miles\.m2\repository\com\rabbitmq\amqp-client\5.20.0\amqp-client-5.20.0.jar;C:\Users\miles\.m2\repository\redis\clients\jedis\4.3.1\jedis-4.3.1.jar;C:\Users\miles\.m2\repository\org\apache\commons\commons-pool2\2.12.1\commons-pool2-2.12.1.jar;C:\Users\miles\.m2\repository\org\json\json\20220320\json-20220320.jar;C:\Users\miles\.m2\repository\org\projectlombok\lombok\1.18.36\lombok-1.18.36.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.4.1\spring-boot-starter-actuator-3.4.1.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.4.3\spring-boot-actuator-autoconfigure-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-actuator\3.4.3\spring-boot-actuator-3.4.3.jar;C:\Users\miles\.m2\repository\io\micrometer\micrometer-observation\1.14.4\micrometer-observation-1.14.4.jar;C:\Users\miles\.m2\repository\io\micrometer\micrometer-commons\1.14.4\micrometer-commons-1.14.4.jar;C:\Users\miles\.m2\repository\io\micrometer\micrometer-jakarta9\1.14.4\micrometer-jakarta9-1.14.4.jar;C:\Users\miles\.m2\repository\io\micrometer\micrometer-core\1.14.4\micrometer-core-1.14.4.jar;C:\Users\miles\.m2\repository\org\hdrhistogram\HdrHistogram\2.2.2\HdrHistogram-2.2.2.jar;C:\Users\miles\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.4.2\spring-boot-starter-validation-3.4.2.jar;C:\Users\miles\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.36\tomcat-embed-el-10.1.36.jar;C:\Users\miles\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.2.Final\hibernate-validator-8.0.2.Final.jar;C:\Users\miles\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\miles\.m2\repository\org\jboss\logging\jboss-logging\3.6.1.Final\jboss-logging-3.6.1.Final.jar;C:\Users\miles\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.4.2\spring-boot-starter-aop-3.4.2.jar;C:\Users\miles\.m2\repository\org\springframework\spring-aop\6.2.3\spring-aop-6.2.3.jar;C:\Users\miles\.m2\repository\org\aspectj\aspectjweaver\1.9.22.1\aspectjweaver-1.9.22.1.jar;C:\Users\miles\.m2\repository\org\apache\kafka\kafka-clients\3.9.0\kafka-clients-3.9.0.jar;C:\Users\miles\.m2\repository\com\github\luben\zstd-jni\1.5.6-4\zstd-jni-1.5.6-4.jar;C:\Users\miles\.m2\repository\org\lz4\lz4-java\1.8.0\lz4-java-1.8.0.jar;C:\Users\miles\.m2\repository\org\xerial\snappy\snappy-java\1.1.10.5\snappy-java-1.1.10.5.jar;C:\Users\miles\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-ui\2.8.5\springdoc-openapi-starter-webmvc-ui-2.8.5.jar;C:\Users\miles\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-api\2.8.5\springdoc-openapi-starter-webmvc-api-2.8.5.jar;C:\Users\miles\.m2\repository\org\webjars\swagger-ui\5.18.3\swagger-ui-5.18.3.jar;C:\Users\miles\.m2\repository\org\webjars\webjars-locator-lite\1.0.1\webjars-locator-lite-1.0.1.jar;C:\Users\miles\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\miles\.m2\repository\org\springdoc\springdoc-openapi-starter-webflux-api\2.8.5\springdoc-openapi-starter-webflux-api-2.8.5.jar;C:\Users\miles\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.8.5\springdoc-openapi-starter-common-2.8.5.jar;C:\Users\miles\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.28\swagger-core-jakarta-2.2.28.jar;C:\Users\miles\.m2\repository\org\apache\commons\commons-lang3\3.17.0\commons-lang3-3.17.0.jar;C:\Users\miles\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.28\swagger-annotations-jakarta-2.2.28.jar;C:\Users\miles\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.28\swagger-models-jakarta-2.2.28.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.18.2\jackson-dataformat-yaml-2.18.2.jar;C:\Users\miles\.m2\repository\org\springframework\spring-webflux\6.2.3\spring-webflux-6.2.3.jar;C:\Users\miles\.m2\repository\io\projectreactor\reactor-core\3.7.3\reactor-core-3.7.3.jar;C:\Users\miles\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\miles\.m2\repository\org\testcontainers\testcontainers\1.20.5\testcontainers-1.20.5.jar;C:\Users\miles\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\miles\.m2\repository\org\hamcrest\hamcrest-core\2.2\hamcrest-core-2.2.jar;C:\Users\miles\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\miles\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\miles\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\miles\.m2\repository\com\github\docker-java\docker-java-api\3.4.1\docker-java-api-3.4.1.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.2\jackson-annotations-2.18.2.jar;C:\Users\miles\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.4.1\docker-java-transport-zerodep-3.4.1.jar;C:\Users\miles\.m2\repository\com\github\docker-java\docker-java-transport\3.4.1\docker-java-transport-3.4.1.jar;C:\Users\miles\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;C:\Users\miles\.m2\repository\org\testcontainers\junit-jupiter\1.20.5\junit-jupiter-1.20.5.jar;C:\Users\miles\.m2\repository\org\testcontainers\kafka\1.20.5\kafka-1.20.5.jar;C:\Users\miles\.m2\repository\org\testcontainers\rabbitmq\1.20.5\rabbitmq-1.20.5.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-amqp\3.4.3\spring-boot-starter-amqp-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-messaging\6.2.3\spring-messaging-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\amqp\spring-rabbit\3.2.3\spring-rabbit-3.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\amqp\spring-amqp\3.2.3\spring-amqp-3.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\retry\spring-retry\2.0.11\spring-retry-2.0.11.jar;C:\Users\miles\.m2\repository\org\springframework\spring-tx\6.2.3\spring-tx-6.2.3.jar;C:\Users\miles\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -35,7 +35,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\miles\AppData\Local\Temp\surefire2875712324992956223\surefirebooter-20250422232720935_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\miles\AppData\Local\Temp\surefire18065116199248916723\surefirebooter-20250423025011763_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.5+9-LTS-239"/>
@@ -50,15 +50,15 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\miles\AppData\Local\Temp\"/>
     <property name="idea.version" value="2023.2.3"/>
-    <property name="catalina.home" value="C:\Users\miles\AppData\Local\Temp\tomcat.0.13017263839684239485"/>
+    <property name="catalina.home" value="C:\Users\miles\AppData\Local\Temp\tomcat.0.15010784247795954641"/>
     <property name="java.version" value="21.0.5"/>
     <property name="user.dir" value="C:\Users\miles\Documents\GitHub\AcpCw2"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="11344"/>
+    <property name="PID" value="1480"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
-    <property name="catalina.base" value="C:\Users\miles\AppData\Local\Temp\tomcat.0.13017263839684239485"/>
+    <property name="catalina.base" value="C:\Users\miles\AppData\Local\Temp\tomcat.0.15010784247795954641"/>
     <property name="native.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\WireGuard\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\dotnet\;C:\Users\miles\AppData\Local\Microsoft\WindowsApps;C:\Users\miles\AppData\Roaming\cabal\bin;C:\ProgramData\chocolatey\lib\ghc\tools\ghc-8.10.2\bin;C:\tools\msys64;C:\Users\miles\AppData\Local\atom\bin;C:\Users\miles\AppData\Local\Microsoft\WindowsApps;C:\Users\miles\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\miles\AppData\Local\GitHubDesktop\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.2\bin;;C:\Users\miles\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\Scripts;C:\Users\miles\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts;C:\Users\miles\AppData\Local\Programs\cursor\resources\app\bin;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -70,9 +70,9 @@
     <property name="CONSOLE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} %-5level %logger{20} - %msg%n"/>
     <property name="LOGGED_APPLICATION_NAME" value="[acpCw2Service] "/>
   </properties>
-  <testcase name="testRabbitMQ" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="2.94">
-    <system-out><![CDATA[23:27:22.059 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [uk.ac.ed.acp.cw2.AcpCw2ApplicationTests]: AcpCw2ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-23:27:22.224 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration uk.ac.ed.acp.cw2.Application for test class uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
+  <testcase name="testRabbitMQ" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="2.564">
+    <system-out><![CDATA[02:50:12.966 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [uk.ac.ed.acp.cw2.AcpCw2ApplicationTests]: AcpCw2ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+02:50:13.139 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration uk.ac.ed.acp.cw2.Application for test class uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -83,7 +83,7 @@
 
  :: Spring Boot ::                (v3.4.3)
 
-23:27:23.037 WARN  o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer - 
+02:50:13.990 WARN  o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer - 
 
 Found multiple occurrences of org.json.JSONObject on the class path:
 
@@ -92,21 +92,21 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
-23:27:23.063 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Starting AcpCw2ApplicationTests using Java 21.0.5 with PID 11344 (started by miles in C:\Users\miles\Documents\GitHub\AcpCw2)
-23:27:23.064 INFO  u.a.e.a.c.AcpCw2ApplicationTests - No active profile set, falling back to 1 default profile: "default"
-23:27:25.734 INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 0 (http)
-23:27:25.835 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2732 ms
-23:27:28.683 INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 3 endpoints beneath base path '/actuator'
-23:27:28.925 INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 56902 (http) with context path '/'
-23:27:28.940 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Started AcpCw2ApplicationTests in 6.319 seconds (process running for 7.807)
-23:27:30.578 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING RABBIT MQ TEST-------------
-23:27:30.581 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: RabbitMQ-21251-TQuoR
-23:27:30.764 INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-23:27:30.766 INFO  o.s.w.s.DispatcherServlet - Completed initialization in 2 ms
-23:27:30.833 INFO  u.a.e.a.c.s.RabbitMqService - =-= Pushing 5 messages to queue RabbitMQ-21251-TQuoR
-23:27:30.956 INFO  u.a.e.a.c.s.RabbitMqService - Sent 5 messages to RabbitMQ-21251-TQuoR
-23:27:31.013 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue RabbitMQ-21251-TQuoR with timeout 1000 msec
-23:27:32.025 INFO  u.a.e.a.c.s.RabbitMqService - Returned 5 messages in 1012, timeout was 1000 (max:1200)
+02:50:14.021 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Starting AcpCw2ApplicationTests using Java 21.0.5 with PID 1480 (started by miles in C:\Users\miles\Documents\GitHub\AcpCw2)
+02:50:14.022 INFO  u.a.e.a.c.AcpCw2ApplicationTests - No active profile set, falling back to 1 default profile: "default"
+02:50:17.007 INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 0 (http)
+02:50:17.166 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3094 ms
+02:50:19.769 INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 3 endpoints beneath base path '/actuator'
+02:50:19.933 INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 62124 (http) with context path '/'
+02:50:19.950 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Started AcpCw2ApplicationTests in 6.393 seconds (process running for 8.017)
+02:50:21.206 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING RABBIT MQ TEST-------------
+02:50:21.209 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: RabbitMQ-37164-9Mr6U
+02:50:21.376 INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+02:50:21.378 INFO  o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+02:50:21.429 INFO  u.a.e.a.c.s.RabbitMqService - =-= Pushing 5 messages to queue RabbitMQ-37164-9Mr6U
+02:50:21.537 INFO  u.a.e.a.c.s.RabbitMqService - Sent 5 messages to RabbitMQ-37164-9Mr6U
+02:50:21.589 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue RabbitMQ-37164-9Mr6U with timeout 1000 msec
+02:50:22.591 INFO  u.a.e.a.c.s.RabbitMqService - Returned 5 messages in 1002, timeout was 1000 (max:1200)
 RabbitMQ Message - uid: s2093547, counter: 0
 ]]></system-out>
     <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
@@ -116,99 +116,120 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="testKafkaSent" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="6.541">
-    <system-out><![CDATA[23:27:32.112 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -----------STARTING KAFKA TEST-------------
-23:27:32.112 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: KafkaSent-67010-Z0VXy
-23:27:32.116 INFO  u.a.e.a.c.s.KafkaService - Pushing 5 count messages to topic KafkaSent-67010-Z0VXy
-23:27:32.117 INFO  u.a.e.a.c.s.KafkaService - Pushing 5 messages to KafkaSent-67010-Z0VXy
-23:27:33.056 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-1] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {KafkaSent-67010-Z0VXy=UNKNOWN_TOPIC_OR_PARTITION}
-23:27:33.380 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic KafkaSent-67010-Z0VXy with timeout 5000 msec
-23:27:38.386 INFO  u.a.e.a.c.s.KafkaService - Returned 5 messages in 5006 ms, timeout was 5000 ms (max:5200 ms)
+  <testcase name="testKafkaSent" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="6.503">
+    <system-out><![CDATA[02:50:22.664 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -----------STARTING KAFKA TEST-------------
+02:50:22.664 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: KafkaSent-51272-qzNoc
+02:50:22.668 INFO  u.a.e.a.c.s.KafkaService - Pushing 5 count messages to topic KafkaSent-51272-qzNoc
+02:50:22.669 INFO  u.a.e.a.c.s.KafkaService - Pushing 5 messages to KafkaSent-51272-qzNoc
+02:50:23.604 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-1] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {KafkaSent-51272-qzNoc=UNKNOWN_TOPIC_OR_PARTITION}
+02:50:23.903 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic KafkaSent-51272-qzNoc with timeout 5000 msec
+02:50:28.911 INFO  u.a.e.a.c.s.KafkaService - Returned 5 messages in 5008 ms, timeout was 5000 ms (max:5200 ms)
 Kafka Message - uid: s2093547, counter: 0
 ]]></system-out>
   </testcase>
-  <testcase name="testService" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="16.436">
-    <system-out><![CDATA[23:27:38.653 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING SERVICE TEST----------------
-23:27:38.653 INFO  u.a.e.a.c.AcpCw2ApplicationTests - readTopic: ServiceTestRead-84821-LCbb6, Good: ServiceTestGood-22375-sklQD, Bad: ServiceTestBad-25959-rZAm1, Count: 10
-23:27:38.658 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Created 2 good messages, 8 bad messages
-23:27:38.711 INFO  u.a.e.a.c.s.KafkaService - Pushing 10 messages to ServiceTestRead-84821-LCbb6
-23:27:38.723 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-6] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ServiceTestRead-84821-LCbb6=UNKNOWN_TOPIC_OR_PARTITION}
-23:27:39.071 INFO  u.a.e.a.c.s.MainService - Processing messages; topic:ServiceTestRead-84821-LCbb6, good_queue:ServiceTestGood-22375-sklQD, bad_queue:ServiceTestBad-25959-rZAm1, count:10
-23:27:39.071 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic ServiceTestRead-84821-LCbb6 with timeout 5000 msec
-23:27:42.118 INFO  u.a.e.a.c.s.KafkaService - Returned 10 messages in 3047 ms, timeout was 5000 ms (max:5200 ms)
-23:27:42.631 INFO  u.a.e.a.c.s.MainService - Received 10/10 valid messages
-23:27:42.633 INFO  u.a.e.a.c.s.MessageProcessor - goodTotal: 0.0, badTotal: 0.0
-23:27:42.803 INFO  u.a.e.a.c.s.RabbitMqService - Sent 2 messages to ServiceTestGood-22375-sklQD
-23:27:42.866 INFO  u.a.e.a.c.s.RabbitMqService - Sent 8 messages to ServiceTestBad-25959-rZAm1
-23:27:42.995 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- RECEIVING MESSAGES ----------------
-23:27:42.998 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue ServiceTestGood-22375-sklQD with timeout 1000 msec
-23:27:44.009 INFO  u.a.e.a.c.s.RabbitMqService - Returned 3 messages in 1011, timeout was 1000 (max:1200)
-23:27:44.024 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue ServiceTestBad-25959-rZAm1 with timeout 1000 msec
-23:27:45.037 INFO  u.a.e.a.c.s.RabbitMqService - Returned 9 messages in 1013, timeout was 1000 (max:1200)
-23:27:55.053 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- GOOD QUEUE ----------------
-23:27:55.057 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 38393-geCIq from cache
-23:27:55.075 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 62819-SDZXR from cache
-23:27:55.083 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Good packets passed
-23:27:55.083 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- BAD QUEUE ----------------
-23:27:55.084 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Bad packets passed
+  <testcase name="testService" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="5.698">
+    <system-out><![CDATA[02:50:29.169 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING SERVICE TEST----------------
+02:50:29.170 INFO  u.a.e.a.c.AcpCw2ApplicationTests - readTopic: ServiceTestRead-50793-nL3wS, Good: ServiceTestGood-62677-7SJLg, Bad: ServiceTestBad-95890-vaqQ7, Count: 10
+02:50:29.178 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Created 8 good messages, 2 bad messages
+02:50:29.245 INFO  u.a.e.a.c.s.KafkaService - Pushing 10 messages to ServiceTestRead-50793-nL3wS
+02:50:29.262 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-6] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ServiceTestRead-50793-nL3wS=UNKNOWN_TOPIC_OR_PARTITION}
+02:50:29.675 INFO  u.a.e.a.c.s.MainService - Processing messages; topic:ServiceTestRead-50793-nL3wS, good_queue:ServiceTestGood-62677-7SJLg, bad_queue:ServiceTestBad-95890-vaqQ7, count:10
+02:50:29.675 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic ServiceTestRead-50793-nL3wS with timeout 5000 msec
+02:50:32.730 INFO  u.a.e.a.c.s.KafkaService - Returned 10 messages in 3055 ms, timeout was 5000 ms (max:5200 ms)
+02:50:33.242 INFO  u.a.e.a.c.s.MainService - Received 10/10 valid messages
+02:50:33.244 INFO  u.a.e.a.c.s.MessageProcessor - goodTotal: 0.0, badTotal: 0.0
+02:50:33.441 INFO  u.a.e.a.c.s.RabbitMqService - Sent 8 messages to ServiceTestGood-62677-7SJLg
+02:50:33.506 INFO  u.a.e.a.c.s.RabbitMqService - Sent 2 messages to ServiceTestBad-95890-vaqQ7
+02:50:33.736 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- RECEIVING MESSAGES ----------------
+02:50:33.740 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue ServiceTestGood-62677-7SJLg with timeout 500 msec
+02:50:34.249 INFO  u.a.e.a.c.s.RabbitMqService - Returned 9 messages in 508, timeout was 500 (max:700)
+02:50:34.261 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue ServiceTestBad-95890-vaqQ7 with timeout 500 msec
+02:50:34.764 INFO  u.a.e.a.c.s.RabbitMqService - Returned 3 messages in 503, timeout was 500 (max:700)
+02:50:34.777 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- GOOD QUEUE ----------------
+02:50:34.781 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 90041-EYM1S from cache
+02:50:34.792 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 50145-sKwwd from cache
+02:50:34.802 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 23273-hZgu0 from cache
+02:50:34.811 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 95461-8txbb from cache
+02:50:34.820 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 87537-FnsoK from cache
+02:50:34.830 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 61349-UrnFq from cache
+02:50:34.840 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 53112-LtdWK from cache
+02:50:34.852 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 68028-M3PXJ from cache
+02:50:34.860 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Good packets passed
+02:50:34.860 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- BAD QUEUE ----------------
+02:50:34.861 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Bad packets passed
 ]]></system-out>
   </testcase>
-  <testcase name="testKafkaMultipleReads" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="17.132">
-    <system-out><![CDATA[23:27:55.091 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING KAFKA MULTIPLE READS TEST----------------
-23:27:55.092 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: KafkaMultipleReads-60541-LeksQ
-23:27:55.095 INFO  u.a.e.a.c.s.KafkaService - Pushing 100 count messages to topic KafkaMultipleReads-60541-LeksQ
-23:27:55.098 INFO  u.a.e.a.c.s.KafkaService - Pushing 100 messages to KafkaMultipleReads-60541-LeksQ
-23:27:55.109 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-16] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {KafkaMultipleReads-60541-LeksQ=UNKNOWN_TOPIC_OR_PARTITION}
-23:27:57.014 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic KafkaMultipleReads-60541-LeksQ with timeout 5000 msec
-23:28:02.016 INFO  u.a.e.a.c.s.KafkaService - Returned 100 messages in 5002 ms, timeout was 5000 ms (max:5200 ms)
-23:28:02.079 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [0] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5069
-23:28:02.082 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic KafkaMultipleReads-60541-LeksQ with timeout 5000 msec
-23:28:07.082 INFO  u.a.e.a.c.s.KafkaService - Returned 100 messages in 5000 ms, timeout was 5000 ms (max:5200 ms)
-23:28:07.149 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [1] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5070
-23:28:07.152 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic KafkaMultipleReads-60541-LeksQ with timeout 5000 msec
-23:28:12.163 INFO  u.a.e.a.c.s.KafkaService - Returned 100 messages in 5010 ms, timeout was 5000 ms (max:5200 ms)
-23:28:12.217 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [2] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5067
+  <testcase name="testKafkaMultipleReads" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="17.657">
+    <system-out><![CDATA[02:50:34.870 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING KAFKA MULTIPLE READS TEST----------------
+02:50:34.870 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: KafkaMultipleReads-83708-hxQDC
+02:50:34.874 INFO  u.a.e.a.c.s.KafkaService - Pushing 100 count messages to topic KafkaMultipleReads-83708-hxQDC
+02:50:34.878 INFO  u.a.e.a.c.s.KafkaService - Pushing 100 messages to KafkaMultipleReads-83708-hxQDC
+02:50:34.905 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-16] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {KafkaMultipleReads-83708-hxQDC=UNKNOWN_TOPIC_OR_PARTITION}
+02:50:37.272 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic KafkaMultipleReads-83708-hxQDC with timeout 5000 msec
+02:50:42.284 INFO  u.a.e.a.c.s.KafkaService - Returned 100 messages in 5012 ms, timeout was 5000 ms (max:5200 ms)
+02:50:42.345 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [0] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5076
+02:50:42.348 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic KafkaMultipleReads-83708-hxQDC with timeout 5000 msec
+02:50:47.348 INFO  u.a.e.a.c.s.KafkaService - Returned 100 messages in 5000 ms, timeout was 5000 ms (max:5200 ms)
+02:50:47.441 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [1] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5096
+02:50:47.443 INFO  u.a.e.a.c.s.KafkaService - Reading messages from topic KafkaMultipleReads-83708-hxQDC with timeout 5000 msec
+02:50:52.455 INFO  u.a.e.a.c.s.KafkaService - Returned 100 messages in 5011 ms, timeout was 5000 ms (max:5200 ms)
+02:50:52.519 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [2] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5078
 ]]></system-out>
   </testcase>
-  <testcase name="testTransform" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="2.49">
-    <system-out><![CDATA[23:28:12.224 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM TEST----------------
-23:28:12.250 INFO  u.a.e.a.c.s.RabbitMqService - Sent 10 messages to TransformTestRead-70051-itm9J
-23:28:12.260 INFO  u.a.e.a.c.s.MainService - Transforming messages; read_queue:TransformTestRead-70051-itm9J, write_queue:TransformTestWrite-79160-l43ij, count:10
-23:28:12.260 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue TransformTestRead-70051-itm9J with timeout 500 msec
-23:28:12.772 INFO  u.a.e.a.c.s.RabbitMqService - Returned 10 messages in 512, timeout was 500 (max:700)
-23:28:12.779 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"qRs93","version":7,"value":94.07096}
-23:28:12.782 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"WuZj3","version":74,"value":84.553894}
-23:28:12.782 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"Ztbxm","version":3,"value":73.62121}
-23:28:12.782 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"opcie","version":69,"value":49.707817}
-23:28:12.783 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"2aHUW","version":4,"value":93.92567}
-23:28:12.783 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"3eNPk","version":31,"value":52.871723}
-23:28:12.783 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"YCqnd","version":66,"value":24.819595}
-23:28:12.783 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"WuZj3"}
-23:28:12.783 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"k5v9b","version":52,"value":29.667871}
-23:28:12.783 INFO  u.a.e.a.c.s.MessageProcessor - Proccessing node {"key":"ka9La","version":39,"value":3.4523249}
-23:28:12.783 INFO  u.a.e.a.c.s.MainService - Handing 10 messages to the transformer
-23:28:12.785 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"qRs93","version":7,"value":94.07096}
-23:28:12.787 INFO  u.a.e.a.c.s.MongoDbService - Checking qRs93
-23:28:12.809 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"WuZj3","version":74,"value":84.553894}
-23:28:12.811 INFO  u.a.e.a.c.s.MongoDbService - Checking WuZj3
-23:28:12.827 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"Ztbxm","version":3,"value":73.62121}
-23:28:12.829 INFO  u.a.e.a.c.s.MongoDbService - Checking Ztbxm
-23:28:12.847 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"opcie","version":69,"value":49.707817}
-23:28:12.848 INFO  u.a.e.a.c.s.MongoDbService - Checking opcie
-23:28:12.958 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"2aHUW","version":4,"value":93.92567}
-23:28:12.960 INFO  u.a.e.a.c.s.MongoDbService - Checking 2aHUW
-23:28:13.076 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"3eNPk","version":31,"value":52.871723}
-23:28:13.078 INFO  u.a.e.a.c.s.MongoDbService - Checking 3eNPk
-23:28:13.197 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"YCqnd","version":66,"value":24.819595}
-23:28:13.200 INFO  u.a.e.a.c.s.MongoDbService - Checking YCqnd
-23:28:13.316 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformTombstone {"key":"WuZj3"}
-23:28:13.319 INFO  u.a.e.a.c.s.MongoDbService - Checking WuZj3
-23:28:13.446 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"k5v9b","version":52,"value":29.667871}
-23:28:13.447 INFO  u.a.e.a.c.s.MongoDbService - Checking k5v9b
-23:28:13.555 INFO  u.a.e.a.c.s.MessageTransformer - Transforming message TransformNormal {"key":"ka9La","version":39,"value":3.4523249}
-23:28:13.557 INFO  u.a.e.a.c.s.MongoDbService - Checking ka9La
-23:28:13.687 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue TransformTestWrite-79160-l43ij with timeout 1000 msec
-23:28:14.701 INFO  u.a.e.a.c.s.RabbitMqService - Returned 10 messages in 1014, timeout was 1000 (max:1200)
+  <testcase name="testTransform" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="3.727">
+    <system-out><![CDATA[02:50:52.528 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM TEST----------------
+02:50:52.555 INFO  u.a.e.a.c.s.RabbitMqService - Sent 10 messages to TransformTestRead-17034-LEUP2
+02:50:52.564 INFO  u.a.e.a.c.s.MainService - Transforming messages; read_queue:TransformTestRead-17034-LEUP2, write_queue:TransformTestWrite-16167-3THwY, count:10
+02:50:52.564 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue TransformTestRead-17034-LEUP2 with timeout 500 msec
+02:50:53.078 INFO  u.a.e.a.c.s.RabbitMqService - Returned 10 messages in 514, timeout was 500 (max:700)
+02:50:53.088 INFO  u.a.e.a.c.s.MainService - Handing 10 messages to the transformer
+02:50:53.092 INFO  u.a.e.a.c.s.MongoDbService - Checking aLpCb
+02:50:53.223 INFO  u.a.e.a.c.s.MongoDbService - Checking ClBg1
+02:50:53.250 INFO  u.a.e.a.c.s.MongoDbService - Checking 6B485
+02:50:53.360 INFO  u.a.e.a.c.s.MongoDbService - Checking MKdJp
+02:50:53.394 INFO  u.a.e.a.c.s.MongoDbService - Checking wnfTD
+02:50:53.419 INFO  u.a.e.a.c.s.MongoDbService - Checking MKdJp
+02:50:53.541 INFO  u.a.e.a.c.s.MongoDbService - Checking YxHlF
+02:50:53.569 INFO  u.a.e.a.c.s.MongoDbService - Checking CkDVU
+02:50:53.694 INFO  u.a.e.a.c.s.MongoDbService - Checking ax24H
+02:50:53.717 INFO  u.a.e.a.c.s.MongoDbService - Checking pEsRx
+02:50:53.854 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue TransformTestWrite-16167-3THwY with timeout 500 msec
+02:50:54.365 INFO  u.a.e.a.c.s.RabbitMqService - Returned 10 messages in 510, timeout was 500 (max:700)
+02:50:54.375 INFO  u.a.e.a.c.s.MongoDbService - Checking aLpCb
+02:50:54.379 INFO  u.a.e.a.c.s.MongoDbService - Checking ClBg1
+02:50:54.386 INFO  u.a.e.a.c.s.MongoDbService - Checking 6B485
+02:50:54.389 INFO  u.a.e.a.c.s.MongoDbService - Checking MKdJp
+02:50:54.393 INFO  u.a.e.a.c.s.MongoDbService - Checking wnfTD
+02:50:54.397 INFO  u.a.e.a.c.s.MongoDbService - Checking MKdJp
+02:50:54.400 INFO  u.a.e.a.c.s.MongoDbService - Checking YxHlF
+02:50:54.404 INFO  u.a.e.a.c.s.MongoDbService - Checking CkDVU
+02:50:54.408 INFO  u.a.e.a.c.s.MongoDbService - Checking ax24H
+02:50:54.410 INFO  u.a.e.a.c.s.MongoDbService - Checking pEsRx
+02:50:54.414 INFO  u.a.e.a.c.s.MongoDbService - Retrieving ClBg1 from cache
+02:50:54.423 INFO  u.a.e.a.c.s.MongoDbService - Retrieving ax24H from cache
+02:50:54.431 INFO  u.a.e.a.c.s.MongoDbService - Retrieving 6B485 from cache
+02:50:54.440 INFO  u.a.e.a.c.s.MongoDbService - Retrieving CkDVU from cache
+02:50:54.448 INFO  u.a.e.a.c.s.MongoDbService - Retrieving YxHlF from cache
+02:50:54.457 INFO  u.a.e.a.c.s.MongoDbService - Retrieving aLpCb from cache
+02:50:54.466 INFO  u.a.e.a.c.s.MongoDbService - Retrieving wnfTD from cache
+02:50:54.473 INFO  u.a.e.a.c.s.MongoDbService - Retrieving pEsRx from cache
+02:50:54.497 INFO  u.a.e.a.c.s.RabbitMqService - Sent 10 messages to TransformTestRead-86096-BaDdF
+02:50:54.501 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Transforming messages; read_queue:TransformTestRead-86096-BaDdF, write_queue:TransformTestWrite-22922-CdZTL, count:10
+02:50:54.501 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue TransformTestRead-86096-BaDdF with timeout 500 msec
+02:50:55.016 INFO  u.a.e.a.c.s.RabbitMqService - Returned 10 messages in 515, timeout was 500 (max:700)
+02:50:55.026 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Handing 10 messages to the transformer
+02:50:55.032 INFO  u.a.e.a.c.s.MongoDbService - Checking aLpCb
+02:50:55.080 INFO  u.a.e.a.c.s.MongoDbService - Checking ClBg1
+02:50:55.115 INFO  u.a.e.a.c.s.MongoDbService - Checking 6B485
+02:50:55.243 INFO  u.a.e.a.c.s.MongoDbService - Checking MKdJp
+02:50:55.277 INFO  u.a.e.a.c.s.MongoDbService - Checking wnfTD
+02:50:55.303 INFO  u.a.e.a.c.s.MongoDbService - Checking MKdJp
+02:50:55.429 INFO  u.a.e.a.c.s.MongoDbService - Checking YxHlF
+02:50:55.553 INFO  u.a.e.a.c.s.MongoDbService - Checking CkDVU
+02:50:55.678 INFO  u.a.e.a.c.s.MongoDbService - Checking ax24H
+02:50:55.701 INFO  u.a.e.a.c.s.MongoDbService - Checking pEsRx
+02:50:55.724 INFO  u.a.e.a.c.s.RabbitMqService - =-= Reading messages from queue TransformTestWrite-22922-CdZTL with timeout 500 msec
+02:50:56.234 INFO  u.a.e.a.c.s.RabbitMqService - Returned 10 messages in 509, timeout was 500 (max:700)
 ]]></system-out>
   </testcase>
 </testsuite>

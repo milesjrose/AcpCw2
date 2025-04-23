@@ -1,24 +1,30 @@
 package uk.ac.ed.acp.cw2.utilities;
 
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
+import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.model.TransformRequest;
+import uk.ac.ed.acp.cw2.service.MongoDbService;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class local {
 
-    private String base;
-    private String rabbit;
-    private String kafka;
-    private String cache;
-    private TestRestTemplate restTemplate;
+    private final String base;
+    private final String rabbit;
+    private final String kafka;
+    private final String cache;
+    private final TestRestTemplate restTemplate;
 
 
     public local(TestRestTemplate restTemplate, String baseUrl){
@@ -103,6 +109,24 @@ public class local {
                 Void.class
         );
         assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to transform messages");
+    }
+
+    public List<cacheEntry> clearCacheEntries(List<TransformMessage> messages, MongoDbService mongoDbService){
+        List<cacheEntry> entries = new ArrayList<>();
+        Set<String> keys = new HashSet<>();
+        for (TransformMessage message : messages){
+            String key = message.key;
+            if (mongoDbService.checkKey(key)){
+                keys.add(key);
+            }
+        }
+        for (String key: keys){
+            cacheEntry entry = new cacheEntry();
+            entry.key = key;
+            entry.entry = mongoDbService.retrieveFromCache(key);
+            mongoDbService.removeFromCache(key);
+        }
+        return entries;
     }
 
 }
