@@ -18,17 +18,20 @@ import java.util.List;
 public class MainService {
     private static final Logger logger = LoggerFactory.getLogger(MainService.class);
     private final RabbitMqService rabbitMqService;
-    private final MongoDbService mongoDbService;
     private final KafkaService kafkaService;
+    private final StorageService storageService;
+    private final CacheService cacheService;
 
     @Autowired
     public MainService(RuntimeEnvironment environment,
                        RabbitMqService rabbitMqService,
-                       MongoDbService mongoDbService,
-                       KafkaService kafkaService) {
+                       CacheService cacheService,
+                       KafkaService kafkaService,
+                       StorageService storageService) {
         this.rabbitMqService = rabbitMqService;
-        this.mongoDbService = mongoDbService;
+        this.cacheService = cacheService;
         this.kafkaService = kafkaService;
+        this.storageService = storageService;
     }
 
     public String getIndexPage() {
@@ -73,7 +76,7 @@ public class MainService {
         }
 
         // Proccess messages
-        MessageProcessor messageProcessor = new MessageProcessor(request,  mongoDbService, rabbitMqService);
+        MessageProcessor messageProcessor = new MessageProcessor(request, storageService, rabbitMqService);
         messageProcessor.proccessMessages(messages);
     }
 
@@ -92,7 +95,7 @@ public class MainService {
             }
         }
         logger.info("Handing {} messages to the transformer", messages.size());
-        MessageTransformer transformer = new MessageTransformer(request, messages, mongoDbService, rabbitMqService);
+        MessageTransformer transformer = new MessageTransformer(request, messages, cacheService, rabbitMqService);
         transformer.processMessages();
     }
 }

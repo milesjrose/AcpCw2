@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
 import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.model.TransformRequest;
-import uk.ac.ed.acp.cw2.service.MongoDbService;
+import uk.ac.ed.acp.cw2.service.CacheService;
 import uk.ac.ed.acp.cw2.Utilities.Parser;
 
 import java.util.ArrayList;
@@ -128,20 +128,20 @@ public class local {
         assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to transform messages");
     }
 
-    public List<cacheEntry> clearCacheEntries(List<TransformMessage> messages, MongoDbService mongoDbService){
+    public List<cacheEntry> clearCacheEntries(List<TransformMessage> messages, CacheService cacheService){
         List<cacheEntry> entries = new ArrayList<>();
         Set<String> keys = new HashSet<>();
         for (TransformMessage message : messages){
             String key = message.key;
-            if (mongoDbService.checkKey(key)){
+            if (cacheService.checkKey(key)){
                 keys.add(key);
             }
         }
         for (String key: keys){
             cacheEntry entry = new cacheEntry();
             entry.key = key;
-            entry.entry = mongoDbService.retrieveFromCache(key);
-            mongoDbService.removeFromCache(key);
+            entry.entry = cacheService.retrieveFromCache(key);
+            cacheService.removeFromCache(key);
         }
         return entries;
     }

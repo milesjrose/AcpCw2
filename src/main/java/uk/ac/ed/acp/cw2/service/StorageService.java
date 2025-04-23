@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import uk.ac.ed.acp.cw2.model.BlobPacket;
 import uk.ac.ed.acp.cw2.Utilities.Headers;
 import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Service
 public class StorageService {
@@ -17,6 +18,7 @@ public class StorageService {
     private final String pushUrl;
     private final String recUrl;
     private final String delUrl;
+    private final String defualtStoreName = "store-s2093547";
     private final RestTemplate restTemplate;
 
     public StorageService(RuntimeEnvironment environment) {
@@ -110,9 +112,9 @@ public class StorageService {
         }
     }
 
-    public BlobPacket pushBlob(String datasetName, String data) {
+    public String pushBlob(String datasetName, String data) {
         BlobPacket packet = new BlobPacket(datasetName, data);
-        return pushBlob(packet);
+        return pushBlob(packet).uuid;
     }
 
     public BlobPacket receiveBlob(String uuid) {
@@ -123,5 +125,9 @@ public class StorageService {
     public boolean deleteBlob(BlobPacket packet) {
         return deleteBlob(packet.uuid);
     }
-    
+
+    public String pushBlob(ObjectNode node) {
+        return pushBlob(defualtStoreName, node.toString().replace("\"", "\\\""));
+    }
+
 } 

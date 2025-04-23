@@ -20,14 +20,14 @@ public class MessageProcessor {
     private List<ProcMessage> badMessages;
     private float goodTotalValue;
     private float badTotalValue;
-    private final MongoDbService mongoDbService;
+    private final StorageService storageService;
     private final RabbitMqService rabbitMqService;
 
     public MessageProcessor(ProcessRequest request,
-                            MongoDbService mongoDbService,
+                            StorageService storageService,
                             RabbitMqService rabbitMqService) {
         this.request = request;
-        this.mongoDbService = mongoDbService;
+        this.storageService = storageService;
         this.rabbitMqService = rabbitMqService;
         this.uncheckedMessages = new ArrayList<>();
         this.goodMessages = new ArrayList<>();
@@ -105,7 +105,7 @@ public class MessageProcessor {
     /* Store message in mongo */
     private String storeMessageMongo(ProcMessage message) {
         try{
-            return mongoDbService.storeInCache(message.getStoreJsonNode());
+            return storageService.pushBlob(message.getStoreJsonNode());
         }
         catch (Exception e){
             logger.error("Error storing message in mongo", e);

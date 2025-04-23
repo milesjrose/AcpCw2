@@ -12,7 +12,7 @@ public class MessageTransformer {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     @Getter
     private List<TransformMessage> messages;
-    private MongoDbService mongoDbService;
+    private CacheService cacheService;
     private RabbitMqService rabbitMqService;
     @Getter
     private Integer totalMessagesWritten;   // Number of messages written to queue
@@ -27,14 +27,14 @@ public class MessageTransformer {
     private TransformRequest transformRequest;
 
 
-    public MessageTransformer(TransformRequest transformRequest, List<TransformMessage> messages, MongoDbService mongoDbService, RabbitMqService rabbitMqService){
+    public MessageTransformer(TransformRequest transformRequest, List<TransformMessage> messages, CacheService cacheService, RabbitMqService rabbitMqService){
         this.totalMessagesWritten = 0;
         this.totalMessagesProcessed = 0;
         this.totalRedisUpdates = 0;
         this.totalValueWritten = 0.0f;
         this.totalAdded = 0.0f;
         this.messages = messages;
-        this.mongoDbService = mongoDbService;
+        this.cacheService = cacheService;
         this.rabbitMqService = rabbitMqService;
         this.transformRequest = transformRequest;
     }
@@ -52,7 +52,7 @@ public class MessageTransformer {
     }
 
     private void processMessage(TransformNormal message){
-        if (mongoDbService.checkKey(message.key)){
+        if (cacheService.checkKey(message.key)){
             TransformNormal cacheMessage = getCachedMessage(message.key);
             if (cacheMessage == null || message.version > cacheMessage.version){
                 storeAndIncrement(message);
@@ -64,8 +64,8 @@ public class MessageTransformer {
     }
 
     private void processMessage(TransformTombstone message){
-        if (mongoDbService.checkKey(message.key)){
-            mongoDbService.removeFromCache(message.key);
+        if (cacheService.checkKey(message.key)){
+            cacheService.removeFromCache(message.key);
             totalRedisUpdates++;
         }
         totalValueWritten += message.value;
@@ -74,7 +74,7 @@ public class MessageTransformer {
 
 
     private void storeAndIncrement(TransformNormal message){
-        mongoDbService.storeInCache(message.key, message.toJson(objectMapper));
+        cacheService.storeInCache(message.key, message.toJson(objectMapper));
         totalRedisUpdates++;
         message.value += 10.5f;
         totalAdded += 10.5f;
@@ -82,7 +82,7 @@ public class MessageTransformer {
 
     private TransformNormal getCachedMessage(String key) {
         TransformNormal message;
-        String cacheValue = mongoDbService.retrieveFromCache(key);
+        String cacheValue = cacheService.retrieveFromCache(key);
         try {
             message = objectMapper.readValue(cacheValue, TransformNormal.class);
         }

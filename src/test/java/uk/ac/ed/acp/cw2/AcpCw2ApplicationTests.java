@@ -13,7 +13,7 @@ import uk.ac.ed.acp.cw2.domain.TranDecoder;
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
 import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.service.MessageTransformer;
-import uk.ac.ed.acp.cw2.service.MongoDbService;
+import uk.ac.ed.acp.cw2.service.CacheService;
 import uk.ac.ed.acp.cw2.utilities.RandomGenerator;
 import uk.ac.ed.acp.cw2.model.TransformRequest;
 import uk.ac.ed.acp.cw2.service.RabbitMqService;
@@ -44,7 +44,7 @@ class AcpCw2ApplicationTests {
     private RabbitMqService rabbitMqService;
 
     @Autowired
-    private MongoDbService mongoDbService;
+    private CacheService cacheService;
 
     @Autowired
     private StorageService storageService;
@@ -93,22 +93,22 @@ class AcpCw2ApplicationTests {
         logger.info("Pushing blob to storage service");
         String data = RandomGenerator.generateRandomKey("store-test");
         String datasetName = RandomGenerator.generateRandomKey("store-test");
-        BlobPacket packet = storageService.pushBlob(datasetName, data);
-        assertNotNull(packet);
+        String uuid = storageService.pushBlob(datasetName, data);
+        assertNotNull(uuid);
 
         logger.info("Receiving blob from storage service");
-        BlobPacket receivedPacket = storageService.receiveBlob(packet.uuid);
+        BlobPacket receivedPacket = storageService.receiveBlob(uuid);
         assertNotNull(receivedPacket);
-        assertEquals(packet.uuid, receivedPacket.uuid);
-        assertEquals(packet.datasetName, receivedPacket.datasetName);
-        assertEquals(packet.data, receivedPacket.data);
+        assertEquals(uuid, receivedPacket.uuid);
+        assertEquals(datasetName, receivedPacket.datasetName);
+        assertEquals(data, receivedPacket.data);
 
         logger.info("Deleting blob from storage service");
-        boolean deleted = storageService.deleteBlob(packet.uuid);
+        boolean deleted = storageService.deleteBlob(uuid);
         assertTrue(deleted);
 
         logger.info("Checking if blob is deleted");
-        BlobPacket deletedPacket = storageService.receiveBlob(packet.uuid);
+        BlobPacket deletedPacket = storageService.receiveBlob(uuid);
         assertNull(deletedPacket);
     }
 
@@ -229,8 +229,9 @@ class AcpCw2ApplicationTests {
             assertTrue(key.length()==3 || key.length()==4, String.format("Unexpected key length %s in message %d", key, i));
             String uuid = jsonNode.get("uuid").asText();
 
-            // Check cached message
-            String storedMessage = http.recCache(uuid);
+            // Check stored message
+            BlobPacket storedBlob = storageService.receiveBlob(uuid);
+            String storedMessage = storedBlob.data;
             JsonNode storedNode = objectMapper.readTree(storedMessage);
             assertEquals(jsonNode.get("key").asText(), storedNode.get("key").asText(), String.format("Unexpected key %s in message %d", storedNode.get("key").asText(), i));
             assertEquals(jsonNode.get("value").asDouble(), storedNode.get("value").asDouble(), String.format("Unexpected value %s in message %d", storedNode.get("value").asText(), i));
@@ -277,7 +278,7 @@ class AcpCw2ApplicationTests {
         // get trans messages
         List<String> messages = http.recRabbit(request.writeQueue, 500);
         // Get all cache entries
-        List<cacheEntry> entries = http.clearCacheEntries(data.getMessages(), mongoDbService);
+        List<cacheEntry> entries = http.clearCacheEntries(data.getMessages(), cacheService);
 
 
         // Now do again, but keep the object to compare.
@@ -299,7 +300,7 @@ class AcpCw2ApplicationTests {
             }
         }
         logger.info("Handing {} messages to the transformer", msgObjects.size());
-        MessageTransformer transformer = new MessageTransformer(request1, msgObjects, mongoDbService, rabbitMqService);
+        MessageTransformer transformer = new MessageTransformer(request1, msgObjects, cacheService, rabbitMqService);
         transformer.processMessages();
         // Receive these messages
         List<String> manual_messages = http.recRabbit(request1.writeQueue, 500);
