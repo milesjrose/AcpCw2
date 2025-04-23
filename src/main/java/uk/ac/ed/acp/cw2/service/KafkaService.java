@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
-import uk.ac.ed.acp.cw2.domain.ProcMessage;
 
 import java.time.Duration;
 import java.util.*;
@@ -23,7 +22,6 @@ import java.util.concurrent.TimeoutException;
 public class KafkaService {
     private static final Logger logger = LoggerFactory.getLogger(KafkaService.class);
     private final RuntimeEnvironment environment;
-    private final String[] stockSymbols = "AAPL,MSFT,GOOG,AMZN,TSLA,JPMC,CATP,UNIL,LLOY".split(",");
     private final String uid = "s2093547";
     private final ObjectMapper objectMapper = new ObjectMapper();
     public KafkaService(RuntimeEnvironment environment) {
@@ -66,52 +64,6 @@ public class KafkaService {
         return kafkaProps;
     }
 
-    public void sendStockSymbols(String symbolTopic, int symbolCount) {
-        logger.info(String.format("Writing %d symbols in topic %s", symbolCount, symbolTopic));
-        Properties kafkaProps = getKafkaProperties(environment);
-
-        try (var producer = new KafkaProducer<String, String>(kafkaProps)) {
-            for (int i = 0; i < symbolCount; i++) {
-                final String key = stockSymbols[new Random().nextInt(stockSymbols.length)];
-                final String value = String.valueOf(i);
-
-                producer.send(new ProducerRecord<>(symbolTopic, key, value), (recordMetadata, ex) -> {
-                    if (ex != null)
-                        ex.printStackTrace();
-                    else
-                        logger.info(String.format("Produced event to topic %s: key = %-10s value = %s%n", symbolTopic, key, value));
-                }).get(1000, TimeUnit.MILLISECONDS);
-            }
-            logger.info(String.format("%d record(s) sent to Kafka\n", symbolCount));
-        } catch (ExecutionException e) {
-            logger.error("execution exc: " + e);
-            throw new RuntimeException(e);
-        } catch (TimeoutException e) {
-            logger.error("timeout exc: " + e);
-        } catch (InterruptedException e) {
-            logger.error("interrupted exc: " + e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<AbstractMap.SimpleEntry<String, String>> receiveStockSymbols(String symbolTopic, int consumeTimeMsec) {
-        logger.info(String.format("Reading stock-symbols from topic %s", symbolTopic));
-        Properties kafkaProps = getKafkaProperties(environment);
-
-        var result = new ArrayList<AbstractMap.SimpleEntry<String, String>>();
-
-        try (var consumer = new KafkaConsumer<String, String>(kafkaProps)) {
-            consumer.subscribe(Collections.singletonList(symbolTopic));
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(consumeTimeMsec));
-            for (ConsumerRecord<String, String> record : records) {
-                logger.info(String.format("[%s] %s: %s %s %s %s", record.topic(), record.key(), record.value(), record.partition(), record.offset(), record.timestamp()));
-                result.add(new AbstractMap.SimpleEntry<>(record.key(), record.value()));
-            }
-        }
-
-        return result;
-    }
-
     public List<String> receiveFromTopic(String readTopic, int timeoutInMsec, int count) {
         logger.info("Reading messages from topic {} with timeout {} msec", readTopic, timeoutInMsec);
         Properties kafkaProps = getKafkaProperties(environment);
@@ -150,7 +102,6 @@ public class KafkaService {
 
     public boolean pushToTopic(String writeTopic, int messageCount){
         logger.info("Pushing {} count messages to topic {}", messageCount, writeTopic);
-        Properties kafkaProps = getKafkaProperties(environment);
         List<String> messages = new ArrayList<>();
 
         for (int i = 0; i < messageCount; i++) {

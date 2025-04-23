@@ -23,11 +23,13 @@ public class CacheController {
 
     @GetMapping("/{cacheKey}")
     public String retrieveFromCache(@PathVariable String cacheKey) {
+        logger.info("Retrieving from cache: {}", cacheKey);
         return cacheService.retrieveFromCache(cacheKey);
     }
 
     @PutMapping("/{cacheKey}/{cacheValue}")
     public void storeInCache(@PathVariable String cacheKey, @PathVariable String cacheValue) {
+        logger.info("Storing in cache: {} = {}", cacheKey, cacheValue);
         cacheService.storeInCache(cacheKey, cacheValue);
     }
 }

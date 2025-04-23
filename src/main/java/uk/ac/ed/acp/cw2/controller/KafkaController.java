@@ -8,7 +8,6 @@ import uk.ac.ed.acp.cw2.model.Message;
 import uk.ac.ed.acp.cw2.service.KafkaService;
 import org.springframework.http.ResponseEntity;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,16 +25,6 @@ public class KafkaController {
 
     public KafkaController(KafkaService kafkaService) {
         this.kafkaService = kafkaService;
-    }
-
-    @PostMapping("/sendStockSymbols/{symbolTopic}/{symbolCount}")
-    public void sendStockSymbols(@PathVariable String symbolTopic, @PathVariable int symbolCount) {
-        kafkaService.sendStockSymbols(symbolTopic, symbolCount);
-    }
-
-    @GetMapping("/receiveStockSymbols/{symbolTopic}/{consumeTimeMsec}")
-    public List<AbstractMap.SimpleEntry<String, String>> receiveStockSymbols(@PathVariable String symbolTopic, @PathVariable int consumeTimeMsec) {
-        return kafkaService.receiveStockSymbols(symbolTopic, consumeTimeMsec);
     }
 
     @PutMapping("/{writeTopic}/{messageCount}")

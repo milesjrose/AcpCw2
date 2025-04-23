@@ -1,7 +1,7 @@
 package uk.ac.ed.acp.cw2.utilities;
 
-import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
@@ -45,9 +45,11 @@ public class local {
         assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode());
     }
     public List<String> recRabbit(String queueName, Integer timeoutInMsec){
-        ResponseEntity<List> response = restTemplate.getForEntity(
+        ResponseEntity<List<String>> response = restTemplate.exchange(
                 rabbit + "/" + queueName + "/" + timeoutInMsec,
-                List.class
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
         );
         assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Queue");
         assertNotNull(response.getBody(), "No messages received from Queue");
@@ -67,10 +69,12 @@ public class local {
         );
     }
 
-    public ResponseEntity<List> recKafka(String topic, Integer timeout){
-        return restTemplate.getForEntity(
+    public ResponseEntity<List<String>> recKafka(String topic, Integer timeout){
+        return restTemplate.exchange(
                 kafka + "/" + topic + "/" + timeout,
-                List.class
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
         );
     }
 

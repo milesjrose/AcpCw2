@@ -20,7 +20,6 @@ import java.util.Random;
 public class RabbitMqService {
 
     private static final Logger logger = LoggerFactory.getLogger(RabbitMqService.class);
-    private final RuntimeEnvironment environment;
     private final String[] stockSymbols = "AAPL,MSFT,GOOG,AMZN,TSLA,JPMC,CATP,UNIL,LLOY".split(",");
 
     private ConnectionFactory factory = null;
@@ -29,7 +28,6 @@ public class RabbitMqService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public RabbitMqService(RuntimeEnvironment environment) {
-        this.environment = environment;
         factory = new ConnectionFactory();
         factory.setHost(environment.getRabbitMqHost());
         factory.setPort(environment.getRabbitMqPort());

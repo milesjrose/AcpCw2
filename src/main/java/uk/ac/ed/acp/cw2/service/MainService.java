@@ -17,7 +17,6 @@ import java.util.List;
 @Service
 public class MainService {
     private static final Logger logger = LoggerFactory.getLogger(MainService.class);
-    private final RuntimeEnvironment environment;
     private final RabbitMqService rabbitMqService;
     private final MongoDbService mongoDbService;
     private final KafkaService kafkaService;
@@ -27,7 +26,6 @@ public class MainService {
                        RabbitMqService rabbitMqService,
                        MongoDbService mongoDbService,
                        KafkaService kafkaService) {
-        this.environment = environment;
         this.rabbitMqService = rabbitMqService;
         this.mongoDbService = mongoDbService;
         this.kafkaService = kafkaService;

@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import uk.ac.ed.acp.cw2.domain.TranDecoder;
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
 import uk.ac.ed.acp.cw2.model.TransformMessage;
-import uk.ac.ed.acp.cw2.service.MainService;
 import uk.ac.ed.acp.cw2.service.MessageTransformer;
 import uk.ac.ed.acp.cw2.service.MongoDbService;
 import uk.ac.ed.acp.cw2.utilities.RandomGenerator;
@@ -30,10 +29,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import uk.ac.ed.acp.cw2.utilities.PacketGenerator;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,9 +46,6 @@ class AcpCw2ApplicationTests {
 
     @Autowired
     private MongoDbService mongoDbService;
-
-    @Autowired
-    private MainService mainService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private local http;
@@ -105,12 +97,13 @@ class AcpCw2ApplicationTests {
 
         // Receive kafka
         int timeoutInMsec = 5000;
-        ResponseEntity<List> receiveResponse = http.recKafka(topicName, timeoutInMsec);
+        ResponseEntity<List<String>> receiveResponse = http.recKafka(topicName, timeoutInMsec);
         assertEquals(HttpStatusCode.valueOf(200), receiveResponse.getStatusCode());
         assertNotNull(receiveResponse.getBody());
         
         // Extract and verify JSON fields from the response
         List<String> messages = receiveResponse.getBody();
+        assertNotNull(messages);
         assertFalse(messages.isEmpty(), "No messages received from Kafka");
         
         // Parse the first message to extract uid and counter
@@ -145,10 +138,12 @@ class AcpCw2ApplicationTests {
         long startTime;
         for (int i = 0; i < 3; i++) {
             startTime = System.currentTimeMillis();
-            ResponseEntity<List> receiveResponse = http.recKafka(topicName, timeoutInMsec);
+            ResponseEntity<List<String>> receiveResponse = http.recKafka(topicName, timeoutInMsec);
             assertEquals(HttpStatusCode.valueOf(200), receiveResponse.getStatusCode(), "Failed to receive messages from Kafka");
-            assertEquals(messageCount, receiveResponse.getBody().size(), "Incorrect number of messages received from Kafka");
-            logger.info("[{}] MessageCount: {}, readMessages: {}, timeout: {}, time: {}", i, messageCount, receiveResponse.getBody().size(), timeoutInMsec, (System.currentTimeMillis() - startTime));
+            List<String> messages = receiveResponse.getBody();
+            assertNotNull(messages);
+            assertEquals(messageCount, messages.size(), "Incorrect number of messages received from Kafka");
+            logger.info("[{}] MessageCount: {}, readMessages: {}, timeout: {}, time: {}", i, messageCount, messages.size(), timeoutInMsec, (System.currentTimeMillis() - startTime));
         }
     }
 
@@ -169,7 +164,7 @@ class AcpCw2ApplicationTests {
         ResponseEntity<Void> sendResponse = http.pushKafka(request.readTopic, json);
         assertEquals(HttpStatusCode.valueOf(200), sendResponse.getStatusCode(), "Failed to send messages to Kafka");
         // Proccess messages
-        ResponseEntity<Void> response = http.procMsg(request);
+        http.procMsg(request);
 
         logger.info("-------------- RECEIVING MESSAGES ----------------");
         // Rec messages

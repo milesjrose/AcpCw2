@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +29,6 @@ public class ProcMessage {
         logger.debug("Creating message with string {}", jsonString);
         ObjectNode data = null;
         List<String> requiredData = Arrays.asList("uid", "key", "comment", "value");
-        ArrayList<String> missingData = new ArrayList<>();
 
         try {
             // Parse the original JSON
