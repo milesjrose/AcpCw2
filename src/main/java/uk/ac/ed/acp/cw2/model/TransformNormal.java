@@ -13,4 +13,7 @@ public class TransformNormal extends TransformMessage{
         json.put("value", value);
         return json;
     }
+    public String type(){
+        return "TransformNormal";
+    }
 }

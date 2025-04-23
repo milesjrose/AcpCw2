@@ -22,7 +22,7 @@ public class MessageTransformer {
     private Float totalAdded;               // Total value of 10.5s added to messages
     private TransformRequest transformRequest;
 
-    void MessageTransformer(TransformRequest transformRequest, List<TransformMessage> messages, MongoDbService mongoDbService, RabbitMqService rabbitMqService){
+    public MessageTransformer(TransformRequest transformRequest, List<TransformMessage> messages, MongoDbService mongoDbService, RabbitMqService rabbitMqService){
         this.totalMessagesWritten = 0;
         this.totalMessagesProcessed = 0;
         this.totalRedisUpdates = 0;
@@ -36,6 +36,7 @@ public class MessageTransformer {
 
     public void processMessages(){
         for (TransformMessage message : messages){
+            logger.debug("Transforming message {} {}", message.type(), message.toJson(objectMapper));
             if (message instanceof TransformNormal n_msg){
                 processMessage(n_msg);
             } else if (message instanceof TransformTombstone t_msg){
@@ -54,6 +55,7 @@ public class MessageTransformer {
         } else {
             storeAndIncrement(message);
         }
+        queueMessage(message);
     }
 
     private void processMessage(TransformTombstone message){

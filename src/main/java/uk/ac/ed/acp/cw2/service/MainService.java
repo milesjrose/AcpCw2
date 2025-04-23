@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
 import uk.ac.ed.acp.cw2.domain.ProcMessage;
+import uk.ac.ed.acp.cw2.domain.TranDecoder;
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
+import uk.ac.ed.acp.cw2.model.TransformMessage;
+import uk.ac.ed.acp.cw2.model.TransformRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,13 +83,18 @@ public class MainService {
         logger.info("Transforming messages; read_queue:{}, write_queue:{}, count:{}",
             request.readQueue, request.writeQueue, request.messageCount);
 
-        List<String> messageStrings = rabbitMqService.receiveFromQueue(request.readQueue, 0);
+        List<String> messageStrings = rabbitMqService.receiveFromQueue(request.readQueue, 500);
         List<TransformMessage> messages = new ArrayList<>();
+        TranDecoder decoder = new TranDecoder();
         for (String messageString : messageStrings){
             try {
-                messages.add(new TransformMessage(messageString));
-            } catch (Exception ignored) {}
+                messages.add(decoder.decode(messageString));
+            } catch (Exception e) {
+                logger.error("Error decoding packet {}", messageString);
+            }
         }
-        
+        logger.info("Handing {} messages to the transformer", messages.size());
+        MessageTransformer transformer = new MessageTransformer(request, messages, mongoDbService, rabbitMqService);
+        transformer.processMessages();
     }
 }

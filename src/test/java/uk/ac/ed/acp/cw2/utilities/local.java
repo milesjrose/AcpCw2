@@ -1,0 +1,108 @@
+package uk.ac.ed.acp.cw2.utilities;
+
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import uk.ac.ed.acp.cw2.model.ProcessRequest;
+import uk.ac.ed.acp.cw2.model.TransformRequest;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class local {
+
+    private String base;
+    private String rabbit;
+    private String kafka;
+    private String cache;
+    private TestRestTemplate restTemplate;
+
+
+    public local(TestRestTemplate restTemplate, String baseUrl){
+        this.base = baseUrl;
+        this.kafka = base + "/kafka";
+        this.rabbit = base + "/rabbitmq";
+        this.cache = base + "/mongodb/cache";
+        this.restTemplate = restTemplate;
+    }
+
+    public void pushRabbit(String queueName, Integer messageCount){
+        ResponseEntity<Void> response = restTemplate.exchange(
+                rabbit + "/" + queueName + "/" + messageCount,
+                HttpMethod.PUT,
+                null,
+                Void.class
+        );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode());
+    }
+    public List<String> recRabbit(String queueName, Integer timeoutInMsec){
+        ResponseEntity<List> response = restTemplate.getForEntity(
+                rabbit + "/" + queueName + "/" + timeoutInMsec,
+                List.class
+        );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Queue");
+        assertNotNull(response.getBody(), "No messages received from Queue");
+        List<String> messages = response.getBody();
+        assertNotNull(messages, "No messages received from Queue");
+        assertFalse(messages.isEmpty(), "No messages received from Queue");
+
+        return messages;
+    }
+
+    public ResponseEntity<Void> pushKafka(String topic, Integer count){
+        return restTemplate.exchange(
+                kafka + "/" + topic + "/" + count,
+                HttpMethod.PUT,
+                null,
+                Void.class
+        );
+    }
+
+    public ResponseEntity<List> recKafka(String topic, Integer timeout){
+        return restTemplate.getForEntity(
+                kafka + "/" + topic + "/" + timeout,
+                List.class
+        );
+    }
+
+    public ResponseEntity<Void> pushKafka(String topic, String json){
+        return restTemplate.exchange(
+                kafka + "/sendMessage/" + topic,
+                HttpMethod.POST,
+                new HttpEntity<>(json, PacketGenerator.createJsonHeaders()),
+                Void.class
+        );
+    }
+
+    public ResponseEntity<Void> procMsg(ProcessRequest request){
+        return restTemplate.exchange(
+                base + "/processMessages",
+                HttpMethod.POST,
+                new HttpEntity<>(request),
+                Void.class
+        );
+    }
+
+    public ResponseEntity<String> recCache(String key){
+        return restTemplate.exchange(
+                cache + "/" + key,
+                HttpMethod.GET,
+                null,
+                String.class
+        );
+    }
+
+    public void tranMsg(TransformRequest request){
+        ResponseEntity<Void> response = restTemplate.exchange(
+                base + "/transformMessages",
+                HttpMethod.POST,
+                new HttpEntity<>(request),
+                Void.class
+        );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to transform messages");
+    }
+
+}

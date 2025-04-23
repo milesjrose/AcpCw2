@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uk.ac.ed.acp.cw2.model.TransformRequest;
 import uk.ac.ed.acp.cw2.service.MainService;
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
 
@@ -40,6 +41,16 @@ public class ServiceController {
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             logger.error("Error processing messages", e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+    @PostMapping("/transformMessages")
+    public ResponseEntity<Void> transformMessages(@RequestBody TransformRequest request){
+        try{
+            mainService.transformMessages(request);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            logger.error("Error transforming messages", e);
             return ResponseEntity.internalServerError().build();
         }
     }

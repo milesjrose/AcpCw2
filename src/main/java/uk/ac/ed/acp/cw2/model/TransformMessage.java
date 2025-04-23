@@ -13,4 +13,8 @@ public class TransformMessage{
         json.put("key", key);
         return json;
     }
+
+    public String type(){
+        return "TransformMessage";
+    }
 }

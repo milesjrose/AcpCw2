@@ -149,7 +149,7 @@ public class KafkaService {
 
 
     public boolean pushToTopic(String writeTopic, int messageCount){
-        logger.info("Pushing {} messages to topic {}", messageCount, writeTopic);
+        logger.info("Pushing {} count messages to topic {}", messageCount, writeTopic);
         Properties kafkaProps = getKafkaProperties(environment);
         List<String> messages = new ArrayList<>();
 
