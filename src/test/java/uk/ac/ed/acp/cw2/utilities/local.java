@@ -10,6 +10,7 @@ import uk.ac.ed.acp.cw2.model.ProcessRequest;
 import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.model.TransformRequest;
 import uk.ac.ed.acp.cw2.service.MongoDbService;
+import uk.ac.ed.acp.cw2.Utilities.Parser;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -60,49 +61,61 @@ public class local {
         return messages;
     }
 
-    public ResponseEntity<Void> pushKafka(String topic, Integer count){
-        return restTemplate.exchange(
+    public void pushKafka(String topic, Integer count){
+        ResponseEntity<Void> response = restTemplate.exchange(
                 kafka + "/" + topic + "/" + count,
                 HttpMethod.PUT,
                 null,
                 Void.class
         );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to push messages to Kafka");
     }
 
-    public ResponseEntity<List<String>> recKafka(String topic, Integer timeout){
-        return restTemplate.exchange(
+    public List<String> recKafka(String topic, Integer timeout){
+        ResponseEntity<List<String>> response = restTemplate.exchange(
                 kafka + "/" + topic + "/" + timeout,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<String>>() {}
         );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Kafka");
+        assertNotNull(response.getBody(), "No messages received from Kafka");
+        List<String> messages = response.getBody();
+        assertNotNull(messages, "No messages received from Kafka");
+        assertFalse(messages.isEmpty(), "No messages received from Kafka");
+
+        return messages;
     }
 
-    public ResponseEntity<Void> pushKafka(String topic, String json){
-        return restTemplate.exchange(
+    public void pushKafka(String topic, String json){
+        ResponseEntity<Void> response = restTemplate.exchange(
                 kafka + "/sendMessage/" + topic,
                 HttpMethod.POST,
                 new HttpEntity<>(json, PacketGenerator.createJsonHeaders()),
                 Void.class
         );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to push messages to Kafka");
     }
 
-    public ResponseEntity<Void> procMsg(ProcessRequest request){
-        return restTemplate.exchange(
+    public void procMsg(ProcessRequest request){
+        ResponseEntity<Void> response = restTemplate.exchange(
                 base + "/processMessages",
                 HttpMethod.POST,
                 new HttpEntity<>(request),
                 Void.class
         );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to process messages");
     }
 
-    public ResponseEntity<String> recCache(String key){
-        return restTemplate.exchange(
+    public String recCache(String key){
+        ResponseEntity<String> response = restTemplate.exchange(
                 cache + "/" + key,
                 HttpMethod.GET,
                 null,
                 String.class
         );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive cache");
+        return Parser.parseString(response.getBody());
     }
 
     public void tranMsg(TransformRequest request){

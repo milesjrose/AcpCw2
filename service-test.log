@@ -1,35 +1,35 @@
 === SERVICE TEST DATA ===
 
 === SENT JSON ===
-[{"uid": "s2093547", "key": "BVIXH", "comment": " ", "value": 39.24}, {"uid": "s2093547", "key": "PRJ", "comment": " ", "value": 6.36}, {"uid": "s2093547", "key": "DNMC", "comment": " ", "value": 18.57}, {"uid": "s2093547", "key": "FZQM", "comment": " ", "value": 12.34}, {"uid": "s2093547", "key": "KWC", "comment": " ", "value": 23.73}, {"uid": "s2093547", "key": "EGPKH", "comment": " ", "value": 12.40}, {"uid": "s2093547", "key": "JQEFU", "comment": " ", "value": 30.53}, {"uid": "s2093547", "key": "RWN", "comment": " ", "value": 34.08}, {"uid": "s2093547", "key": "AWW", "comment": " ", "value": 37.33}, {"uid": "s2093547", "key": "BCAQV", "comment": " ", "value": 4.62}]
+[{"uid": "s2093547", "key": "BQYM", "comment": " ", "value": 13.81}, {"uid": "s2093547", "key": "CUXVO", "comment": " ", "value": 17.96}, {"uid": "s2093547", "key": "YOF", "comment": " ", "value": 29.89}, {"uid": "s2093547", "key": "JLT", "comment": " ", "value": 36.32}, {"uid": "s2093547", "key": "WII", "comment": " ", "value": 12.94}, {"uid": "s2093547", "key": "UGO", "comment": " ", "value": 45.71}, {"uid": "s2093547", "key": "LNJAB", "comment": " ", "value": 6.55}, {"uid": "s2093547", "key": "FKTVP", "comment": " ", "value": 1.39}, {"uid": "s2093547", "key": "WISTC", "comment": " ", "value": 10.73}, {"uid": "s2093547", "key": "BAOV", "comment": " ", "value": 9.97}]
 
 === GOOD PACKET TOTALS ===
-Index 0: 6.36
-Index 1: 24.93
-Index 2: 37.27
-Index 3: 61.00
-Index 4: 95.08
-Index 5: 132.41
+Index 0: 13.81
+Index 1: 43.70
+Index 2: 80.02
+Index 3: 92.96
+Index 4: 138.67
+Index 5: 148.64
 
 === BAD PACKET TOTALS ===
-Index 0: 39.24
-Index 1: 51.64
-Index 2: 82.17
-Index 3: 86.79
+Index 0: 17.96
+Index 1: 24.51
+Index 2: 25.90
+Index 3: 36.63
 
 === GOOD QUEUE MESSAGES ===
-{"uid":"s2093547","key":"PRJ","comment":" ","value":6.36,"uuid":"62555-d9Ohx"}
-{"uid":"s2093547","key":"DNMC","comment":" ","value":18.57,"uuid":"45882-KNYNI"}
-{"uid":"s2093547","key":"FZQM","comment":" ","value":12.34,"uuid":"18969-mLuIi"}
-{"uid":"s2093547","key":"KWC","comment":" ","value":23.73,"uuid":"34854-5G0yR"}
-{"uid":"s2093547","key":"RWN","comment":" ","value":34.08,"uuid":"10304-k22vi"}
-{"uid":"s2093547","key":"AWW","comment":" ","value":37.33,"uuid":"63565-5P1Jy"}
-{"TOTAL":132.41}
+{"uid":"s2093547","key":"BQYM","comment":" ","value":13.81,"uuid":"65967-0hQG9"}
+{"uid":"s2093547","key":"YOF","comment":" ","value":29.89,"uuid":"38658-Z1JvA"}
+{"uid":"s2093547","key":"JLT","comment":" ","value":36.32,"uuid":"23282-sq5eA"}
+{"uid":"s2093547","key":"WII","comment":" ","value":12.94,"uuid":"18601-gxUlT"}
+{"uid":"s2093547","key":"UGO","comment":" ","value":45.71,"uuid":"84839-KmiQI"}
+{"uid":"s2093547","key":"BAOV","comment":" ","value":9.97,"uuid":"71482-RZbTD"}
+{"TOTAL":148.64001}
 
 === BAD QUEUE MESSAGES ===
-{"uid":"s2093547","key":"BVIXH","comment":" ","value":39.24}
-{"uid":"s2093547","key":"EGPKH","comment":" ","value":12.4}
-{"uid":"s2093547","key":"JQEFU","comment":" ","value":30.53}
-{"uid":"s2093547","key":"BCAQV","comment":" ","value":4.62}
-{"TOTAL":86.79}
+{"uid":"s2093547","key":"CUXVO","comment":" ","value":17.96}
+{"uid":"s2093547","key":"LNJAB","comment":" ","value":6.55}
+{"uid":"s2093547","key":"FKTVP","comment":" ","value":1.39}
+{"uid":"s2093547","key":"WISTC","comment":" ","value":10.73}
+{"TOTAL":36.629997}
 --------------------------------

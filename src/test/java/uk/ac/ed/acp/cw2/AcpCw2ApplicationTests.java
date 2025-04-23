@@ -15,14 +15,13 @@ import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.service.MessageTransformer;
 import uk.ac.ed.acp.cw2.service.MongoDbService;
 import uk.ac.ed.acp.cw2.utilities.RandomGenerator;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import uk.ac.ed.acp.cw2.model.TransformRequest;
 import uk.ac.ed.acp.cw2.service.RabbitMqService;
 import uk.ac.ed.acp.cw2.utilities.cacheEntry;
 import uk.ac.ed.acp.cw2.utilities.local;
 import jakarta.annotation.PostConstruct;
-
+import uk.ac.ed.acp.cw2.model.BlobPacket;
+import uk.ac.ed.acp.cw2.service.StorageService;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.FileWriter;
@@ -46,6 +45,9 @@ class AcpCw2ApplicationTests {
 
     @Autowired
     private MongoDbService mongoDbService;
+
+    @Autowired
+    private StorageService storageService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private local http;
@@ -85,6 +87,32 @@ class AcpCw2ApplicationTests {
     }
 
     @Test
+    void testStorageService() throws Exception {
+        logger.info("-------------- STORAGE SERVICE TEST ----------------");
+
+        logger.info("Pushing blob to storage service");
+        String data = RandomGenerator.generateRandomKey("store-test");
+        String datasetName = RandomGenerator.generateRandomKey("store-test");
+        BlobPacket packet = storageService.pushBlob(datasetName, data);
+        assertNotNull(packet);
+
+        logger.info("Receiving blob from storage service");
+        BlobPacket receivedPacket = storageService.receiveBlob(packet.uuid);
+        assertNotNull(receivedPacket);
+        assertEquals(packet.uuid, receivedPacket.uuid);
+        assertEquals(packet.datasetName, receivedPacket.datasetName);
+        assertEquals(packet.data, receivedPacket.data);
+
+        logger.info("Deleting blob from storage service");
+        boolean deleted = storageService.deleteBlob(packet.uuid);
+        assertTrue(deleted);
+
+        logger.info("Checking if blob is deleted");
+        BlobPacket deletedPacket = storageService.receiveBlob(packet.uuid);
+        assertNull(deletedPacket);
+    }
+
+    @Test
     void testKafkaSent() throws Exception {
         logger.info("-----------STARTING KAFKA TEST-------------");
         String topicName = RandomGenerator.generateRandomKey("KafkaSent");
@@ -92,17 +120,11 @@ class AcpCw2ApplicationTests {
         int messageCount = 5;
 
         // Send kafka
-        ResponseEntity<Void> sendResponse = http.pushKafka(topicName, messageCount);
-        assertEquals(HttpStatusCode.valueOf(200), sendResponse.getStatusCode());
+        http.pushKafka(topicName, messageCount);
 
         // Receive kafka
         int timeoutInMsec = 5000;
-        ResponseEntity<List<String>> receiveResponse = http.recKafka(topicName, timeoutInMsec);
-        assertEquals(HttpStatusCode.valueOf(200), receiveResponse.getStatusCode());
-        assertNotNull(receiveResponse.getBody());
-        
-        // Extract and verify JSON fields from the response
-        List<String> messages = receiveResponse.getBody();
+        List<String> messages = http.recKafka(topicName, timeoutInMsec);
         assertNotNull(messages);
         assertFalse(messages.isEmpty(), "No messages received from Kafka");
         
@@ -130,17 +152,14 @@ class AcpCw2ApplicationTests {
         int messageCount = 100;
 
         // Send kafka
-        ResponseEntity<Void> sendResponse = http.pushKafka(topicName, messageCount);
-        assertEquals(HttpStatusCode.valueOf(200), sendResponse.getStatusCode(), "Failed to send messages to Kafka");
+        http.pushKafka(topicName, messageCount);
 
         // Rec kafka
         int timeoutInMsec = 5000;
         long startTime;
         for (int i = 0; i < 3; i++) {
             startTime = System.currentTimeMillis();
-            ResponseEntity<List<String>> receiveResponse = http.recKafka(topicName, timeoutInMsec);
-            assertEquals(HttpStatusCode.valueOf(200), receiveResponse.getStatusCode(), "Failed to receive messages from Kafka");
-            List<String> messages = receiveResponse.getBody();
+            List<String> messages = http.recKafka(topicName, timeoutInMsec);
             assertNotNull(messages);
             assertEquals(messageCount, messages.size(), "Incorrect number of messages received from Kafka");
             logger.info("[{}] MessageCount: {}, readMessages: {}, timeout: {}, time: {}", i, messageCount, messages.size(), timeoutInMsec, (System.currentTimeMillis() - startTime));
@@ -161,8 +180,7 @@ class AcpCw2ApplicationTests {
         PacketGenerator.PacketListResult packetList = PacketGenerator.generatePacketList(request.messageCount);
         String json = packetList.jsonList;
         logger.info("Created {} good messages, {} bad messages",packetList.goodTotals.size(), packetList.badTotals.size());
-        ResponseEntity<Void> sendResponse = http.pushKafka(request.readTopic, json);
-        assertEquals(HttpStatusCode.valueOf(200), sendResponse.getStatusCode(), "Failed to send messages to Kafka");
+        http.pushKafka(request.readTopic, json);
         // Proccess messages
         http.procMsg(request);
 
@@ -212,9 +230,7 @@ class AcpCw2ApplicationTests {
             String uuid = jsonNode.get("uuid").asText();
 
             // Check cached message
-            ResponseEntity<String> storeResponse = http.recCache(uuid);
-            assertEquals(HttpStatusCode.valueOf(200), storeResponse.getStatusCode(), "Failed to load message from MongoDB");
-            String storedMessage = storeResponse.getBody();
+            String storedMessage = http.recCache(uuid);
             JsonNode storedNode = objectMapper.readTree(storedMessage);
             assertEquals(jsonNode.get("key").asText(), storedNode.get("key").asText(), String.format("Unexpected key %s in message %d", storedNode.get("key").asText(), i));
             assertEquals(jsonNode.get("value").asDouble(), storedNode.get("value").asDouble(), String.format("Unexpected value %s in message %d", storedNode.get("value").asText(), i));

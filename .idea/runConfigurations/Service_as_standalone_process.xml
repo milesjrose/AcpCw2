@@ -6,6 +6,7 @@
       <env name="RABBITMQ_PORT" value="5672" />
       <env name="REDIS_HOST" value="localhost" />
       <env name="REDIS_PORT" value="6379" />
+      <env name="ACP_STORAGE_SERVICE" value="https://acp-storage.azurewebsites.net" />
     </envs>
     <module name="AcpCw2Template" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="uk.ac.ed.acp.cw2.Application" />

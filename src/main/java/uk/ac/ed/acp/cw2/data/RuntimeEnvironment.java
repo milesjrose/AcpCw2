@@ -26,16 +26,42 @@ public class RuntimeEnvironment {
     public static final String KAFKA_SASL_MECHANISM_ENV_VAR = "KAFKA_SASL_MECHANISM";
     public static final String KAFKA_SASL_JAAS_CONFIG_ENV_VAR = "KAFKA_SASL_JAAS_CONFIG";
 
+    public static final String ACP_STORAGE_SERVICE_ENV_VAR = "ACP_STORAGE_SERVICE";
+
+    @Getter
+    @Setter
     private String redisHost;
+    @Getter
+    @Setter
     private int redisPort;
+    @Getter
+    @Setter
     private String rabbitMqHost;
+    @Getter
+    @Setter
     private int rabbitMqPort;
+    @Getter
+    @Setter
     private String kafkaBootstrapServers;
+    @Getter
+    @Setter
     private String kafkaInboundTopic;
+    @Getter
+    @Setter
     private String kafkaOutboundTopic;
+    @Getter
+    @Setter
     private String kafkaSecurityProtocol;
+    @Getter
+    @Setter
     private String kafkaSaslMechanism;
+    @Getter
+    @Setter
     private String kafkaSaslJaasConfig;
+    @Getter
+    @Setter
+    private String storageServiceUrl;
+
 
     /**
      * Configures and retrieves the runtime environment settings by reading from
@@ -60,7 +86,9 @@ public class RuntimeEnvironment {
         settings.setRedisPort(System.getenv(REDIS_PORT_ENV_VAR) == null ? 6379 : Integer.parseInt(System.getenv(REDIS_PORT_ENV_VAR)));
         settings.setRabbitMqHost(System.getenv(RABBITMQ_HOST_ENV_VAR) == null ? "localhost" : System.getenv(RABBITMQ_HOST_ENV_VAR));
         settings.setRabbitMqPort(System.getenv(RABBITMQ_PORT_ENV_VAR) == null ? 5672 : Integer.parseInt(System.getenv(RABBITMQ_PORT_ENV_VAR)));
+        settings.setStorageServiceUrl(System.getenv(ACP_STORAGE_SERVICE_ENV_VAR) == null ? "https://acp-storage.azurewebsites.net" : System.getenv(ACP_STORAGE_SERVICE_ENV_VAR));
 
+        
         // if the security is enabled then all must be set - otherwise no security is happening
         if (System.getenv(KAFKA_SECURITY_PROTOCOL_ENV_VAR) != null) {
             if (System.getenv(KAFKA_SASL_MECHANISM_ENV_VAR) == null || System.getenv(KAFKA_SASL_JAAS_CONFIG_ENV_VAR) == null || System.getenv(KAFKA_SECURITY_PROTOCOL_ENV_VAR) == null) {
@@ -73,84 +101,5 @@ public class RuntimeEnvironment {
         }
 
         return settings;
-    }
-
-
-    // KAFKA_BOOTSTRAP_SERVERS
-    public String getKafkaBootstrapServers() {
-        return kafkaBootstrapServers;
-    }
-    public void setKafkaBootstrapServers(String kafkaBootstrapServers) {
-        this.kafkaBootstrapServers = kafkaBootstrapServers;
-    }
-
-    // KAFKA_INBOUND_TOPIC
-    public String getKafkaInboundTopic() {
-        return kafkaInboundTopic;
-    }
-    public void setKafkaInboundTopic(String kafkaInboundTopic) {
-        this.kafkaInboundTopic = kafkaInboundTopic;
-    }
-
-    // KAFKA_OUTBOUND_TOPIC
-    public String getKafkaOutboundTopic() {
-        return kafkaOutboundTopic;
-    }
-    public void setKafkaOutboundTopic(String kafkaOutboundTopic) {
-        this.kafkaOutboundTopic = kafkaOutboundTopic;
-    }
-
-    // REDIS_HOST
-    public String getRedisHost() {
-        return redisHost;
-    }
-    public void setRedisHost(String redisHost) {
-        this.redisHost = redisHost;
-    }
-
-    // REDIS_PORT
-    public int getRedisPort() {
-        return redisPort;
-    }
-    public void setRedisPort(int redisPort) {
-        this.redisPort = redisPort;
-    }
-
-    // RABBITMQ_HOST
-    public String getRabbitMqHost() {
-        return rabbitMqHost;
-    }
-    public void setRabbitMqHost(String rabbitMqHost) {
-        this.rabbitMqHost = rabbitMqHost;
-    }
-
-    // RABBITMQ_PORT
-    public int getRabbitMqPort() {
-        return rabbitMqPort;
-    }
-    public void setRabbitMqPort(int rabbitMqPort) {
-        this.rabbitMqPort = rabbitMqPort;
-    }
-
-    // Optional Kafka security fields
-    public String getKafkaSecurityProtocol() {
-        return kafkaSecurityProtocol;
-    }
-    public void setKafkaSecurityProtocol(String kafkaSecurityProtocol) {
-        this.kafkaSecurityProtocol = kafkaSecurityProtocol;
-    }
-
-    public String getKafkaSaslMechanism() {
-        return kafkaSaslMechanism;
-    }
-    public void setKafkaSaslMechanism(String kafkaSaslMechanism) {
-        this.kafkaSaslMechanism = kafkaSaslMechanism;
-    }
-
-    public String getKafkaSaslJaasConfig() {
-        return kafkaSaslJaasConfig;
-    }
-    public void setKafkaSaslJaasConfig(String kafkaSaslJaasConfig) {
-        this.kafkaSaslJaasConfig = kafkaSaslJaasConfig;
     }
 }
