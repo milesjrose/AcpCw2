@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.ed.acp.cw2.model.Message;
+import uk.ac.ed.acp.cw2.model.ProcessMessage;
 import uk.ac.ed.acp.cw2.service.KafkaService;
 import org.springframework.http.ResponseEntity;
 
@@ -41,7 +41,7 @@ public class KafkaController {
     @GetMapping("/{readTopic}/{timeoutInMsec}")
     public ResponseEntity<List<String>> receiveFromTopic(@PathVariable String readTopic, @PathVariable int timeoutInMsec) {
         try {
-            List<String> messages = kafkaService.receiveFromTopic(readTopic, timeoutInMsec);
+            List<String> messages = kafkaService.receiveFromTopicTimeout(readTopic, timeoutInMsec);
             return messages != null ? ResponseEntity.ok(messages) : ResponseEntity.internalServerError().build();
         } catch (Exception e) {
             logger.error("Error receiving messages from Kafka topic", e);
@@ -50,11 +50,11 @@ public class KafkaController {
     }
 
     @PostMapping("/sendMessage/{topic}")
-    public ResponseEntity<Void> sendMessage(@PathVariable String topic, @RequestBody List<Message> messages) {
+    public ResponseEntity<Void> sendMessage(@PathVariable String topic, @RequestBody List<ProcessMessage> processMessages) {
         List<String> messageStrings = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
-        for (Message message : messages){
-            messageStrings.add(message.toString(objectMapper));
+        for (ProcessMessage processMessage : processMessages){
+            messageStrings.add(processMessage.toString(objectMapper));
         }
         kafkaService.send(topic, messageStrings);
         return ResponseEntity.ok().build();

@@ -45,6 +45,20 @@ public class local {
         );
         assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode());
     }
+
+    public long timeRabbit(String queueName, Integer timeoutInMsec){
+        long startTime = System.currentTimeMillis();
+        ResponseEntity<List<String>> response = restTemplate.exchange(
+                rabbit + "/" + queueName + "/" + timeoutInMsec,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Kafka");
+        long endTime = System.currentTimeMillis();
+        return endTime-startTime;
+    }
+
     public List<String> recRabbit(String queueName, Integer timeoutInMsec){
         ResponseEntity<List<String>> response = restTemplate.exchange(
                 rabbit + "/" + queueName + "/" + timeoutInMsec,
@@ -61,6 +75,33 @@ public class local {
         return messages;
     }
 
+    
+    public boolean checkRabbitResponse(String queue, Integer timeout){
+        long startTime = System.currentTimeMillis();
+        ResponseEntity<List<String>> response = restTemplate.exchange(
+                rabbit + "/" + queue + "/" + timeout,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        long endTime = System.currentTimeMillis();
+        long timeTaken = endTime - startTime;
+        if (timeTaken > timeout){
+            System.out.println("Timeout: " + timeout);
+            return false;
+        }
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Queue");
+        try{
+            List<String> messages = response.getBody();
+            return !messages.isEmpty();
+        } catch (Exception e){
+            System.out.println("Error checking Rabbit response: " + e.getMessage());
+            return false;
+        }
+    }
+
+
+
     public void pushKafka(String topic, Integer count){
         ResponseEntity<Void> response = restTemplate.exchange(
                 kafka + "/" + topic + "/" + count,
@@ -69,6 +110,36 @@ public class local {
                 Void.class
         );
         assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to push messages to Kafka");
+    }
+
+    public long timeKafka(String topic, Integer timeout){
+        long startTime = System.currentTimeMillis();
+        ResponseEntity<List<String>> response = restTemplate.exchange(
+                kafka + "/" + topic + "/" + timeout,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        long endTime = System.currentTimeMillis();
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Kafka");
+        return endTime-startTime;
+    }
+
+    public boolean checkKafkaResponse(String topic, Integer timeout){
+        ResponseEntity<List<String>> response = restTemplate.exchange(
+                kafka + "/" + topic + "/" + timeout,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<String>>() {}
+        );
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Kafka");
+        try{
+            List<String> messages = response.getBody();
+            return !messages.isEmpty();
+        } catch (Exception e){
+            System.out.println("Error checking Rabbit response: " + e.getMessage());
+            return false;
+        }
     }
 
     public List<String> recKafka(String topic, Integer timeout){

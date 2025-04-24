@@ -37,7 +37,7 @@ public class RabbitMqController {
     @GetMapping("/{queueName}/{timeoutInMsec}")
     public ResponseEntity<List<String>> receiveFromQueue(@PathVariable String queueName, @PathVariable int timeoutInMsec) {
         try {
-            List<String> messages = rabbitMqService.receiveFromQueue(queueName, timeoutInMsec);
+            List<String> messages = rabbitMqService.receiveFromQueueTimeout(queueName, timeoutInMsec);
             return ResponseEntity.ok(messages);
         } catch (Exception e) {
             logger.error("Error receiving messages from queue", e);

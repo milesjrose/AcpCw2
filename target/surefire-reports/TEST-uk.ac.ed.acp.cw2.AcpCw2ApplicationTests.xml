@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="42.38" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="249.074" tests="14" errors="0" skipped="0" failures="2">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\miles\AppData\Local\Temp\surefire5095796502913799871\surefirebooter-20250423184943033_3.jar C:\Users\miles\AppData\Local\Temp\surefire5095796502913799871 2025-04-23T18-49-42_861-jvmRun1 surefire-20250423184943033_1tmp surefire_0-20250423184943033_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\miles\AppData\Local\Temp\surefire12901605223973301539\surefirebooter-20250424023253481_3.jar C:\Users\miles\AppData\Local\Temp\surefire12901605223973301539 2025-04-24T02-32-53_298-jvmRun1 surefire-20250424023253481_1tmp surefire_0-20250424023253481_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\miles\Documents\GitHub\AcpCw2\target\test-classes;C:\Users\miles\Documents\GitHub\AcpCw2\target\classes;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.4.3\spring-boot-starter-web-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.3\spring-boot-starter-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot\3.4.3\spring-boot-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.3\spring-boot-autoconfigure-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.3\spring-boot-starter-logging-3.4.3.jar;C:\Users\miles\.m2\repository\ch\qos\logback\logback-classic\1.5.16\logback-classic-1.5.16.jar;C:\Users\miles\.m2\repository\ch\qos\logback\logback-core\1.5.16\logback-core-1.5.16.jar;C:\Users\miles\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\miles\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\miles\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar;C:\Users\miles\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\miles\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.3\spring-boot-starter-json-3.4.3.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.2\jackson-databind-2.18.2.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.2\jackson-core-2.18.2.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.2\jackson-datatype-jdk8-2.18.2.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.2\jackson-datatype-jsr310-2.18.2.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.2\jackson-module-parameter-names-2.18.2.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.4.3\spring-boot-starter-tomcat-3.4.3.jar;C:\Users\miles\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.36\tomcat-embed-core-10.1.36.jar;C:\Users\miles\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.36\tomcat-embed-websocket-10.1.36.jar;C:\Users\miles\.m2\repository\org\springframework\spring-web\6.2.3\spring-web-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-beans\6.2.3\spring-beans-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-webmvc\6.2.3\spring-webmvc-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-context\6.2.3\spring-context-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-expression\6.2.3\spring-expression-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.3\spring-boot-starter-test-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-test\3.4.3\spring-boot-test-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.3\spring-boot-test-autoconfigure-3.4.3.jar;C:\Users\miles\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\miles\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\miles\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\miles\.m2\repository\net\minidev\json-smart\2.5.2\json-smart-2.5.2.jar;C:\Users\miles\.m2\repository\net\minidev\accessors-smart\2.5.2\accessors-smart-2.5.2.jar;C:\Users\miles\.m2\repository\org\ow2\asm\asm\9.7.1\asm-9.7.1.jar;C:\Users\miles\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\miles\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\miles\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\miles\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\miles\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\miles\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\miles\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\miles\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\miles\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\miles\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\miles\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\miles\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\miles\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\miles\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\miles\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\miles\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\miles\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\miles\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\miles\.m2\repository\org\springframework\spring-core\6.2.3\spring-core-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-jcl\6.2.3\spring-jcl-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-test\6.2.3\spring-test-6.2.3.jar;C:\Users\miles\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;C:\Users\miles\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar;C:\Users\miles\.m2\repository\com\rabbitmq\amqp-client\5.20.0\amqp-client-5.20.0.jar;C:\Users\miles\.m2\repository\redis\clients\jedis\4.3.1\jedis-4.3.1.jar;C:\Users\miles\.m2\repository\org\apache\commons\commons-pool2\2.12.1\commons-pool2-2.12.1.jar;C:\Users\miles\.m2\repository\org\json\json\20220320\json-20220320.jar;C:\Users\miles\.m2\repository\org\projectlombok\lombok\1.18.36\lombok-1.18.36.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-actuator\3.4.1\spring-boot-starter-actuator-3.4.1.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-actuator-autoconfigure\3.4.3\spring-boot-actuator-autoconfigure-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-actuator\3.4.3\spring-boot-actuator-3.4.3.jar;C:\Users\miles\.m2\repository\io\micrometer\micrometer-observation\1.14.4\micrometer-observation-1.14.4.jar;C:\Users\miles\.m2\repository\io\micrometer\micrometer-commons\1.14.4\micrometer-commons-1.14.4.jar;C:\Users\miles\.m2\repository\io\micrometer\micrometer-jakarta9\1.14.4\micrometer-jakarta9-1.14.4.jar;C:\Users\miles\.m2\repository\io\micrometer\micrometer-core\1.14.4\micrometer-core-1.14.4.jar;C:\Users\miles\.m2\repository\org\hdrhistogram\HdrHistogram\2.2.2\HdrHistogram-2.2.2.jar;C:\Users\miles\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.4.2\spring-boot-starter-validation-3.4.2.jar;C:\Users\miles\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.36\tomcat-embed-el-10.1.36.jar;C:\Users\miles\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.2.Final\hibernate-validator-8.0.2.Final.jar;C:\Users\miles\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\miles\.m2\repository\org\jboss\logging\jboss-logging\3.6.1.Final\jboss-logging-3.6.1.Final.jar;C:\Users\miles\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.4.2\spring-boot-starter-aop-3.4.2.jar;C:\Users\miles\.m2\repository\org\springframework\spring-aop\6.2.3\spring-aop-6.2.3.jar;C:\Users\miles\.m2\repository\org\aspectj\aspectjweaver\1.9.22.1\aspectjweaver-1.9.22.1.jar;C:\Users\miles\.m2\repository\org\apache\kafka\kafka-clients\3.9.0\kafka-clients-3.9.0.jar;C:\Users\miles\.m2\repository\com\github\luben\zstd-jni\1.5.6-4\zstd-jni-1.5.6-4.jar;C:\Users\miles\.m2\repository\org\lz4\lz4-java\1.8.0\lz4-java-1.8.0.jar;C:\Users\miles\.m2\repository\org\xerial\snappy\snappy-java\1.1.10.5\snappy-java-1.1.10.5.jar;C:\Users\miles\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-ui\2.8.5\springdoc-openapi-starter-webmvc-ui-2.8.5.jar;C:\Users\miles\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-api\2.8.5\springdoc-openapi-starter-webmvc-api-2.8.5.jar;C:\Users\miles\.m2\repository\org\webjars\swagger-ui\5.18.3\swagger-ui-5.18.3.jar;C:\Users\miles\.m2\repository\org\webjars\webjars-locator-lite\1.0.1\webjars-locator-lite-1.0.1.jar;C:\Users\miles\.m2\repository\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar;C:\Users\miles\.m2\repository\org\springdoc\springdoc-openapi-starter-webflux-api\2.8.5\springdoc-openapi-starter-webflux-api-2.8.5.jar;C:\Users\miles\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.8.5\springdoc-openapi-starter-common-2.8.5.jar;C:\Users\miles\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.28\swagger-core-jakarta-2.2.28.jar;C:\Users\miles\.m2\repository\org\apache\commons\commons-lang3\3.17.0\commons-lang3-3.17.0.jar;C:\Users\miles\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.28\swagger-annotations-jakarta-2.2.28.jar;C:\Users\miles\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.28\swagger-models-jakarta-2.2.28.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.18.2\jackson-dataformat-yaml-2.18.2.jar;C:\Users\miles\.m2\repository\org\springframework\spring-webflux\6.2.3\spring-webflux-6.2.3.jar;C:\Users\miles\.m2\repository\io\projectreactor\reactor-core\3.7.3\reactor-core-3.7.3.jar;C:\Users\miles\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\miles\.m2\repository\org\testcontainers\testcontainers\1.20.5\testcontainers-1.20.5.jar;C:\Users\miles\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\miles\.m2\repository\org\hamcrest\hamcrest-core\2.2\hamcrest-core-2.2.jar;C:\Users\miles\.m2\repository\org\apache\commons\commons-compress\1.24.0\commons-compress-1.24.0.jar;C:\Users\miles\.m2\repository\org\rnorth\duct-tape\duct-tape\1.0.8\duct-tape-1.0.8.jar;C:\Users\miles\.m2\repository\org\jetbrains\annotations\17.0.0\annotations-17.0.0.jar;C:\Users\miles\.m2\repository\com\github\docker-java\docker-java-api\3.4.1\docker-java-api-3.4.1.jar;C:\Users\miles\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.2\jackson-annotations-2.18.2.jar;C:\Users\miles\.m2\repository\com\github\docker-java\docker-java-transport-zerodep\3.4.1\docker-java-transport-zerodep-3.4.1.jar;C:\Users\miles\.m2\repository\com\github\docker-java\docker-java-transport\3.4.1\docker-java-transport-3.4.1.jar;C:\Users\miles\.m2\repository\net\java\dev\jna\jna\5.13.0\jna-5.13.0.jar;C:\Users\miles\.m2\repository\org\testcontainers\junit-jupiter\1.20.5\junit-jupiter-1.20.5.jar;C:\Users\miles\.m2\repository\org\testcontainers\kafka\1.20.5\kafka-1.20.5.jar;C:\Users\miles\.m2\repository\org\testcontainers\rabbitmq\1.20.5\rabbitmq-1.20.5.jar;C:\Users\miles\.m2\repository\org\springframework\boot\spring-boot-starter-amqp\3.4.3\spring-boot-starter-amqp-3.4.3.jar;C:\Users\miles\.m2\repository\org\springframework\spring-messaging\6.2.3\spring-messaging-6.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\amqp\spring-rabbit\3.2.3\spring-rabbit-3.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\amqp\spring-amqp\3.2.3\spring-amqp-3.2.3.jar;C:\Users\miles\.m2\repository\org\springframework\retry\spring-retry\2.0.11\spring-retry-2.0.11.jar;C:\Users\miles\.m2\repository\org\springframework\spring-tx\6.2.3\spring-tx-6.2.3.jar;C:\Users\miles\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -35,7 +35,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\miles\AppData\Local\Temp\surefire5095796502913799871\surefirebooter-20250423184943033_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\miles\AppData\Local\Temp\surefire12901605223973301539\surefirebooter-20250424023253481_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.5+9-LTS-239"/>
@@ -50,15 +50,15 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\miles\AppData\Local\Temp\"/>
     <property name="idea.version" value="2023.2.3"/>
-    <property name="catalina.home" value="C:\Users\miles\AppData\Local\Temp\tomcat.0.2294113813898064770"/>
+    <property name="catalina.home" value="C:\Users\miles\AppData\Local\Temp\tomcat.0.7378091184100953742"/>
     <property name="java.version" value="21.0.5"/>
     <property name="user.dir" value="C:\Users\miles\Documents\GitHub\AcpCw2"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="18292"/>
+    <property name="PID" value="7492"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
-    <property name="catalina.base" value="C:\Users\miles\AppData\Local\Temp\tomcat.0.2294113813898064770"/>
+    <property name="catalina.base" value="C:\Users\miles\AppData\Local\Temp\tomcat.0.7378091184100953742"/>
     <property name="native.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\WireGuard\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\dotnet\;C:\Users\miles\AppData\Local\Microsoft\WindowsApps;C:\Users\miles\AppData\Roaming\cabal\bin;C:\ProgramData\chocolatey\lib\ghc\tools\ghc-8.10.2\bin;C:\tools\msys64;C:\Users\miles\AppData\Local\atom\bin;C:\Users\miles\AppData\Local\Microsoft\WindowsApps;C:\Users\miles\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\miles\AppData\Local\GitHubDesktop\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.2\bin;;C:\Users\miles\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\Scripts;C:\Users\miles\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts;C:\Users\miles\AppData\Local\Programs\cursor\resources\app\bin;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -70,9 +70,9 @@
     <property name="CONSOLE_LOG_PATTERN" value="%d{HH:mm:ss.SSS} %-5level %logger{20} - %msg%n"/>
     <property name="LOGGED_APPLICATION_NAME" value="[acpCw2Service] "/>
   </properties>
-  <testcase name="testStorageService" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="2.268">
-    <system-out><![CDATA[18:49:44.403 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [uk.ac.ed.acp.cw2.AcpCw2ApplicationTests]: AcpCw2ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-18:49:44.617 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration uk.ac.ed.acp.cw2.Application for test class uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
+  <testcase name="testRabbitMinReadTime" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="7.854">
+    <system-out><![CDATA[02:32:54.731 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [uk.ac.ed.acp.cw2.AcpCw2ApplicationTests]: AcpCw2ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+02:32:54.939 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration uk.ac.ed.acp.cw2.Application for test class uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -83,7 +83,7 @@
 
  :: Spring Boot ::                (v3.4.3)
 
-18:49:45.625 WARN  o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer - 
+02:32:55.993 WARN  o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer - 
 
 Found multiple occurrences of org.json.JSONObject on the class path:
 
@@ -92,22 +92,26 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
-18:49:45.658 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Starting AcpCw2ApplicationTests using Java 21.0.5 with PID 18292 (started by miles in C:\Users\miles\Documents\GitHub\AcpCw2)
-18:49:45.660 INFO  u.a.e.a.c.AcpCw2ApplicationTests - No active profile set, falling back to 1 default profile: "default"
-18:49:48.476 INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 0 (http)
-18:49:48.585 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2880 ms
-18:49:51.537 INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 3 endpoints beneath base path '/actuator'
-18:49:51.768 INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 56048 (http) with context path '/'
-18:49:51.789 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Started AcpCw2ApplicationTests in 6.681 seconds (process running for 8.558)
-18:49:53.403 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- STORAGE SERVICE TEST ----------------
-18:49:53.403 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Pushing blob to storage service
-18:49:53.984 INFO  u.a.e.a.c.s.StorageService - Pushed to store-test-34527-cLWjJ in d282beec-3061-4d5e-b926-11fa85305475: "d282beec-3061-4d5e-b926-11fa85305475" 
-18:49:53.991 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Receiving blob from storage service
-18:49:54.093 INFO  u.a.e.a.c.s.StorageService - Received from d282beec-3061-4d5e-b926-11fa85305475 in store-test-34527-cLWjJ: store-test-70503-I0t8x
-18:49:54.095 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Deleting blob from storage service
-18:49:54.165 INFO  u.a.e.a.c.s.StorageService - Deleted blob: d282beec-3061-4d5e-b926-11fa85305475
-18:49:54.166 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Checking if blob is deleted
-18:49:54.335 ERROR u.a.e.a.c.s.StorageService - Error receiving blob: https://acp-storage.azurewebsites.net/api/v1/blob/d282beec-3061-4d5e-b926-11fa85305475 500 Internal Server Error on GET request for "https://acp-storage.azurewebsites.net/api/v1/blob/d282beec-3061-4d5e-b926-11fa85305475": "<html><body><h1>ACP-Storage-Service - Error Page</h1><div>Status code: <b>null</b></div><div>Exception Message: <b>N/A</b></div> <div>Original URL: <b>/api/v1/blob/d282beec-3061-4d5e-b926-11fa85305475</b></div> <br/><div>Timestamp: <b>2025/04/23 17:49:54</b></div><body></html>"
+02:32:56.025 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Starting AcpCw2ApplicationTests using Java 21.0.5 with PID 7492 (started by miles in C:\Users\miles\Documents\GitHub\AcpCw2)
+02:32:56.026 INFO  u.a.e.a.c.AcpCw2ApplicationTests - No active profile set, falling back to 1 default profile: "default"
+02:32:59.193 INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port 0 (http)
+02:32:59.329 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3264 ms
+02:32:59.715 INFO  u.a.e.a.c.s.KafkaService - KafkaService constructor took 0 ms
+02:33:02.768 INFO  o.s.b.a.e.w.EndpointLinksResolver - Exposing 3 endpoints beneath base path '/actuator'
+02:33:03.038 INFO  o.s.b.w.e.t.TomcatWebServer - Tomcat started on port 49200 (http) with context path '/'
+02:33:03.072 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Started AcpCw2ApplicationTests in 7.606 seconds (process running for 9.414)
+02:33:05.426 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------RABBIT MIN READ TIME TEST----------------
+02:33:05.430 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: MinRabbitReadTime-59098-eBgjg
+02:33:05.657 INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+02:33:05.660 INFO  o.s.w.s.DispatcherServlet - Completed initialization in 3 ms
+02:33:05.725 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue MinRabbitReadTime-59098-eBgjg: count=0
+02:33:05.910 INFO  u.a.e.a.c.s.RabbitMqService - Received 0 messages in 184ms/240ms (timeout=40ms)
+Timeout: 40
+02:33:06.205 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 40
+02:33:11.213 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue MinRabbitReadTime-59098-eBgjg: count=0
+02:33:11.229 INFO  u.a.e.a.c.s.RabbitMqService - Received 4 messages in 16ms/260ms (timeout=60ms)
+02:33:11.238 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Minimum Rabbit read time: 60 ms
+02:33:11.243 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
 ]]></system-out>
     <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
 WARNING: A Java agent has been loaded dynamically (C:\Users\miles\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar)
@@ -116,121 +120,374 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="testRabbitMQ" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="0.851">
-    <system-out><![CDATA[18:49:54.364 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING RABBIT MQ TEST-------------
-18:49:54.364 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: RabbitMQ-60267-MNzLa
-18:49:54.531 INFO  o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-18:49:54.532 INFO  o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
-18:49:55.028 INFO  u.a.e.a.c.s.RabbitMqService - Sent 5 messages to RabbitMQ-60267-MNzLa
-18:49:55.075 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue RabbitMQ-60267-MNzLa: count=0
-18:49:55.187 INFO  u.a.e.a.c.s.RabbitMqService - Received 5/0 messages in 112ms
+  <testcase name="testRabbitBulk" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="0.245">
+    <system-out><![CDATA[02:33:11.271 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------RABBIT BULK TEST----------------
+02:33:11.272 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: BulkRabbitTest-40700-4v5aa
+02:33:11.424 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue BulkRabbitTest-40700-4v5aa: count=0
+02:33:11.496 INFO  u.a.e.a.c.s.RabbitMqService - Received 300 messages in 71ms/700ms (timeout=500ms)
+02:33:11.507 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 86 ms
+02:33:11.508 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+]]></system-out>
+  </testcase>
+  <testcase name="testRabbitShort" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="0.72">
+    <system-out><![CDATA[02:33:11.521 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------RABBIT SHORT TEST----------------
+02:33:11.521 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: ShortTest-46769-VFc8T
+02:33:11.625 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ShortTest-46769-VFc8T: count=0
+02:33:11.648 INFO  u.a.e.a.c.s.RabbitMqService - Received 500 messages in 22ms/250ms (timeout=50ms)
+02:33:11.656 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 34 ms
+02:33:11.656 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+02:33:11.656 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: ShortTest-96990-28BLd
+02:33:11.787 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ShortTest-96990-28BLd: count=0
+02:33:11.810 INFO  u.a.e.a.c.s.RabbitMqService - Received 450 messages in 22ms/250ms (timeout=50ms)
+02:33:11.819 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 34 ms
+02:33:11.819 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+02:33:11.819 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: ShortTest-45592-QgrlJ
+02:33:11.896 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ShortTest-45592-QgrlJ: count=0
+02:33:11.924 INFO  u.a.e.a.c.s.RabbitMqService - Received 500 messages in 28ms/250ms (timeout=50ms)
+02:33:11.932 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 41 ms
+02:33:11.933 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+02:33:11.933 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: ShortTest-31062-Og4iu
+02:33:11.991 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ShortTest-31062-Og4iu: count=0
+02:33:12.059 INFO  u.a.e.a.c.s.RabbitMqService - Received 385 messages in 67ms/250ms (timeout=50ms)
+02:33:12.066 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 79 ms
+02:33:12.066 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+02:33:12.066 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: ShortTest-24867-yooQs
+02:33:12.197 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ShortTest-24867-yooQs: count=0
+02:33:12.220 INFO  u.a.e.a.c.s.RabbitMqService - Received 400 messages in 23ms/250ms (timeout=50ms)
+02:33:12.230 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 37 ms
+02:33:12.230 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+]]></system-out>
+  </testcase>
+  <testcase name="testTransformSingle" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="2.169">
+    <system-out><![CDATA[02:33:12.241 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM TEST----------------
+02:33:12.241 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Generating 10 packets
+02:33:12.341 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-65094-fhUU1, write_queue:TransformTestWrite-38896-pDsbb, count:10
+02:33:12.342 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 10 valid messages from queue: TransformTestRead-65094-fhUU1
+02:33:12.411 INFO  u.a.e.a.c.s.RabbitMqService - Received 10/10 valid messages in 69ms, queue=TransformTestRead-65094-fhUU1
+02:33:13.384 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-38896-pDsbb: count=0
+02:33:13.445 INFO  u.a.e.a.c.s.RabbitMqService - Received 10 messages in 59ms/1200ms (timeout=1000ms)
+Error decoding last message: Cannot construct instance of `uk.ac.ed.acp.cw2.model.OutboundTombstone` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 2]
+02:33:13.579 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-97459-jVP8N, write_queue:TransformTestWrite-64665-ADeAU, count:10
+02:33:13.580 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 10 valid messages from queue: TransformTestRead-97459-jVP8N
+02:33:13.594 INFO  u.a.e.a.c.s.RabbitMqService - Received 10/10 valid messages in 14ms, queue=TransformTestRead-97459-jVP8N
+02:33:14.322 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-64665-ADeAU: count=0
+02:33:14.384 INFO  u.a.e.a.c.s.RabbitMqService - Received 10 messages in 62ms/1200ms (timeout=1000ms)
+Error decoding last message: Cannot construct instance of `uk.ac.ed.acp.cw2.model.OutboundTombstone` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 2]
+02:33:14.403 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ===============================PASSED===================================
+]]></system-out>
+  </testcase>
+  <testcase name="testMinKafkaReadTime" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="92.693">
+    <system-out><![CDATA[02:33:14.412 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------MIN KAFKA READ TIME TEST----------------
+02:33:14.417 INFO  u.a.e.a.c.s.KafkaService - Pushing 100 messages to MinKafkaReadTime-90725-89USi
+02:33:15.821 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-1] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {MinKafkaReadTime-90725-89USi=UNKNOWN_TOPIC_OR_PARTITION}
+02:33:16.283 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: MinKafkaReadTime-90725-89USi
+02:33:16.287 INFO  u.a.e.a.c.s.KafkaService - Pushing 100 messages to MinKafkaReadTime-90725-89USi
+02:33:16.578 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=500
+02:33:17.089 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 511ms/700ms (timeout=500ms)
+02:33:17.092 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 500
+02:33:22.109 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=700
+02:33:22.819 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 710ms/900ms (timeout=700ms)
+02:33:22.824 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 700
+02:33:27.842 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=900
+02:33:28.751 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 909ms/1100ms (timeout=900ms)
+02:33:28.753 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 900
+02:33:33.765 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=1100
+02:33:34.865 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 1100ms/1300ms (timeout=1100ms)
+02:33:34.867 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 1100
+02:33:39.885 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=1300
+02:33:41.189 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 1304ms/1500ms (timeout=1300ms)
+02:33:41.194 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 1300
+02:33:46.213 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=1500
+02:33:47.720 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 1507ms/1700ms (timeout=1500ms)
+02:33:47.725 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 1500
+02:33:52.744 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=1700
+02:33:54.450 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 1706ms/1900ms (timeout=1700ms)
+02:33:54.452 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 1700
+02:33:59.458 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=1900
+02:34:01.364 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 1906ms/2100ms (timeout=1900ms)
+02:34:01.366 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 1900
+02:34:06.378 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=2100
+02:34:08.480 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 2102ms/2300ms (timeout=2100ms)
+02:34:08.484 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 2100
+02:34:13.498 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=2300
+02:34:15.800 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 2301ms/2500ms (timeout=2300ms)
+02:34:15.803 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 2300
+02:34:20.811 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=2500
+02:34:23.318 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 2507ms/2700ms (timeout=2500ms)
+02:34:23.320 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 2500
+02:34:28.330 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=2700
+02:34:31.034 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 2703ms/2900ms (timeout=2700ms)
+02:34:31.040 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 2700
+02:34:36.049 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=2900
+02:34:38.963 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 2914ms/3100ms (timeout=2900ms)
+02:34:38.966 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Timeout: 2900
+02:34:43.983 INFO  u.a.e.a.c.s.KafkaService - Reading topic MinKafkaReadTime-90725-89USi: timeOut=3100
+02:34:47.093 INFO  u.a.e.a.c.s.KafkaService - Received 200 messages in 3110ms/3300ms (timeout=3100ms)
+02:34:47.096 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Minimum Kafka read time: 3100 ms
+02:34:47.098 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+]]></system-out>
+  </testcase>
+  <testcase name="testStorageService" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="0.693">
+    <system-out><![CDATA[02:34:47.107 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- STORAGE SERVICE TEST ----------------
+02:34:47.107 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Pushing blob to storage service
+02:34:47.639 INFO  u.a.e.a.c.s.StorageService - Pushed to store-test-94017-9xU7I in 31f56827-2108-49e3-94e0-424d9b8b0952: "31f56827-2108-49e3-94e0-424d9b8b0952" 
+02:34:47.639 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Receiving blob from storage service
+02:34:47.685 INFO  u.a.e.a.c.s.StorageService - Received from 31f56827-2108-49e3-94e0-424d9b8b0952 in store-test-94017-9xU7I: store-test-17285-BzKjo
+02:34:47.686 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Deleting blob from storage service
+02:34:47.733 INFO  u.a.e.a.c.s.StorageService - Deleted blob: 31f56827-2108-49e3-94e0-424d9b8b0952
+02:34:47.733 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Checking if blob is deleted
+02:34:47.795 ERROR u.a.e.a.c.s.StorageService - Error receiving blob: https://acp-storage.azurewebsites.net/api/v1/blob/31f56827-2108-49e3-94e0-424d9b8b0952 500 Internal Server Error on GET request for "https://acp-storage.azurewebsites.net/api/v1/blob/31f56827-2108-49e3-94e0-424d9b8b0952": "<html><body><h1>ACP-Storage-Service - Error Page</h1><div>Status code: <b>null</b></div><div>Exception Message: <b>N/A</b></div> <div>Original URL: <b>/api/v1/blob/31f56827-2108-49e3-94e0-424d9b8b0952</b></div> <br/><div>Timestamp: <b>2025/04/24 01:34:47</b></div><body></html>"
+02:34:47.795 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+]]></system-out>
+  </testcase>
+  <testcase name="testTransformBulk" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="74.401">
+    <failure message="expected: &lt;29587.336&gt; but was: &lt;30169.58&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <29587.336> but was: <30169.58>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:765)
+	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransform(AcpCw2ApplicationTests.java:392)
+	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransformBulk(AcpCw2ApplicationTests.java:419)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+    <system-out><![CDATA[02:34:47.803 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM BULK TEST----------------
+02:34:47.804 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM TEST----------------
+02:34:47.804 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Generating 500 packets
+02:34:47.965 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-97501-TyH3M, write_queue:TransformTestWrite-22497-6lRAl, count:500
+02:34:47.965 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 500 valid messages from queue: TransformTestRead-97501-TyH3M
+02:34:48.039 INFO  u.a.e.a.c.s.RabbitMqService - Received 500/500 valid messages in 73ms, queue=TransformTestRead-97501-TyH3M
+02:35:21.619 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-22497-6lRAl: count=0
+02:35:21.680 INFO  u.a.e.a.c.s.RabbitMqService - Received 226 messages in 60ms/1200ms (timeout=1000ms)
+Error decoding last message: Cannot construct instance of `uk.ac.ed.acp.cw2.model.OutboundTombstone` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 2]
+02:35:25.785 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-97935-TtLMv, write_queue:TransformTestWrite-58112-pWwmX, count:500
+02:35:25.785 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 500 valid messages from queue: TransformTestRead-97935-TtLMv
+02:35:25.888 INFO  u.a.e.a.c.s.RabbitMqService - Received 500/500 valid messages in 103ms, queue=TransformTestRead-97935-TtLMv
+02:36:02.137 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-58112-pWwmX: count=0
+02:36:02.154 INFO  u.a.e.a.c.s.RabbitMqService - Received 298 messages in 17ms/1200ms (timeout=1000ms)
+Error decoding last message: Cannot construct instance of `uk.ac.ed.acp.cw2.model.OutboundTombstone` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 2]
+]]></system-out>
+  </testcase>
+  <testcase name="testRabbitMQ" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="0.192">
+    <system-out><![CDATA[02:36:02.210 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING RABBIT MQ TEST-------------
+02:36:02.210 INFO  u.a.e.a.c.AcpCw2ApplicationTests - queueName: RabbitMQ-23367-ftAp3
+02:36:02.330 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue RabbitMQ-23367-ftAp3: count=0
+02:36:02.390 INFO  u.a.e.a.c.s.RabbitMqService - Received 5 messages in 60ms/1200ms (timeout=1000ms)
 RabbitMQ Message - uid: s2093547, counter: 0
+02:36:02.395 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
 ]]></system-out>
   </testcase>
-  <testcase name="testKafkaSent" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="6.789">
-    <system-out><![CDATA[18:49:55.216 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -----------STARTING KAFKA TEST-------------
-18:49:55.216 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: KafkaSent-15094-Rt3KS
-18:49:55.220 INFO  u.a.e.a.c.s.KafkaService - Pushing 5 messages to KafkaSent-15094-Rt3KS
-18:49:56.268 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-1] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {KafkaSent-15094-Rt3KS=UNKNOWN_TOPIC_OR_PARTITION}
-18:49:56.478 INFO  u.a.e.a.c.s.KafkaService - Reading topic KafkaSent-15094-Rt3KS: count=0
-18:50:01.681 INFO  u.a.e.a.c.s.KafkaService - Received 5/0 messages in 5203ms
+  <testcase name="testTransormMultiple" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="11.788">
+    <failure message="expected: &lt;806.9364&gt; but was: &lt;899.93536&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <806.9364> but was: <899.93536>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:765)
+	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransform(AcpCw2ApplicationTests.java:392)
+	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransormMultiple(AcpCw2ApplicationTests.java:410)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+    <system-out><![CDATA[02:36:02.403 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM MULTIPLE TEST----------------
+02:36:02.403 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM TEST----------------
+02:36:02.403 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Generating 53 packets
+02:36:02.512 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-13040-eNj2K, write_queue:TransformTestWrite-79261-KqAAu, count:53
+02:36:02.512 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 53 valid messages from queue: TransformTestRead-13040-eNj2K
+02:36:02.583 INFO  u.a.e.a.c.s.RabbitMqService - Received 53/53 valid messages in 71ms, queue=TransformTestRead-13040-eNj2K
+02:36:06.792 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-79261-KqAAu: count=0
+02:36:06.806 INFO  u.a.e.a.c.s.RabbitMqService - Received 53 messages in 14ms/1200ms (timeout=1000ms)
+Error decoding last message: Cannot construct instance of `uk.ac.ed.acp.cw2.model.OutboundTombstone` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 2]
+02:36:07.252 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-62236-fyKu0, write_queue:TransformTestWrite-75531-C3jV7, count:53
+02:36:07.252 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 53 valid messages from queue: TransformTestRead-62236-fyKu0
+02:36:07.267 INFO  u.a.e.a.c.s.RabbitMqService - Received 53/53 valid messages in 15ms, queue=TransformTestRead-62236-fyKu0
+02:36:10.683 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-75531-C3jV7: count=0
+02:36:10.741 INFO  u.a.e.a.c.s.RabbitMqService - Received 53 messages in 58ms/1200ms (timeout=1000ms)
+Error decoding last message: Cannot construct instance of `uk.ac.ed.acp.cw2.model.OutboundTombstone` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 2]
+02:36:10.750 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ===============================PASSED===================================
+02:36:10.751 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM TEST----------------
+02:36:10.751 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Generating 21 packets
+02:36:10.774 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-77844-MeBfu, write_queue:TransformTestWrite-33972-elXjp, count:21
+02:36:10.774 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 21 valid messages from queue: TransformTestRead-77844-MeBfu
+02:36:10.839 INFO  u.a.e.a.c.s.RabbitMqService - Received 21/21 valid messages in 65ms, queue=TransformTestRead-77844-MeBfu
+02:36:12.666 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-33972-elXjp: count=0
+02:36:12.680 INFO  u.a.e.a.c.s.RabbitMqService - Received 21 messages in 14ms/1200ms (timeout=1000ms)
+Error decoding last message: Cannot construct instance of `uk.ac.ed.acp.cw2.model.OutboundTombstone` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 2]
+02:36:12.880 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-43706-CJNjx, write_queue:TransformTestWrite-95176-O4lIS, count:21
+02:36:12.880 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 21 valid messages from queue: TransformTestRead-43706-CJNjx
+02:36:12.891 INFO  u.a.e.a.c.s.RabbitMqService - Received 21/21 valid messages in 11ms, queue=TransformTestRead-43706-CJNjx
+02:36:14.162 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-95176-O4lIS: count=0
+02:36:14.176 INFO  u.a.e.a.c.s.RabbitMqService - Received 21 messages in 14ms/1200ms (timeout=1000ms)
+Error decoding last message: Cannot construct instance of `uk.ac.ed.acp.cw2.model.OutboundTombstone` (no Creators, like default constructor, exist): cannot deserialize from Object value (no delegate- or property-based Creator)
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 2]
+]]></system-out>
+  </testcase>
+  <testcase name="testKafkaShort" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="15.224">
+    <system-out><![CDATA[02:36:14.194 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------KAFKA SHORT TEST----------------
+02:36:14.194 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: ShortTest-17966-bYaFA
+02:36:14.197 INFO  u.a.e.a.c.s.KafkaService - Pushing 500 messages to ShortTest-17966-bYaFA
+02:36:14.219 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-3] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ShortTest-17966-bYaFA=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:15.517 INFO  u.a.e.a.c.s.KafkaService - Reading topic ShortTest-17966-bYaFA: timeOut=500
+02:36:16.023 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 505ms/700ms (timeout=500ms)
+02:36:16.025 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 511 ms
+02:36:17.535 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+02:36:17.535 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: ShortTest-43884-4wX5v
+02:36:17.541 INFO  u.a.e.a.c.s.KafkaService - Pushing 500 messages to ShortTest-43884-4wX5v
+02:36:17.556 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-4] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ShortTest-43884-4wX5v=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:18.539 INFO  u.a.e.a.c.s.KafkaService - Reading topic ShortTest-43884-4wX5v: timeOut=500
+02:36:19.048 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 508ms/700ms (timeout=500ms)
+02:36:19.052 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 515 ms
+02:36:20.560 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+02:36:20.560 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: ShortTest-52951-WZJY0
+02:36:20.564 INFO  u.a.e.a.c.s.KafkaService - Pushing 500 messages to ShortTest-52951-WZJY0
+02:36:20.579 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-5] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ShortTest-52951-WZJY0=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:21.487 INFO  u.a.e.a.c.s.KafkaService - Reading topic ShortTest-52951-WZJY0: timeOut=500
+02:36:21.992 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 505ms/700ms (timeout=500ms)
+02:36:21.994 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 509 ms
+02:36:23.495 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+02:36:23.495 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: ShortTest-15019-EPLDn
+02:36:23.502 INFO  u.a.e.a.c.s.KafkaService - Pushing 500 messages to ShortTest-15019-EPLDn
+02:36:23.525 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-6] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ShortTest-15019-EPLDn=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:24.460 INFO  u.a.e.a.c.s.KafkaService - Reading topic ShortTest-15019-EPLDn: timeOut=500
+02:36:24.966 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 505ms/700ms (timeout=500ms)
+02:36:24.970 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 512 ms
+02:36:26.481 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+02:36:26.481 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: ShortTest-80458-Eb06u
+02:36:26.484 INFO  u.a.e.a.c.s.KafkaService - Pushing 500 messages to ShortTest-80458-Eb06u
+02:36:26.497 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-7] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ShortTest-80458-Eb06u=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:27.391 INFO  u.a.e.a.c.s.KafkaService - Reading topic ShortTest-80458-Eb06u: timeOut=500
+02:36:27.904 INFO  u.a.e.a.c.s.KafkaService - Received 0 messages in 513ms/700ms (timeout=500ms)
+02:36:27.906 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 518 ms
+02:36:29.411 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+]]></system-out>
+  </testcase>
+  <testcase name="testKafkaBulk" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="5.852">
+    <system-out><![CDATA[02:36:29.420 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------KAFKA BULK TEST----------------
+02:36:29.421 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: BulkTest-24174-s4n4E
+02:36:29.425 INFO  u.a.e.a.c.s.KafkaService - Pushing 500 messages to BulkTest-24174-s4n4E
+02:36:29.436 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-8] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {BulkTest-24174-s4n4E=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:30.258 INFO  u.a.e.a.c.s.KafkaService - Reading topic BulkTest-24174-s4n4E: timeOut=5000
+02:36:35.263 INFO  u.a.e.a.c.s.KafkaService - Received 500 messages in 5005ms/5200ms (timeout=5000ms)
+02:36:35.267 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Time taken: 5011 ms
+02:36:35.267 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
+]]></system-out>
+  </testcase>
+  <testcase name="testKafkaSent" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="5.164">
+    <system-out><![CDATA[02:36:35.274 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -----------STARTING KAFKA TEST-------------
+02:36:35.274 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: KafkaSent-99131-Sipth
+02:36:35.276 INFO  u.a.e.a.c.s.KafkaService - Pushing 5 messages to KafkaSent-99131-Sipth
+02:36:35.289 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-9] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {KafkaSent-99131-Sipth=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:35.422 INFO  u.a.e.a.c.s.KafkaService - Reading topic KafkaSent-99131-Sipth: timeOut=5000
+02:36:40.428 INFO  u.a.e.a.c.s.KafkaService - Received 5 messages in 5006ms/5200ms (timeout=5000ms)
 Kafka Message - uid: s2093547, counter: 0
+02:36:40.432 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
 ]]></system-out>
   </testcase>
-  <testcase name="testService" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="5.251">
-    <system-out><![CDATA[18:50:02.008 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING SERVICE TEST----------------
-18:50:02.008 INFO  u.a.e.a.c.AcpCw2ApplicationTests - readTopic: ServiceTestRead-62266-uUQPn, Good: ServiceTestGood-44446-o2pNU, Bad: ServiceTestBad-27617-sVHRq, Count: 10
-18:50:02.013 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Created 6 good messages, 4 bad messages
-18:50:02.033 INFO  u.a.e.a.c.s.KafkaService - Pushing 10 messages to ServiceTestRead-62266-uUQPn
-18:50:02.050 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-2] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ServiceTestRead-62266-uUQPn=UNKNOWN_TOPIC_OR_PARTITION}
-18:50:02.260 INFO  u.a.e.a.c.s.MessageProcessor - Processing messages; topic:ServiceTestRead-62266-uUQPn, good_queue:ServiceTestGood-44446-o2pNU, bad_queue:ServiceTestBad-27617-sVHRq, count:10
-18:50:05.871 INFO  u.a.e.a.c.s.KafkaService - Returned 10/10 messages in 3611 ms)
-18:50:05.874 INFO  u.a.e.a.c.s.MessageProcessor - goodTotal: 0.0, badTotal: 0.0
-18:50:06.029 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 7b979b57-5854-4f63-8ce0-ed40f3f19e40: "7b979b57-5854-4f63-8ce0-ed40f3f19e40" 
-18:50:06.124 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in eb0d7192-893f-4605-9025-9aaabf144402: "eb0d7192-893f-4605-9025-9aaabf144402" 
-18:50:06.200 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in d7283bfc-5edc-45ce-803e-4d901d5c281d: "d7283bfc-5edc-45ce-803e-4d901d5c281d" 
-18:50:06.300 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 384981e5-b667-4d4e-88ff-559e623c2c20: "384981e5-b667-4d4e-88ff-559e623c2c20" 
-18:50:06.408 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 28cabfd0-2141-4c90-846c-5b079f5156fc: "28cabfd0-2141-4c90-846c-5b079f5156fc" 
-18:50:06.510 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in f394cefa-a8db-435e-af91-04b809649cef: "f394cefa-a8db-435e-af91-04b809649cef" 
-18:50:06.586 INFO  u.a.e.a.c.s.RabbitMqService - Sent 6 messages to ServiceTestGood-44446-o2pNU
-18:50:06.719 INFO  u.a.e.a.c.s.RabbitMqService - Sent 4 messages to ServiceTestBad-27617-sVHRq
-18:50:06.784 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to ServiceTestGood-44446-o2pNU
-18:50:06.801 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to ServiceTestBad-27617-sVHRq
-18:50:06.806 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- RECEIVING MESSAGES ----------------
-18:50:06.810 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ServiceTestGood-44446-o2pNU: count=0
-18:50:06.873 INFO  u.a.e.a.c.s.RabbitMqService - Received 7/0 messages in 62ms
-18:50:06.882 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ServiceTestBad-27617-sVHRq: count=0
-18:50:06.897 INFO  u.a.e.a.c.s.RabbitMqService - Received 5/0 messages in 15ms
-18:50:06.905 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- GOOD QUEUE ----------------
-18:50:06.979 INFO  u.a.e.a.c.s.StorageService - Received from 7b979b57-5854-4f63-8ce0-ed40f3f19e40 in store-s2093547: {"uid":"s2093547","key":"GJP","comment":" ","value":10.16,"runningTotalValue":10.16}
-18:50:07.023 INFO  u.a.e.a.c.s.StorageService - Received from eb0d7192-893f-4605-9025-9aaabf144402 in store-s2093547: {"uid":"s2093547","key":"RQVR","comment":" ","value":42.67,"runningTotalValue":52.829998}
-18:50:07.078 INFO  u.a.e.a.c.s.StorageService - Received from d7283bfc-5edc-45ce-803e-4d901d5c281d in store-s2093547: {"uid":"s2093547","key":"ENJ","comment":" ","value":30.88,"runningTotalValue":83.71}
-18:50:07.129 INFO  u.a.e.a.c.s.StorageService - Received from 384981e5-b667-4d4e-88ff-559e623c2c20 in store-s2093547: {"uid":"s2093547","key":"MYI","comment":" ","value":35.47,"runningTotalValue":119.18}
-18:50:07.201 INFO  u.a.e.a.c.s.StorageService - Received from 28cabfd0-2141-4c90-846c-5b079f5156fc in store-s2093547: {"uid":"s2093547","key":"IJZ","comment":" ","value":41.97,"runningTotalValue":161.15}
-18:50:07.252 INFO  u.a.e.a.c.s.StorageService - Received from f394cefa-a8db-435e-af91-04b809649cef in store-s2093547: {"uid":"s2093547","key":"SQAM","comment":" ","value":3.0,"runningTotalValue":164.15}
-18:50:07.252 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Good packets passed
-18:50:07.252 INFO  u.a.e.a.c.AcpCw2ApplicationTests - -------------- BAD QUEUE ----------------
-18:50:07.252 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Bad packets passed
+  <testcase name="testService" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="7.768">
+    <system-out><![CDATA[02:36:40.440 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING SERVICE TEST----------------
+02:36:40.440 INFO  u.a.e.a.c.AcpCw2ApplicationTests - readTopic: ServiceTestRead-49544-0P0y3, Good: ServiceTestGood-20324-3YOPY, Bad: ServiceTestBad-83659-lPmVd, Count: 66
+02:36:40.446 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Created 30 good messages, 36 bad messages
+02:36:40.459 INFO  u.a.e.a.c.s.KafkaService - Pushing 66 messages to ServiceTestRead-49544-0P0y3
+02:36:40.470 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-10] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {ServiceTestRead-49544-0P0y3=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:40.746 INFO  u.a.e.a.c.s.MessageProcessor - Processing messages; topic:ServiceTestRead-49544-0P0y3, good_queue:ServiceTestGood-20324-3YOPY, bad_queue:ServiceTestBad-83659-lPmVd, count:66
+02:36:44.300 INFO  u.a.e.a.c.s.KafkaService - Returned 66/66 messages in 3554 ms)
+02:36:44.303 INFO  u.a.e.a.c.s.MessageProcessor - goodTotal: 0.0, badTotal: 0.0
+02:36:44.524 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 159e44fc-0488-426a-b5bf-ed2b1170f4a0: "159e44fc-0488-426a-b5bf-ed2b1170f4a0" 
+02:36:44.607 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 3614721b-5612-47ad-bf16-d1ec0003fd5b: "3614721b-5612-47ad-bf16-d1ec0003fd5b" 
+02:36:44.697 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in afdbf351-91bd-456a-9e01-74c5eb996dda: "afdbf351-91bd-456a-9e01-74c5eb996dda" 
+02:36:44.769 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 34969f9a-5015-472f-a63e-8d6b986b477d: "34969f9a-5015-472f-a63e-8d6b986b477d" 
+02:36:44.812 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in b75b853a-6a92-4b96-b19a-af58d2849364: "b75b853a-6a92-4b96-b19a-af58d2849364" 
+02:36:44.918 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 00461466-f230-4d7a-adb8-32c1a22528ff: "00461466-f230-4d7a-adb8-32c1a22528ff" 
+02:36:44.988 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in d77504b8-3fe5-490f-b915-3273cdf7e3dc: "d77504b8-3fe5-490f-b915-3273cdf7e3dc" 
+02:36:45.051 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in d074adb8-3e2a-41c4-81e8-49175815b478: "d074adb8-3e2a-41c4-81e8-49175815b478" 
+02:36:45.113 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in c93a5cae-08d3-4128-aedf-a3dd14acd9bd: "c93a5cae-08d3-4128-aedf-a3dd14acd9bd" 
+02:36:45.185 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 9fb0cb9a-8f9c-42c6-ae34-ac67cab85747: "9fb0cb9a-8f9c-42c6-ae34-ac67cab85747" 
+02:36:45.253 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 1d4ef6f3-6fcc-4d77-8433-da22677c6a94: "1d4ef6f3-6fcc-4d77-8433-da22677c6a94" 
+02:36:45.305 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 2a18ae00-0e16-4692-9aec-2f2036124d7a: "2a18ae00-0e16-4692-9aec-2f2036124d7a" 
+02:36:45.357 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 7905bae4-3903-4c0c-aa8c-1632ab520cfc: "7905bae4-3903-4c0c-aa8c-1632ab520cfc" 
+02:36:45.413 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 93c333e5-0fdf-4330-9f2d-e18bccb85acc: "93c333e5-0fdf-4330-9f2d-e18bccb85acc" 
+02:36:45.534 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 41194741-7c0d-4194-966c-308ea61b33e0: "41194741-7c0d-4194-966c-308ea61b33e0" 
+02:36:45.607 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in ea49e871-be37-4684-ae86-75b5236146fa: "ea49e871-be37-4684-ae86-75b5236146fa" 
+02:36:45.684 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 43d9d389-9dfb-4548-84f0-956c641d0baf: "43d9d389-9dfb-4548-84f0-956c641d0baf" 
+02:36:45.739 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 7adf76a7-ab8c-46b7-ba4f-a7ecf49e3618: "7adf76a7-ab8c-46b7-ba4f-a7ecf49e3618" 
+02:36:45.783 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 49d34c13-68f2-4072-bd60-9d62509648c9: "49d34c13-68f2-4072-bd60-9d62509648c9" 
+02:36:45.842 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 162d251f-f250-4740-8fb0-119c91185c14: "162d251f-f250-4740-8fb0-119c91185c14" 
+02:36:45.915 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 6930d547-9059-4814-a8e2-b3420e5f9b37: "6930d547-9059-4814-a8e2-b3420e5f9b37" 
+02:36:45.957 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 34427cd3-d77a-4061-9a47-cb930fc767a3: "34427cd3-d77a-4061-9a47-cb930fc767a3" 
+02:36:46.036 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 52cfda52-1068-4c87-9813-eba1a2fba541: "52cfda52-1068-4c87-9813-eba1a2fba541" 
+02:36:46.126 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in a710d448-b581-4b77-9143-3e3cb2cf8948: "a710d448-b581-4b77-9143-3e3cb2cf8948" 
+02:36:46.195 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in bd3eca76-02ca-4469-916b-059170450d2c: "bd3eca76-02ca-4469-916b-059170450d2c" 
+02:36:46.237 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 1d4b28d9-b440-4be5-bd43-c556e79c3092: "1d4b28d9-b440-4be5-bd43-c556e79c3092" 
+02:36:46.318 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 73299dd6-eaa4-40ac-b2ff-e7e0c5232111: "73299dd6-eaa4-40ac-b2ff-e7e0c5232111" 
+02:36:46.370 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in ecc9da53-2a6a-4f0d-afd5-c4a499ea62eb: "ecc9da53-2a6a-4f0d-afd5-c4a499ea62eb" 
+02:36:46.422 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 089ba5ac-e47a-4b60-a71a-e0011ac1c330: "089ba5ac-e47a-4b60-a71a-e0011ac1c330" 
+02:36:46.514 INFO  u.a.e.a.c.s.StorageService - Pushed to store-s2093547 in 599960de-4b17-4093-9853-8a9797ca7385: "599960de-4b17-4093-9853-8a9797ca7385" 
+02:36:46.765 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ServiceTestGood-20324-3YOPY: count=0
+02:36:46.819 INFO  u.a.e.a.c.s.RabbitMqService - Received 31 messages in 54ms/700ms (timeout=500ms)
+02:36:46.824 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue ServiceTestBad-83659-lPmVd: count=0
+02:36:46.880 INFO  u.a.e.a.c.s.RabbitMqService - Received 37 messages in 56ms/700ms (timeout=500ms)
+02:36:46.932 INFO  u.a.e.a.c.s.StorageService - Received from 159e44fc-0488-426a-b5bf-ed2b1170f4a0 in store-s2093547: {"uid":"s2093547","key":"BIL","comment":" ","value":31.22,"runningTotalValue":31.22}
+02:36:46.960 INFO  u.a.e.a.c.s.StorageService - Received from 3614721b-5612-47ad-bf16-d1ec0003fd5b in store-s2093547: {"uid":"s2093547","key":"CSZ","comment":" ","value":27.47,"runningTotalValue":58.69}
+02:36:46.996 INFO  u.a.e.a.c.s.StorageService - Received from afdbf351-91bd-456a-9e01-74c5eb996dda in store-s2093547: {"uid":"s2093547","key":"KLY","comment":" ","value":49.98,"runningTotalValue":108.67}
+02:36:47.042 INFO  u.a.e.a.c.s.StorageService - Received from 34969f9a-5015-472f-a63e-8d6b986b477d in store-s2093547: {"uid":"s2093547","key":"WIOC","comment":" ","value":27.15,"runningTotalValue":135.81999}
+02:36:47.076 INFO  u.a.e.a.c.s.StorageService - Received from b75b853a-6a92-4b96-b19a-af58d2849364 in store-s2093547: {"uid":"s2093547","key":"WHC","comment":" ","value":12.38,"runningTotalValue":148.2}
+02:36:47.129 INFO  u.a.e.a.c.s.StorageService - Received from 00461466-f230-4d7a-adb8-32c1a22528ff in store-s2093547: {"uid":"s2093547","key":"JOVA","comment":" ","value":6.26,"runningTotalValue":154.45999}
+02:36:47.160 INFO  u.a.e.a.c.s.StorageService - Received from d77504b8-3fe5-490f-b915-3273cdf7e3dc in store-s2093547: {"uid":"s2093547","key":"CKGS","comment":" ","value":38.43,"runningTotalValue":192.88998}
+02:36:47.191 INFO  u.a.e.a.c.s.StorageService - Received from d074adb8-3e2a-41c4-81e8-49175815b478 in store-s2093547: {"uid":"s2093547","key":"PST","comment":" ","value":20.11,"runningTotalValue":212.99998}
+02:36:47.228 INFO  u.a.e.a.c.s.StorageService - Received from c93a5cae-08d3-4128-aedf-a3dd14acd9bd in store-s2093547: {"uid":"s2093547","key":"DWB","comment":" ","value":14.39,"runningTotalValue":227.38998}
+02:36:47.263 INFO  u.a.e.a.c.s.StorageService - Received from 9fb0cb9a-8f9c-42c6-ae34-ac67cab85747 in store-s2093547: {"uid":"s2093547","key":"BQIB","comment":" ","value":35.0,"runningTotalValue":262.38998}
+02:36:47.294 INFO  u.a.e.a.c.s.StorageService - Received from 1d4ef6f3-6fcc-4d77-8433-da22677c6a94 in store-s2093547: {"uid":"s2093547","key":"DDX","comment":" ","value":27.51,"runningTotalValue":289.9}
+02:36:47.333 INFO  u.a.e.a.c.s.StorageService - Received from 2a18ae00-0e16-4692-9aec-2f2036124d7a in store-s2093547: {"uid":"s2093547","key":"YSZ","comment":" ","value":6.18,"runningTotalValue":296.08}
+02:36:47.364 INFO  u.a.e.a.c.s.StorageService - Received from 7905bae4-3903-4c0c-aa8c-1632ab520cfc in store-s2093547: {"uid":"s2093547","key":"YBEG","comment":" ","value":34.71,"runningTotalValue":330.78998}
+02:36:47.399 INFO  u.a.e.a.c.s.StorageService - Received from 93c333e5-0fdf-4330-9f2d-e18bccb85acc in store-s2093547: {"uid":"s2093547","key":"DLVR","comment":" ","value":24.91,"runningTotalValue":355.69998}
+02:36:47.441 INFO  u.a.e.a.c.s.StorageService - Received from 41194741-7c0d-4194-966c-308ea61b33e0 in store-s2093547: {"uid":"s2093547","key":"VYZ","comment":" ","value":14.21,"runningTotalValue":369.90997}
+02:36:47.475 INFO  u.a.e.a.c.s.StorageService - Received from ea49e871-be37-4684-ae86-75b5236146fa in store-s2093547: {"uid":"s2093547","key":"JPL","comment":" ","value":32.8,"runningTotalValue":402.70996}
+02:36:47.505 INFO  u.a.e.a.c.s.StorageService - Received from 43d9d389-9dfb-4548-84f0-956c641d0baf in store-s2093547: {"uid":"s2093547","key":"OCI","comment":" ","value":31.51,"runningTotalValue":434.21997}
+02:36:47.563 INFO  u.a.e.a.c.s.StorageService - Received from 7adf76a7-ab8c-46b7-ba4f-a7ecf49e3618 in store-s2093547: {"uid":"s2093547","key":"CGSX","comment":" ","value":18.93,"runningTotalValue":453.14996}
+02:36:47.614 INFO  u.a.e.a.c.s.StorageService - Received from 49d34c13-68f2-4072-bd60-9d62509648c9 in store-s2093547: {"uid":"s2093547","key":"VHWD","comment":" ","value":42.36,"runningTotalValue":495.50995}
+02:36:47.647 INFO  u.a.e.a.c.s.StorageService - Received from 162d251f-f250-4740-8fb0-119c91185c14 in store-s2093547: {"uid":"s2093547","key":"YAA","comment":" ","value":9.67,"runningTotalValue":505.17996}
+02:36:47.677 INFO  u.a.e.a.c.s.StorageService - Received from 6930d547-9059-4814-a8e2-b3420e5f9b37 in store-s2093547: {"uid":"s2093547","key":"WUY","comment":" ","value":36.67,"runningTotalValue":541.85}
+02:36:47.710 INFO  u.a.e.a.c.s.StorageService - Received from 34427cd3-d77a-4061-9a47-cb930fc767a3 in store-s2093547: {"uid":"s2093547","key":"RNX","comment":" ","value":41.52,"runningTotalValue":583.37}
+02:36:47.748 INFO  u.a.e.a.c.s.StorageService - Received from 52cfda52-1068-4c87-9813-eba1a2fba541 in store-s2093547: {"uid":"s2093547","key":"OMR","comment":" ","value":15.74,"runningTotalValue":599.11}
+02:36:47.780 INFO  u.a.e.a.c.s.StorageService - Received from a710d448-b581-4b77-9143-3e3cb2cf8948 in store-s2093547: {"uid":"s2093547","key":"ETKO","comment":" ","value":18.85,"runningTotalValue":617.95996}
+02:36:47.855 INFO  u.a.e.a.c.s.StorageService - Received from bd3eca76-02ca-4469-916b-059170450d2c in store-s2093547: {"uid":"s2093547","key":"YYXC","comment":" ","value":11.17,"runningTotalValue":629.12994}
+02:36:47.906 INFO  u.a.e.a.c.s.StorageService - Received from 1d4b28d9-b440-4be5-bd43-c556e79c3092 in store-s2093547: {"uid":"s2093547","key":"GMCV","comment":" ","value":1.91,"runningTotalValue":631.0399}
+02:36:47.998 INFO  u.a.e.a.c.s.StorageService - Received from 73299dd6-eaa4-40ac-b2ff-e7e0c5232111 in store-s2093547: {"uid":"s2093547","key":"OVFQ","comment":" ","value":28.91,"runningTotalValue":659.9499}
+02:36:48.079 INFO  u.a.e.a.c.s.StorageService - Received from ecc9da53-2a6a-4f0d-afd5-c4a499ea62eb in store-s2093547: {"uid":"s2093547","key":"ANU","comment":" ","value":30.21,"runningTotalValue":690.1599}
+02:36:48.138 INFO  u.a.e.a.c.s.StorageService - Received from 089ba5ac-e47a-4b60-a71a-e0011ac1c330 in store-s2093547: {"uid":"s2093547","key":"HOEI","comment":" ","value":10.88,"runningTotalValue":701.0399}
+02:36:48.201 INFO  u.a.e.a.c.s.StorageService - Received from 599960de-4b17-4093-9853-8a9797ca7385 in store-s2093547: {"uid":"s2093547","key":"WZB","comment":" ","value":20.71,"runningTotalValue":721.74994}
+02:36:48.201 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Good packets passed
+02:36:48.202 INFO  u.a.e.a.c.AcpCw2ApplicationTests - Bad packets passed
+02:36:48.202 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ===============================PASSED===================================
 ]]></system-out>
   </testcase>
-  <testcase name="testKafkaMultipleReads" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="17.28">
-    <system-out><![CDATA[18:50:07.261 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING KAFKA MULTIPLE READS TEST----------------
-18:50:07.261 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: KafkaMultipleReads-37610-5zTwm
-18:50:07.273 INFO  u.a.e.a.c.s.KafkaService - Pushing 100 messages to KafkaMultipleReads-37610-5zTwm
-18:50:07.286 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-3] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {KafkaMultipleReads-37610-5zTwm=UNKNOWN_TOPIC_OR_PARTITION}
-18:50:07.713 INFO  u.a.e.a.c.s.KafkaService - Reading topic KafkaMultipleReads-37610-5zTwm: count=0
-18:50:12.924 INFO  u.a.e.a.c.s.KafkaService - Received 100/0 messages in 5211ms
-18:50:13.368 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [0] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5661
-18:50:13.371 INFO  u.a.e.a.c.s.KafkaService - Reading topic KafkaMultipleReads-37610-5zTwm: count=0
-18:50:18.579 INFO  u.a.e.a.c.s.KafkaService - Received 100/0 messages in 5208ms
-18:50:18.952 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [1] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5584
-18:50:18.955 INFO  u.a.e.a.c.s.KafkaService - Reading topic KafkaMultipleReads-37610-5zTwm: count=0
-18:50:24.167 INFO  u.a.e.a.c.s.KafkaService - Received 100/0 messages in 5212ms
-18:50:24.533 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [2] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5581
-]]></system-out>
-  </testcase>
-  <testcase name="testTransform" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="1.955">
-    <system-out><![CDATA[18:50:24.541 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING TRANSFORM TEST----------------
-18:50:24.571 INFO  u.a.e.a.c.s.RabbitMqService - Sent 10 messages to TransformTestRead-77617-S8YBO
-18:50:24.583 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-77617-S8YBO, write_queue:TransformTestWrite-14669-bISDf, count:10
-18:50:24.583 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 10 valid messages from queue: TransformTestRead-77617-S8YBO
-18:50:24.601 INFO  u.a.e.a.c.s.RabbitMqService - Received 10/10 valid messages in 17ms, queue=TransformTestRead-77617-S8YBO
-18:50:24.831 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:24.911 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:24.990 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:25.065 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:25.139 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:25.258 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:25.337 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:25.405 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:25.526 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:25.652 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-14669-bISDf
-18:50:25.722 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-14669-bISDf: count=0
-18:50:25.798 INFO  u.a.e.a.c.s.RabbitMqService - Received 10/0 messages in 76ms
-18:50:25.843 INFO  u.a.e.a.c.s.CacheService - Retrieving Dctk4 from cache
-18:50:25.852 INFO  u.a.e.a.c.s.CacheService - Retrieving JsXLZ from cache
-18:50:25.860 INFO  u.a.e.a.c.s.CacheService - Retrieving TGyTb from cache
-18:50:25.868 INFO  u.a.e.a.c.s.CacheService - Retrieving OXurk from cache
-18:50:25.876 INFO  u.a.e.a.c.s.CacheService - Retrieving lVrPd from cache
-18:50:25.886 INFO  u.a.e.a.c.s.CacheService - Retrieving TgoKZ from cache
-18:50:25.895 INFO  u.a.e.a.c.s.CacheService - Retrieving aDhkQ from cache
-18:50:25.904 INFO  u.a.e.a.c.s.CacheService - Retrieving qZrfj from cache
-18:50:25.929 INFO  u.a.e.a.c.s.RabbitMqService - Sent 10 messages to TransformTestRead-86620-LlA5M
-18:50:25.934 INFO  u.a.e.a.c.s.MessageTransformer - Transforming messages; read_queue:TransformTestRead-86620-LlA5M, write_queue:TransformTestWrite-72007-Qa0ht, count:10
-18:50:25.934 INFO  u.a.e.a.c.s.RabbitMqService - Receiving 10 valid messages from queue: TransformTestRead-86620-LlA5M
-18:50:25.953 INFO  u.a.e.a.c.s.RabbitMqService - Received 10/10 valid messages in 19ms, queue=TransformTestRead-86620-LlA5M
-18:50:25.979 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.000 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.019 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.040 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.108 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.236 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.348 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.427 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.447 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.467 INFO  u.a.e.a.c.s.RabbitMqService - Sent 1 messages to TransformTestWrite-72007-Qa0ht
-18:50:26.473 INFO  u.a.e.a.c.s.RabbitMqService - Reading queue TransformTestWrite-72007-Qa0ht: count=0
-18:50:26.485 INFO  u.a.e.a.c.s.RabbitMqService - Received 10/0 messages in 12ms
+  <testcase name="testKafkaMultipleReads" classname="uk.ac.ed.acp.cw2.AcpCw2ApplicationTests" time="15.338">
+    <system-out><![CDATA[02:36:48.209 INFO  u.a.e.a.c.AcpCw2ApplicationTests - --------------STARTING KAFKA MULTIPLE READS TEST----------------
+02:36:48.209 INFO  u.a.e.a.c.AcpCw2ApplicationTests - topicName: KafkaMultipleReads-63542-xS98W
+02:36:48.213 INFO  u.a.e.a.c.s.KafkaService - Pushing 100 messages to KafkaMultipleReads-63542-xS98W
+02:36:48.224 WARN  o.a.k.c.NetworkClient - [Producer clientId=producer-11] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {KafkaMultipleReads-63542-xS98W=UNKNOWN_TOPIC_OR_PARTITION}
+02:36:48.505 INFO  u.a.e.a.c.s.KafkaService - Reading topic KafkaMultipleReads-63542-xS98W: timeOut=5000
+02:36:53.518 INFO  u.a.e.a.c.s.KafkaService - Received 100 messages in 5013ms/5200ms (timeout=5000ms)
+02:36:53.520 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [0] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5018
+02:36:53.522 INFO  u.a.e.a.c.s.KafkaService - Reading topic KafkaMultipleReads-63542-xS98W: timeOut=5000
+02:36:58.528 INFO  u.a.e.a.c.s.KafkaService - Received 100 messages in 5006ms/5200ms (timeout=5000ms)
+02:36:58.532 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [1] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5012
+02:36:58.535 INFO  u.a.e.a.c.s.KafkaService - Reading topic KafkaMultipleReads-63542-xS98W: timeOut=5000
+02:37:03.539 INFO  u.a.e.a.c.s.KafkaService - Received 100 messages in 5004ms/5200ms (timeout=5000ms)
+02:37:03.542 INFO  u.a.e.a.c.AcpCw2ApplicationTests - [2] MessageCount: 100, readMessages: 100, timeout: 5000, time: 5010
+02:37:03.542 INFO  u.a.e.a.c.AcpCw2ApplicationTests - ========================PASSED=========================
 ]]></system-out>
   </testcase>
 </testsuite>

@@ -31,7 +31,7 @@ public class CacheService {
     }
 
     public String retrieveFromCache(String cacheKey) {
-        logger.info(String.format("Retrieving %s from cache", cacheKey));
+        logger.debug(String.format("Retrieving %s from cache", cacheKey));
         try (JedisPool pool = new JedisPool(environment.getRedisHost(), environment.getRedisPort()); Jedis jedis = pool.getResource()) {
             logger.debug("Redis connection established");
 

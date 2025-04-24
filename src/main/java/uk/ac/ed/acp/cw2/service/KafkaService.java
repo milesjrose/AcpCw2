@@ -18,7 +18,6 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -27,10 +26,28 @@ public class KafkaService {
     private final RuntimeEnvironment environment;
     private final String uid = "s2093547";
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private KafkaConsumer<String, String> consumer;
+    private boolean consumerInitialized = false;
+
     public KafkaService(RuntimeEnvironment environment) {
+        long startTime = System.currentTimeMillis();
         this.environment = environment;
+        logger.info("KafkaService constructor took {} ms", System.currentTimeMillis() - startTime);
     }
 
+    private void initializeConsumer() {
+        if (!consumerInitialized) {
+            Properties kafkaProps = getKafkaProperties(environment);
+            consumer = new KafkaConsumer<>(kafkaProps);
+            consumerInitialized = true;
+        } else {
+            // Reset the consumer if it already exists
+            consumer.unsubscribe();
+            consumer.close();
+            Properties kafkaProps = getKafkaProperties(environment);
+            consumer = new KafkaConsumer<>(kafkaProps);
+        }
+    }
 
     /**
      * Constructs Kafka properties required for KafkaProducer and KafkaConsumer configuration.
@@ -74,70 +91,35 @@ public class KafkaService {
         if (!ignoreCount && !ignoreTime) {
             logger.info("Reading topic {}: timeOut={}, count={}", readTopic, timeoutInMsec, count);
         } else if (!ignoreCount) {
-            logger.info("Reading topic {}: timeOut={}", readTopic, timeoutInMsec);
-        } else if (!ignoreTime) {
             logger.info("Reading topic {}: count={}", readTopic, count);
+        } else if (!ignoreTime) {
+            logger.info("Reading topic {}: timeOut={}", readTopic, timeoutInMsec);
         } else {
             logger.error("Requesting read with no message count or timeout");
             return new ArrayList<>();
         }
 
-        // Setup
-        Properties kafkaProps = getKafkaProperties(environment);
-        List<String> messages = Collections.synchronizedList(new ArrayList<>());
+        List<String> messages = new ArrayList<>();
         long startTime = System.currentTimeMillis();
-        long maxExecutionTime = timeoutInMsec + 200;
-        CountDownLatch latch = new CountDownLatch(1);
-        
-        // Receive
-        try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(kafkaProps)) {
+
+        try {
+            initializeConsumer();
             consumer.subscribe(Collections.singletonList(readTopic));
-
-            // Start a separate thread for polling
-            Thread consumerThread = new Thread(() -> {
-                try {
-                    while ((ignoreTime || System.currentTimeMillis() - startTime < maxExecutionTime) && 
-                           (ignoreCount || messages.size() < count)) {
-                        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(10));
-                        for (ConsumerRecord<String, String> record : records) {
-                            messages.add(record.value());
-                            logger.debug("Received message: {}", record.value());
-                            if (!ignoreCount && messages.size() >= count) {
-                                latch.countDown();
-                                break;
-                            }
-                        }
-                        if (!ignoreTime && System.currentTimeMillis() - startTime >= maxExecutionTime) {
-                            latch.countDown();
-                            break;
-                        }
+            
+            while ((ignoreTime || System.currentTimeMillis() - startTime < timeoutInMsec) &&
+                   (ignoreCount || messages.size() < count)) {
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(10));
+                for (ConsumerRecord<String, String> record : records) {
+                    messages.add(record.value());
+                    if (!ignoreCount && messages.size() >= count) {
+                        break;
                     }
-                } catch (Exception e) {
-                    logger.error("Error in consumer thread: {}", e.getMessage());
-                    latch.countDown();
                 }
-            });
-
-            consumerThread.start();
-            latch.await();
-            consumerThread.join();
-
-            // Log results
-            if (!ignoreCount && !ignoreTime) {
-                logger.info("Received {}/{} messages in {}/{}ms (timeout={}ms)", 
-                           messages.size(), count, 
-                           System.currentTimeMillis() - startTime, 
-                           timeoutInMsec + 200, timeoutInMsec);
-            } else if (!ignoreCount) {
-                logger.info("Received {} messages in {}/{}ms (timeout={}ms)", 
-                           messages.size(), 
-                           System.currentTimeMillis() - startTime, 
-                           timeoutInMsec + 200, timeoutInMsec);
-            } else {
-                logger.info("Received {}/{} messages in {}ms", 
-                           messages.size(), count, 
-                           System.currentTimeMillis() - startTime);
             }
+
+            if (!ignoreCount && !ignoreTime){logger.info("Received {}/{} messages in {}ms/{}ms (timeout={}ms)", messages.size(), count, System.currentTimeMillis() - startTime, timeoutInMsec+ 200, timeoutInMsec);}
+            else if (ignoreCount){logger.info("Received {} messages in {}ms/{}ms (timeout={}ms)", messages.size(), System.currentTimeMillis() - startTime, timeoutInMsec+ 200, timeoutInMsec);}
+            else {logger.info("Received {}/{} messages in {}ms", messages.size(), count, System.currentTimeMillis() - startTime);}
             return messages;
         } catch (Exception e) {
             logger.error("Error receiving messages from Kafka topic", e);
@@ -145,7 +127,7 @@ public class KafkaService {
         }
     }
 
-    public List<String> receiveFromTopic(String readTopic, int timeoutInMsec){
+    public List<String> receiveFromTopicTimeout(String readTopic, int timeoutInMsec){
         return receiveFromTopic(readTopic, timeoutInMsec, 0);
     }
 

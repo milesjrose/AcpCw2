@@ -7,4 +7,8 @@ public class cacheEntry {
     String key;
     @Getter
     String entry;
+
+    public String toString(){
+        return "Key: " + key + ", Entry: " + entry;
+    }
 }

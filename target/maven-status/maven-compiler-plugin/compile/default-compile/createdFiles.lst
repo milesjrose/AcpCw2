@@ -17,6 +17,5 @@ uk\ac\ed\acp\cw2\controller\ErrorHandler.class
 uk\ac\ed\acp\cw2\service\KafkaService.class
 uk\ac\ed\acp\cw2\service\MessageTransformer.class
 uk\ac\ed\acp\cw2\service\CacheService.class
-uk\ac\ed\acp\cw2\model\Message.class
 uk\ac\ed\acp\cw2\domain\ProcMessage.class
 uk\ac\ed\acp\cw2\service\MainService.class

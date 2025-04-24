@@ -52,7 +52,7 @@ public class RabbitMqService {
             }
 
             // Return
-            logger.info("Sent {} messages to {}", messages.size(), queueName);
+            logger.debug("Sent {} messages to {}", messages.size(), queueName);
         } catch (Exception e) {
             logger.error("Error pushing messages to queue", e);
             throw new RuntimeException(e);
@@ -91,7 +91,6 @@ public class RabbitMqService {
         // Setup
         List<String> messages = new ArrayList<>();
         long startTime = System.currentTimeMillis();
-        long maxExecutionTime = timeoutInMsec + 200;
         CountDownLatch latch = new CountDownLatch(1);
 
         // Receive
@@ -116,13 +115,13 @@ public class RabbitMqService {
             };
             // Start receiving
             String consumerTag = channel.basicConsume(queueName, true, deliverCallback, tag -> {});
-            long remainingTime = maxExecutionTime - (System.currentTimeMillis() - startTime);
+            long remainingTime = timeoutInMsec - (System.currentTimeMillis() - startTime);
             // Wait until either max messages received or timeout
             while ((!ignoreCount || messages.size() < messageCount) && 
                    (!ignoreTime || remainingTime > 0)) {
                 long sleepTime = Math.min(100, remainingTime);
                 Thread.sleep(sleepTime); // Small sleep to prevent busy waiting
-                remainingTime = maxExecutionTime - (System.currentTimeMillis() - startTime);
+                remainingTime = timeoutInMsec - (System.currentTimeMillis() - startTime);
             }
             // Cancel consumer if still active
             if (channel.isOpen()) {
@@ -130,7 +129,7 @@ public class RabbitMqService {
             }
 
             if (!ignoreCount && !ignoreTime){logger.info("Received {}/{} messages in {}ms/{}ms (timeout={}ms)", messages.size(), messageCount, System.currentTimeMillis() - startTime, timeoutInMsec+ 200, timeoutInMsec);}
-            else if (!ignoreCount){logger.info("Received {} messages in {}ms/{}ms (timeout={}ms)", messages.size(), System.currentTimeMillis() - startTime, timeoutInMsec+ 200, timeoutInMsec);}
+            else if (ignoreCount){logger.info("Received {} messages in {}ms/{}ms (timeout={}ms)", messages.size(), System.currentTimeMillis() - startTime, timeoutInMsec+ 200, timeoutInMsec);}
             else {logger.info("Received {}/{} messages in {}ms", messages.size(), messageCount, System.currentTimeMillis() - startTime);}
             return messages;
         } catch (Exception e) {
@@ -139,7 +138,7 @@ public class RabbitMqService {
         }
     }
 
-    public List<String> receiveFromQueue(String queueName, int timeoutInMsec) {
+    public List<String> receiveFromQueueTimeout(String queueName, int timeoutInMsec) {
         return receiveFromQueue(queueName, timeoutInMsec, 0);
     }
 

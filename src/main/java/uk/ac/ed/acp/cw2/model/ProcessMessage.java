@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
-public class Message {
+public class ProcessMessage {
     public String uid;
     public String key;
     public String comment;

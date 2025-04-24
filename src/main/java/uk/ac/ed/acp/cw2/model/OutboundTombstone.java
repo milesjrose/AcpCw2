@@ -2,12 +2,18 @@ package uk.ac.ed.acp.cw2.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.Getter;
 
 public class OutboundTombstone {
+    @Getter
     private Integer totalMessagesWritten;
+    @Getter
     private Integer totalMessagesProcessed;
+    @Getter
     private Integer totalRedisUpdates;
+    @Getter
     private Float totalValueWritten;
+    @Getter
     private Float totalAdded;
 
     public OutboundTombstone(Integer totalMessagesWritten, Integer totalMessagesProcessed, Integer totalRedisUpdates, Float totalValueWritten, Float totalAdded) {

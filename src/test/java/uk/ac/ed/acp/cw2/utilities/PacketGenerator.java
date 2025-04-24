@@ -21,9 +21,7 @@ public class PacketGenerator {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static Random random = new Random();
 
-    public static class TransformData{
-        
-
+    public static class TranMessagesData{
         @Getter
         Float totalValueWritten;
         @Getter
@@ -41,6 +39,7 @@ public class PacketGenerator {
 
         List<String> keys;
         List<Integer> versions;
+        @Getter
         List<Integer> tombstoneIndices;
         @Getter
         List<TransformMessage> messages;
@@ -50,7 +49,7 @@ public class PacketGenerator {
             return tombstoneCount + normalCount;
         }
 
-        public TransformData(){
+        public TranMessagesData(){
             totalValueWritten = 0f;
             tombstoneCount = 0;
             normalCount = 0;
@@ -117,18 +116,19 @@ public class PacketGenerator {
 
 
     }
-    public static TransformData generateTransformMessage(Integer numPackets){
+    public static TranMessagesData generateTransformMessages(Integer numPackets){
         //Made of
         //-tombstone packets (Contain key(String), sometimes TOTAL(Float))
         //-normal packets (Contain key(String), value(Float), version(Integer))
         // First decide what index of packets will be tombstones.
-        TransformData data = new TransformData();
+        TranMessagesData data = new TranMessagesData();
         int numTombstones = RandomGenerator.generateInteger(numPackets/4, 0);
         if (numTombstones == 0){numTombstones = 1;}
 
         data.tombstoneCount = numTombstones;
         data.normalCount = numPackets - numTombstones;
-        for (int i = 0; i < numTombstones; i++){
+        data.tombstoneIndices.add(numPackets-1);// last packet tombstone to get final info.
+        for (int i = 0; i < (numTombstones-1); i++){
             data.tombstoneIndices.add(RandomGenerator.generateInteger(numPackets-1,2));
         }
 
@@ -266,11 +266,11 @@ public class PacketGenerator {
         return result;
     }
 
-    public static TransformRequest transformRequest(){
+    public static TransformRequest transformRequest(Integer messageCount){
         TransformRequest request = new TransformRequest();
         request.readQueue = RandomGenerator.generateRandomKey("TransformTestRead");
         request.writeQueue = RandomGenerator.generateRandomKey("TransformTestWrite");
-        request.messageCount = 10;
+        request.messageCount = messageCount;
         return request;
     }
 
