@@ -10,6 +10,7 @@ import uk.ac.ed.acp.cw2.model.TransformMessage;
 import uk.ac.ed.acp.cw2.model.TransformNormal;
 import uk.ac.ed.acp.cw2.model.TransformTombstone;
 import com.fasterxml.jackson.databind.JsonNode;
+import java.math.BigDecimal;
 
 public class Parser {
     private static final Logger logger = LoggerFactory.getLogger(Parser.class);
@@ -60,13 +61,13 @@ public class Parser {
                 TransformNormal message = new TransformNormal();
                 message.key = key;
                 message.version = jsonNode.get("version").asInt();
-                message.value = (float) jsonNode.get("value").asDouble();
+                message.value = new BigDecimal(jsonNode.get("value").asText()).floatValue();
                 return message;
             } else {
                 // Tombstone
                 TransformTombstone message = new TransformTombstone();
                 if (jsonNode.has("TOTAL")){
-                    message.value = (float) jsonNode.get("TOTAL").asDouble();
+                    message.value = new BigDecimal(jsonNode.get("TOTAL").asText()).floatValue();
                 } else {
                     message.value = 0.0f;
                 }

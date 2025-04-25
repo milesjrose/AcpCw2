@@ -30,6 +30,8 @@ logging:
   level:
     root: WARN
     uk.ac.ed.acp.cw2: INFO
+    uk.ac.ed.acp.cw2.domain: INFO
+    uk.ac.ed.acp.cw2.service.CacheService: INFO
     org.springframework: INFO
   pattern:
     console: "%d{HH:mm:ss.SSS} %-5level %logger{20} - %msg%n"

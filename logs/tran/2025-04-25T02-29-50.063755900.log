@@ -1,0 +1,245 @@
+=== TRANSFORM TEST DATA ===
+
+> Generation Data
+    numPackets: 23
+    Total Messages Written: 22
+    Total Messages Processed: 23
+    Total Redis Updates: 20
+    Total Value Written: 413.37637
+    Total Added: 199.5
+
+> Redis cache data:
+    Redis Size: 18
+    Redis Delta: 2
+
+> Message data
+    Tombstone Value Written: 0.0
+    Normal Count: 22
+    Tombstone Count: 1
+    Tombstone Indices: [22]
+    Unwritten Count: 1
+    Unwritten Indices: []
+    Unstored Count: 3
+    Unstored Indices: [10, 14, 17]
+    Removed Count: 1
+    Removed Message Indices: [0]
+
+Differing Data: (Called Run, Manual Run, Generated Data)
+    !DIFFERENT Total Value Written: 413.37637, 413.37637, 413.37637
+    !DIFFERENT Total Added: 199.5, 199.5, 199.5
+--------------------------------
+    !DIFFERENT messagesSize/totalMessagesWritten (Called Run): 23, 22
+    !DIFFERENT messagesSize/totalMessagesWritten (Manual Run): 23, 22
+--------------------------------
+
+=== CALLED RUN DATA ===
+Request: {"readQueue":"TransformTestRead-95090-ZEh0V","writeQueue":"TransformTestWrite-31751-Bqwbv","messageCount":23}
+
+> Stats
+    Total Messages Written: 22
+    Total Messages Processed: 23
+    Total Redis Updates: 20
+    Total Value Written: 413.37637
+    Total Added: 199.5
+
+> Written Messages:23
+    [0]: {"key":"Zd1L5","version":2,"value":25.84943}
+    [1]: {"key":"JpAmp","version":2,"value":28.894686}
+    [2]: {"key":"mZkCq","version":1,"value":22.89001}
+    [3]: {"key":"NIJ1h","version":0,"value":16.640633}
+    [4]: {"key":"a5oMU","version":2,"value":19.092806}
+    [5]: {"key":"JWkiL","version":1,"value":21.103298}
+    [6]: {"key":"Np6Jm","version":1,"value":20.707977}
+    [7]: {"key":"D1X51","version":1,"value":12.95883}
+    [8]: {"key":"r1IWK","version":2,"value":20.77225}
+    [9]: {"key":"a6bE4","version":2,"value":13.524215}
+    [10]: {"key":"a5oMU","version":2,"value":6.3964963}
+    [11]: {"key":"GlgIN","version":2,"value":30.018631}
+    [12]: {"key":"NpdXE","version":1,"value":27.674446}
+    [13]: {"key":"5Qfmv","version":0,"value":14.267363}
+    [14]: {"key":"D1X51","version":0,"value":4.5474005}
+    [15]: {"key":"geTrD","version":0,"value":29.054037}
+    [16]: {"key":"hqtkK","version":2,"value":15.359451}
+    [17]: {"key":"r1IWK","version":0,"value":1.8485725}
+    [18]: {"key":"Be1rk","version":1,"value":15.920352}
+    [19]: {"key":"ujLF8","version":2,"value":22.352074}
+    [20]: {"key":"oeIQZ","version":1,"value":25.889746}
+    [21]: {"key":"My6X7","version":2,"value":17.613678}
+    [22]: {"totalMessagesWritten":22,"totalMessagesProcessed":23,"totalRedisUpdates":20,"totalValueWritten":413.37637,"totalAdded":199.5}
+
+> Cache Entries:18
+    [0]: {"key":"JpAmp","version":2,"value":18.394686}
+    [1]: {"key":"mZkCq","version":1,"value":12.390012}
+    [2]: {"key":"NIJ1h","version":0,"value":6.1406317}
+    [3]: {"key":"a5oMU","version":2,"value":8.592806}
+    [4]: {"key":"JWkiL","version":1,"value":10.603299}
+    [5]: {"key":"Np6Jm","version":1,"value":10.207978}
+    [6]: {"key":"D1X51","version":1,"value":2.4588299}
+    [7]: {"key":"r1IWK","version":2,"value":10.272249}
+    [8]: {"key":"a6bE4","version":2,"value":3.0242145}
+    [9]: {"key":"GlgIN","version":2,"value":19.518631}
+    [10]: {"key":"NpdXE","version":1,"value":17.174446}
+    [11]: {"key":"5Qfmv","version":0,"value":3.7673628}
+    [12]: {"key":"geTrD","version":0,"value":18.554037}
+    [13]: {"key":"hqtkK","version":2,"value":4.8594513}
+    [14]: {"key":"Be1rk","version":1,"value":5.420352}
+    [15]: {"key":"ujLF8","version":2,"value":11.852073}
+    [16]: {"key":"oeIQZ","version":1,"value":15.389746}
+    [17]: {"key":"My6X7","version":2,"value":7.113677}
+
+=== MANUAL RUN DATA ===
+Request: {"readQueue":"TransformTestRead-46313-xFVkf","writeQueue":"TransformTestWrite-58084-R3nKs","messageCount":23}
+
+> Stats
+    Total Messages Written: 22
+    Total Messages Processed: 23
+    Total Redis Updates: 20
+    Total Value Written: 413.37637
+    !DIFFERENT Total Value Written: 413.37637, 413.37637
+    Total Added: 199.5
+    !DIFFERENT Total Added: 199.5, 199.5
+
+> Written Messages:23
+    [0]: {"key":"Zd1L5","version":2,"value":25.84943}
+    [1]: {"key":"JpAmp","version":2,"value":28.894686}
+    [2]: {"key":"mZkCq","version":1,"value":22.89001}
+    [3]: {"key":"NIJ1h","version":0,"value":16.640633}
+    [4]: {"key":"a5oMU","version":2,"value":19.092806}
+    [5]: {"key":"JWkiL","version":1,"value":21.103298}
+    [6]: {"key":"Np6Jm","version":1,"value":20.707977}
+    [7]: {"key":"D1X51","version":1,"value":12.95883}
+    [8]: {"key":"r1IWK","version":2,"value":20.77225}
+    [9]: {"key":"a6bE4","version":2,"value":13.524215}
+    [10]: {"key":"a5oMU","version":2,"value":6.3964963}
+    [11]: {"key":"GlgIN","version":2,"value":30.018631}
+    [12]: {"key":"NpdXE","version":1,"value":27.674446}
+    [13]: {"key":"5Qfmv","version":0,"value":14.267363}
+    [14]: {"key":"D1X51","version":0,"value":4.5474005}
+    [15]: {"key":"geTrD","version":0,"value":29.054037}
+    [16]: {"key":"hqtkK","version":2,"value":15.359451}
+    [17]: {"key":"r1IWK","version":0,"value":1.8485725}
+    [18]: {"key":"Be1rk","version":1,"value":15.920352}
+    [19]: {"key":"ujLF8","version":2,"value":22.352074}
+    [20]: {"key":"oeIQZ","version":1,"value":25.889746}
+    [21]: {"key":"My6X7","version":2,"value":17.613678}
+    [22]: {"totalMessagesWritten":22,"totalMessagesProcessed":23,"totalRedisUpdates":20,"totalValueWritten":413.37637,"totalAdded":199.5}
+
+> Cache Entries:18
+    [0]: {"key":"JpAmp","version":2,"value":18.394686}
+    [1]: {"key":"mZkCq","version":1,"value":12.390012}
+    [2]: {"key":"NIJ1h","version":0,"value":6.1406317}
+    [3]: {"key":"a5oMU","version":2,"value":8.592806}
+    [4]: {"key":"JWkiL","version":1,"value":10.603299}
+    [5]: {"key":"Np6Jm","version":1,"value":10.207978}
+    [6]: {"key":"D1X51","version":1,"value":2.4588299}
+    [7]: {"key":"r1IWK","version":2,"value":10.272249}
+    [8]: {"key":"a6bE4","version":2,"value":3.0242145}
+    [9]: {"key":"GlgIN","version":2,"value":19.518631}
+    [10]: {"key":"NpdXE","version":1,"value":17.174446}
+    [11]: {"key":"5Qfmv","version":0,"value":3.7673628}
+    [12]: {"key":"geTrD","version":0,"value":18.554037}
+    [13]: {"key":"hqtkK","version":2,"value":4.8594513}
+    [14]: {"key":"Be1rk","version":1,"value":5.420352}
+    [15]: {"key":"ujLF8","version":2,"value":11.852073}
+    [16]: {"key":"oeIQZ","version":1,"value":15.389746}
+    [17]: {"key":"My6X7","version":2,"value":7.113677}
+
+> Read Messages (with updated values):23
+    [0]: {"key":"Zd1L5","version":2,"value":25.84943}
+    [1]: {"key":"JpAmp","version":2,"value":28.894686}
+    [2]: {"key":"mZkCq","version":1,"value":22.89001}
+    [3]: {"key":"NIJ1h","version":0,"value":16.640633}
+    [4]: {"key":"a5oMU","version":2,"value":19.092806}
+    [5]: {"key":"JWkiL","version":1,"value":21.103298}
+    [6]: {"key":"Np6Jm","version":1,"value":20.707977}
+    [7]: {"key":"D1X51","version":1,"value":12.95883}
+    [8]: {"key":"r1IWK","version":2,"value":20.77225}
+    [9]: {"key":"a6bE4","version":2,"value":13.524215}
+    [10]: {"key":"a5oMU","version":2,"value":6.3964963}
+    [11]: {"key":"GlgIN","version":2,"value":30.018631}
+    [12]: {"key":"NpdXE","version":1,"value":27.674446}
+    [13]: {"key":"5Qfmv","version":0,"value":14.267363}
+    [14]: {"key":"D1X51","version":0,"value":4.5474005}
+    [15]: {"key":"geTrD","version":0,"value":29.054037}
+    [16]: {"key":"hqtkK","version":2,"value":15.359451}
+    [17]: {"key":"r1IWK","version":0,"value":1.8485725}
+    [18]: {"key":"Be1rk","version":1,"value":15.920352}
+    [19]: {"key":"ujLF8","version":2,"value":22.352074}
+    [20]: {"key":"oeIQZ","version":1,"value":25.889746}
+    [21]: {"key":"My6X7","version":2,"value":17.613678}
+    [22]: {"key":"Zd1L5","TOTAL":0.0}
+
+=== GENERATED DATA ===
+
+> Stats
+    Total Messages Written: 22
+    Total Messages Processed: 23
+    Total Redis Updates: 20
+    Total Value Written: 413.37637
+    Total Added: 199.5
+
+> Generation Data:
+    Tombstone Value Written: 0.0
+    Tombstone Count: 1
+    Normal Count: 22
+    Unstored Count: 3
+    Removed Count: 1
+    Removed Message Indices: [0]
+
+> Removed Messages:1
+    [0]: {"key":"Zd1L5","version":2,"value":15.349431}
+
+> Unstored Messages:3
+    [10]: {"key":"a5oMU","version":2,"value":6.3964963}
+    [14]: {"key":"D1X51","version":0,"value":4.5474005}
+    [17]: {"key":"r1IWK","version":0,"value":1.8485725}
+
+> Generated Messages
+    [0]: {"key":"Zd1L5","version":2,"value":15.349431}
+    [1]: {"key":"JpAmp","version":2,"value":18.394686}
+    [2]: {"key":"mZkCq","version":1,"value":12.390012}
+    [3]: {"key":"NIJ1h","version":0,"value":6.1406317}
+    [4]: {"key":"a5oMU","version":2,"value":8.592806}
+    [5]: {"key":"JWkiL","version":1,"value":10.603299}
+    [6]: {"key":"Np6Jm","version":1,"value":10.207978}
+    [7]: {"key":"D1X51","version":1,"value":2.4588299}
+    [8]: {"key":"r1IWK","version":2,"value":10.272249}
+    [9]: {"key":"a6bE4","version":2,"value":3.0242145}
+    [10]: {"key":"a5oMU","version":2,"value":6.3964963}
+    [11]: {"key":"GlgIN","version":2,"value":19.518631}
+    [12]: {"key":"NpdXE","version":1,"value":17.174446}
+    [13]: {"key":"5Qfmv","version":0,"value":3.7673628}
+    [14]: {"key":"D1X51","version":0,"value":4.5474005}
+    [15]: {"key":"geTrD","version":0,"value":18.554037}
+    [16]: {"key":"hqtkK","version":2,"value":4.8594513}
+    [17]: {"key":"r1IWK","version":0,"value":1.8485725}
+    [18]: {"key":"Be1rk","version":1,"value":5.420352}
+    [19]: {"key":"ujLF8","version":2,"value":11.852073}
+    [20]: {"key":"oeIQZ","version":1,"value":15.389746}
+    [21]: {"key":"My6X7","version":2,"value":7.113677}
+    [22]: {"key":"Zd1L5","TOTAL":0.0}
+
+> Generated Packets
+    [0]: {"key":"Zd1L5","version":2,"value":15.349431}
+    [1]: {"key":"JpAmp","version":2,"value":18.394686}
+    [2]: {"key":"mZkCq","version":1,"value":12.390012}
+    [3]: {"key":"NIJ1h","version":0,"value":6.1406317}
+    [4]: {"key":"a5oMU","version":2,"value":8.592806}
+    [5]: {"key":"JWkiL","version":1,"value":10.603299}
+    [6]: {"key":"Np6Jm","version":1,"value":10.207978}
+    [7]: {"key":"D1X51","version":1,"value":2.4588299}
+    [8]: {"key":"r1IWK","version":2,"value":10.272249}
+    [9]: {"key":"a6bE4","version":2,"value":3.0242145}
+    [10]: {"key":"a5oMU","version":2,"value":6.3964963}
+    [11]: {"key":"GlgIN","version":2,"value":19.518631}
+    [12]: {"key":"NpdXE","version":1,"value":17.174446}
+    [13]: {"key":"5Qfmv","version":0,"value":3.7673628}
+    [14]: {"key":"D1X51","version":0,"value":4.5474005}
+    [15]: {"key":"geTrD","version":0,"value":18.554037}
+    [16]: {"key":"hqtkK","version":2,"value":4.8594513}
+    [17]: {"key":"r1IWK","version":0,"value":1.8485725}
+    [18]: {"key":"Be1rk","version":1,"value":5.420352}
+    [19]: {"key":"ujLF8","version":2,"value":11.852073}
+    [20]: {"key":"oeIQZ","version":1,"value":15.389746}
+    [21]: {"key":"My6X7","version":2,"value":7.113677}
+    [22]: {"key":"Zd1L5","TOTAL":0.0}

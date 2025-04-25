@@ -15,6 +15,8 @@ import java.util.Random;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+import static java.lang.Math.max;
+
 
 public class PacketGenerator {
 
@@ -37,16 +39,42 @@ public class PacketGenerator {
         @Getter
         Integer totalMessagesProcessed;
 
-        List<String> keys;
-        List<Integer> versions;
+        @Getter
+        Float tombstoneValueWritten;
+        @Getter
+        List<TransformMessage> removedMessages;
+        @Getter
+        Integer unstoredCount;
+        @Getter
+        List<Integer> unstoredIndices;
+        @Getter
+        List<TransformMessage> unstoredMessages;
+        @Getter
+        List<Integer> removedMessageIndices;
+
         @Getter
         List<Integer> tombstoneIndices;
+        List<Integer> writtenIndices;
+        @Getter
+        List<Integer> unWrittenIndices;
         @Getter
         List<TransformMessage> messages;
         @Getter
         List<ObjectNode> packets;
+
+        @Getter
+        List<TransformNormal> redisCache;
+
         public Integer messageCount(){
             return tombstoneCount + normalCount;
+        }
+
+        public void calculateUnWrittenIndices(){
+            for (int i = 0; i < messageCount(); i++){
+                if (!writtenIndices.contains(i)){
+                    unWrittenIndices.add(i);
+                }
+            }
         }
 
         public TranMessagesData(){
@@ -57,38 +85,62 @@ public class PacketGenerator {
             totalMessagesWritten = 0;
             totalAdded = 0f;
             totalMessagesProcessed = 0;
-            keys = new ArrayList<>();
-            versions = new ArrayList<>();
+
             tombstoneIndices = new ArrayList<>();
             messages = new ArrayList<>();
             packets = new ArrayList<>();
+            unstoredIndices = new ArrayList<>();
+
+            tombstoneValueWritten = 0f;
+            removedMessages = new ArrayList<>();
+            unstoredCount = 0;
+            unstoredMessages = new ArrayList<>();
+            removedMessageIndices = new ArrayList<>();
+            writtenIndices = new ArrayList<>();
+            unWrittenIndices = new ArrayList<>();
+            redisCache = new ArrayList<>();
         }
 
         public void add(TransformNormal msg){
-            if (keys.contains(msg.key)){
-                int index = keys.indexOf(msg.key);
-                if (msg.version>versions.get(index)){
-                    redisAdd();
+            if (redisContainsKey(msg.key)){
+                int index = redisGetKeyIndex(msg.key);
+                int cacheVersion = redisCache.get(index).version;
+                if (msg.version > cacheVersion){
+                    // Remove old version from cache - doesnt count in real redis, as update in place.
+                    redisCache.remove(index);
+                    // Add with update++
+                    redisAdd(msg);
+                } else {
+                    unstoredCount += 1;
+                    unstoredIndices.add(messages.size());
+                    unstoredMessages.add(msg);
                 }
             } else {
-                redisAdd();
+                redisAdd(msg);
             }
+            // Add to queue
             queueAdd(msg.value);
+            // Add to written msg/packet/indices
             messages.add(msg);
-            keys.add(msg.key);
-            versions.add(msg.version);
             packets.add(msg.toJson(objectMapper));
+            writtenIndices.add(messages.size());
+            // Update total
             totalMessagesProcessed += 1;
         }
 
         public void add(TransformTombstone msg){
-            int index = keys.indexOf(msg.key);
-            keys.remove(msg.key);
-            versions.remove(index);
+            // Remove from redis cache
+            redisRemove(msg.key);
+            // Add self to written indices
+            writtenIndices.add(messages.size());
+            // Update totals
             totalValueWritten += msg.value;
-            packets.add(msg.toJson(objectMapper));
+            tombstoneValueWritten += msg.value;
+            // Add to packets and messages
             messages.add(msg);
-            totalRedisUpdates += 1;
+            packets.add(msg.toJson(objectMapper));
+            writtenIndices.add(messages.size());
+            // Update total messages processed
             totalMessagesProcessed += 1;
         }
 
@@ -97,16 +149,50 @@ public class PacketGenerator {
         }
 
         public String getRandomKey(){
-            if(keys.size()>0){
-                return keys.get(RandomGenerator.generateInteger(keys.size()-1, 0));
+            if(redisCache.size()>2){
+                return redisCache.get((int)(RandomGenerator.generateInteger(redisCache.size()-1, 0))).key;
             }
             else return "noKey";
         }
 
-        public void redisAdd(){
+        public void redisAdd(TransformNormal msg){
+            redisCache.add(msg);
             totalRedisUpdates += 1;
             totalAdded += 10.5f;
             totalValueWritten += 10.5f;
+        }
+
+        public boolean redisRemove(TransformNormal msg){
+            int index = redisGetKeyIndex(msg.key);
+            if (index != -1){
+                redisCache.remove(index);
+                totalRedisUpdates += 1;
+                return true;
+            }
+            return false;
+        }
+
+        public boolean redisRemove(String key){
+            int index = redisGetKeyIndex(key);
+            if (index != -1){
+                redisCache.remove(index);
+                totalRedisUpdates += 1;
+                return true;
+            }
+            return false;
+        }
+
+        public Integer redisGetKeyIndex(String key){
+            for (int i = 0; i < redisCache.size(); i++){
+                if (redisCache.get(i).key == key){
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public boolean redisContainsKey(String key){
+            return redisGetKeyIndex(key) != -1;
         }
 
         public void queueAdd(Float value){
@@ -136,31 +222,45 @@ public class PacketGenerator {
         // Then generate the tombstone packet.
         for (int i = 0; i < numPackets; i++){
             if (data.isTombstone(i)){
-                String key = data.getRandomKey();
-                TransformTombstone tombstone = generateTombstonePacket(key);
+                TransformTombstone tombstone = generateTombstonePacket(data);
                 data.add(tombstone);
             } else {
-                TransformNormal normal = generateNormalPacket();
+                TransformNormal normal = generateNormalPacket(data);
                 data.add(normal);
             }
         }
+        data.calculateUnWrittenIndices();
         return data;
     }
 
-    private static TransformNormal generateNormalPacket(){
+    private static TransformNormal generateNormalPacket(TranMessagesData data){
         //Generate a normal packet
         TransformNormal normal = new TransformNormal();
-        String key = RandomGenerator.generateString(5);
-        Float value = RandomGenerator.generateFloat(100, 0);
-        Integer version = RandomGenerator.generateInteger(100, 0);
-        normal.key = key;
+        // Decide if packet reuses a key:
+        Boolean reuseKey = false;
+        if (data.redisCache.size() > 3){
+            Float count = (float) data.messageCount();
+            Float reduction = (200f / (count+200f));
+            int bound = (int) ((1f - reduction)*100f);
+            reuseKey = RandomGenerator.generateInteger(100,0) < bound;
+        }
+        if (reuseKey){
+            normal.key = data.getRandomKey();
+        } else {
+            normal.key = RandomGenerator.generateString(5);
+        }
+        // Low value for easier testing
+        Float value = RandomGenerator.generateFloat(20, 0);
+        // Verion is 0,1,2 -  to have more conflicts while testing.
+        Integer version = RandomGenerator.generateInteger(3, 0);
         normal.value = value;
         normal.version = version;
         return normal;
     }
 
-    private static TransformTombstone generateTombstonePacket(String key){
+    private static TransformTombstone generateTombstonePacket(TranMessagesData data){
         //Generate a tombstone packet
+        String key = data.getRandomKey();
         TransformTombstone tombstone = new TransformTombstone();
         Boolean hasTotal = RandomGenerator.generateInteger(100,0) < 20;
         if (hasTotal){

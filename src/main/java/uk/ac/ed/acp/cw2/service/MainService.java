@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
+import uk.ac.ed.acp.cw2.domain.MessageProcessor;
+import uk.ac.ed.acp.cw2.domain.MessageTransformer;
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
 import uk.ac.ed.acp.cw2.model.TransformRequest;
 

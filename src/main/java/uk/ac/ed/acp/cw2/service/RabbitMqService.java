@@ -1,22 +1,18 @@
 package uk.ac.ed.acp.cw2.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DeliverCallback;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
-
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.nio.charset.StandardCharsets;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.rabbitmq.client.*;
+import org.springframework.stereotype.Service;
+
+import uk.ac.ed.acp.cw2.data.RuntimeEnvironment;
 import uk.ac.ed.acp.cw2.Utilities.Parser;
 
 @Service
@@ -25,6 +21,7 @@ public class RabbitMqService {
     private static final Logger logger = LoggerFactory.getLogger(RabbitMqService.class);
 
     private ConnectionFactory factory = null;
+    private Channel channel;
 
     private final String uid = "s2093547";
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -33,39 +30,74 @@ public class RabbitMqService {
         factory = new ConnectionFactory();
         factory.setHost(environment.getRabbitMqHost());
         factory.setPort(environment.getRabbitMqPort());
-    }
-
-    // ================================ Push ================================
-
-    public void pushMessages(String queueName, List<ObjectNode> messages) {
-        try (Connection connection = factory.newConnection();
-             Channel channel = connection.createChannel()) {
-
-            // Declare queue
-            channel.queueDeclare(queueName, false, false, false, null);
-
-            // Push messages
-            for (ObjectNode message : messages) {
-                String jsonMessage = objectMapper.writeValueAsString(message);
-                channel.basicPublish("", queueName, null, jsonMessage.getBytes());
-                logger.debug("Pushed to {}: {}", queueName, jsonMessage);
-            }
-
-            // Return
-            logger.debug("Sent {} messages to {}", messages.size(), queueName);
+        factory.setAutomaticRecoveryEnabled(true);
+        factory.setNetworkRecoveryInterval(5000); // try every 5s
+        try{
+            Connection connection = factory.newConnection();
+            channel = connection.createChannel();
         } catch (Exception e) {
-            logger.error("Error pushing messages to queue", e);
+            logger.error("Error initialising channel: {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }
+    
+    // ================================ Push ================================
 
-    public void pushMessage(String queueName, ObjectNode message) {
-        List<ObjectNode> messages = new ArrayList<>();
-        messages.add(message);
-        pushMessages(queueName, messages);
+    public boolean push(String queueName, List<ObjectNode> messages) {
+        try {
+            channel.queueDeclare(queueName, false, false, false, null);
+        } catch (Exception e) {
+            logger.error("Error declaring queue: {}", e.getMessage());
+            return false;
+        }
+        Integer sent = 0;
+        Integer totalMessages = messages.size();
+        for (ObjectNode message : messages) {
+            try{
+                String jsonMessage = objectMapper.writeValueAsString(message);
+                Integer count = 0;
+                while (!send(queueName, jsonMessage)){
+                    count++;
+                    logger.error("Error pushing message to queue. Retrying...");
+                    if (count > 5){
+                        logger.error("Aborting push after 5 retries. {}/{} messages pushed", sent, totalMessages);
+                        return false;
+                    }
+                }
+                sent++;
+                // Reduce excessive logging
+                if (totalMessages > 1){
+                    logger.debug("Pushed message {}/{} to {}: {}", sent, totalMessages, queueName, jsonMessage);
+                }
+            } catch (Exception e) {
+                logger.error("Error decoding json string {} - Skipping message", e.getMessage());
+            }
+        }
+        if ((int)sent != (int)totalMessages){
+            logger.error("Failed to push all messages to {} (pushed: {}/{})", queueName, sent, totalMessages);
+            return false;
+        }
+        // Reduce excessive logging
+        if (totalMessages > 1){
+            logger.info("Sent {}/{} messages to {}", sent, totalMessages, queueName);
+        }
+        return true;
     }
 
-    public void pushToQueue(String queueName, int messageCount) {
+    public boolean push(String queueName, ObjectNode message) {
+        List<ObjectNode> messages = new ArrayList<>();
+        messages.add(message);
+        return push(queueName, messages);
+    }
+
+    private boolean send(String queueName, String message) {
+        try{
+            channel.basicPublish("", queueName, null, message.getBytes());
+        } catch (Exception e) {logger.error("{}", e.getMessage());return false;}
+        return true;
+    }
+
+    public boolean pushToQueue(String queueName, int messageCount) {
         List<ObjectNode> messages = new ArrayList<>();
         // Create messages
         for (int i = 0; i < messageCount; i++) {
@@ -75,121 +107,95 @@ public class RabbitMqService {
             messages.add(message);
         }
         // Push messages
-        pushMessages(queueName, messages);
+        return push(queueName, messages);
     }
 
     // ================================ Receive ================================
 
-    public List<String> receiveFromQueue(String queueName, int timeoutInMsec, int messageCount){
+    private List<String> receive(String queueName, int timeoutInMsec, int messageCount, List<String> requiredFields){
         // Check inputs
-        boolean ignoreCount = (messageCount == 0);
-        boolean ignoreTime = (timeoutInMsec == 0);
-        if (!ignoreCount && !ignoreTime){logger.info("Reading queue {}: timeOut={}, count={}", queueName, timeoutInMsec, messageCount);}
-        else if (!ignoreCount){logger.info("Reading queue {}: timeOut={}", queueName, timeoutInMsec);}
-        else if (!ignoreTime){logger.info("Reading queue {}: count={}", queueName, messageCount);}
-        else {logger.error("Requesting read with no message count or timeout"); return new ArrayList<>();}
+        boolean checkCount = (messageCount != 0);
+        boolean checkTime = (timeoutInMsec != 0);
+        boolean ignoreFields = (requiredFields == null);
+        Integer runType = (checkCount ? 1 : 0) + (checkTime ? 2 : 0); // 0 = neither, 1 = count, 2 = time, 3 = both
+        String prefix = !ignoreFields ? "[With Validation]" : "";
+        switch (runType){
+            case 0: logger.error(prefix + "Requesting read with no message count or timeout"); return null;
+            case 1: logger.info(prefix + "Reading queue {}: count={}", queueName, messageCount); break;
+            case 2: logger.info(prefix + "Reading queue {}: timeOut={}", queueName, timeoutInMsec); break;
+            case 3: logger.info(prefix + "Reading queue {}: timeOut={}, count={}", queueName, timeoutInMsec, messageCount); break;
+        }
         // Setup
         List<String> messages = new ArrayList<>();
         long startTime = System.currentTimeMillis();
         CountDownLatch latch = new CountDownLatch(1);
-
-        // Receive
-        try (Connection connection = factory.newConnection();
-             Channel channel = connection.createChannel()) {
-            // Declare queue
+        // Declare queue
+        try {
             channel.queueDeclare(queueName, false, false, false, null);
-            // Define receiver
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            logger.error("Error declaring queue: {}", e.getMessage());
+            return null;
+        }
+        // Define what to do when message is received
+        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+            // If not ignoring fields, check if message is valid
+            if (ignoreFields || Parser.isValidMessage(message, requiredFields)){
                 messages.add(message);
-                logger.debug("Received: {}", message);
-                
-                if (!ignoreCount && messages.size() >= messageCount) {
-                    try {
-                        channel.basicCancel(consumerTag);
-                    } catch (IOException e) {
-                        logger.error("Error cancelling consumer: {}", e.getMessage());
-                    }
+                logger.debug("Received message {}/{}: {}", messages.size(), messageCount, message);
+                if (checkCount && messages.size() >= messageCount){
+                    try {channel.basicCancel(consumerTag);} catch (IOException e) {logger.error("Error cancelling consumer: {}", e.getMessage());}
                     latch.countDown();
                 }
-            };
-            // Start receiving
+            }
+        };
+        // Receive messages
+        try{
             String consumerTag = channel.basicConsume(queueName, true, deliverCallback, tag -> {});
-            long remainingTime = timeoutInMsec - (System.currentTimeMillis() - startTime);
-            // Wait until either max messages received or timeout
-            while ((!ignoreCount || messages.size() < messageCount) && 
-                   (!ignoreTime || remainingTime > 0)) {
-                long sleepTime = Math.min(100, remainingTime);
-                Thread.sleep(sleepTime); // Small sleep to prevent busy waiting
-                remainingTime = timeoutInMsec - (System.currentTimeMillis() - startTime);
-            }
-            // Cancel consumer if still active
-            if (channel.isOpen()) {
+            if (checkTime){
+                // Wait for enough time, then cancel consumer
+                Thread.sleep(startTime + timeoutInMsec - System.currentTimeMillis());
                 channel.basicCancel(consumerTag);
+            } else {
+                // Wait for enough messages
+                latch.await();
             }
-
-            if (!ignoreCount && !ignoreTime){logger.info("Received {}/{} messages in {}ms/{}ms (timeout={}ms)", messages.size(), messageCount, System.currentTimeMillis() - startTime, timeoutInMsec+ 200, timeoutInMsec);}
-            else if (ignoreCount){logger.info("Received {} messages in {}ms/{}ms (timeout={}ms)", messages.size(), System.currentTimeMillis() - startTime, timeoutInMsec+ 200, timeoutInMsec);}
-            else {logger.info("Received {}/{} messages in {}ms", messages.size(), messageCount, System.currentTimeMillis() - startTime);}
-            return messages;
         } catch (Exception e) {
-            logger.error("Error receiving messages from queue", e);
-            throw new RuntimeException(e);
+            logger.error("Error receiving messages: {}", e.getMessage());
+            return null;
         }
+        // Output
+        switch (runType){
+            case 1: logger.info(prefix + "Received {}/{} messages in {}ms", messages.size(), messageCount, System.currentTimeMillis() - startTime); break;
+            case 2: logger.info(prefix + "Received {} messages in {}/{}ms", messages.size(), System.currentTimeMillis() - startTime, timeoutInMsec); break;
+            case 3: logger.info(prefix + "Received {}/{} messages in {}/{}ms", messages.size(), messageCount, System.currentTimeMillis() - startTime, timeoutInMsec); break;
+        }
+        // Return received messages
+        logger.info("returning: {}", messages);
+        return messages;
     }
 
-    public List<String> receiveFromQueueTimeout(String queueName, int timeoutInMsec) {
-        return receiveFromQueue(queueName, timeoutInMsec, 0);
-    }
-
-    public List<String> receiveFromQueueCount(String queueName, int messageCount) {
-        return receiveFromQueue(queueName, 0, messageCount);
-    }
-
-    public List<String> receiveValidMessagesFromQueue(String queueName, int messageCount, List<String> requiredFields) {
-        logger.info("Receiving {} valid messages from queue: {}", messageCount, queueName);
-        long startTime = System.currentTimeMillis();
-        List<String> messages = new ArrayList<>();
-        AtomicInteger receivedCount = new AtomicInteger(0);
-        CountDownLatch latch = new CountDownLatch(1);
-
-        try (Connection connection = factory.newConnection();
-             Channel channel = connection.createChannel()) {
-
-            // Declare queue
+    // Alt calls
+    public List<String> receiveTimeout(String queueName, int timeoutInMsec) {return receive(queueName, timeoutInMsec, 0, null);}
+    public List<String> receiveTimeout(String queueName, int timeoutInMsec, List<String> requiredFields) {return receive(queueName, timeoutInMsec, 0, requiredFields);}
+    public List<String> receiveCount(String queueName, int messageCount) {return receive(queueName, 0, messageCount, null);}
+    public List<String> receiveCount(String queueName, int messageCount, List<String> requiredFields) {return receive(queueName, 0, messageCount, requiredFields);}
+    public List<String> receiveCountWithTimeout(String queueName, int timeoutInMsec, int messageCount) {return receive(queueName, timeoutInMsec, messageCount, null);}
+    public List<String> receiveCountWithTimeout(String queueName, int timeoutInMsec, int messageCount, List<String> requiredFields) {return receive(queueName, timeoutInMsec, messageCount, requiredFields);}
+    // ================================ Utility ================================
+    public long getQueueMessageCount(String queueName) {
+        // Declare queue
+        try {
             channel.queueDeclare(queueName, false, false, false, null);
-
-            // Define receiver
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                if (Parser.isValidMessage(message, requiredFields)) {
-                    messages.add(message);
-                    receivedCount.incrementAndGet();
-                    logger.debug("Received valid message: {}", message);
-                    if (receivedCount.get() >= messageCount) {
-                        try {
-                            channel.basicCancel(consumerTag);
-                            latch.countDown();
-                        } catch (IOException e) {
-                            logger.error("Error cancelling consumer: {}", e.getMessage());
-                        }
-                    }
-                }
-            };
-
-            // Start receiving messages
-            channel.basicConsume(queueName, true, deliverCallback, tag -> {
-                latch.countDown();
-            });
-
-            // Wait for the consumer to be cancelled (Message count hit)
-            latch.await();
-
-            logger.info("Received {}/{} valid messages in {}ms, queue={}", messages.size(), messageCount, System.currentTimeMillis() - startTime, queueName);
-            return messages;
-        } catch (Exception e) {
-            logger.error("Error receiving messages from queue: {}", e.getMessage());
-            return messages;
+        } catch (Exception e) { 
+            logger.error("Error declaring queue: {}", e.getMessage());
+            return -1;
+        }
+        // Get message count
+        try {return channel.messageCount(queueName);} 
+        catch (IOException e) {
+            logger.error("Error getting message count: {}", e.getMessage());
+            return -1;
         }
     }
 }

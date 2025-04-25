@@ -7,6 +7,8 @@ C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\controller
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\controller\ServiceController.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\controller\StorageController.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\data\RuntimeEnvironment.java
+C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\domain\MessageProcessor.java
+C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\domain\MessageTransformer.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\domain\ProcMessage.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\model\BlobPacket.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\model\OutboundTombstone.java
@@ -19,8 +21,6 @@ C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\model\Tran
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\service\CacheService.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\service\KafkaService.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\service\MainService.java
-C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\service\MessageProcessor.java
-C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\service\MessageTransformer.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\service\RabbitMqService.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\service\StorageService.java
 C:\Users\miles\Documents\GitHub\AcpCw2\src\main\java\uk\ac\ed\acp\cw2\Utilities\Headers.java

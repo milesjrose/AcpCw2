@@ -1,31 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 249.1 s <<< FAILURE! -- in uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
-uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransformBulk -- Time elapsed: 74.40 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <29587.336> but was: <30169.58>
+Tests run: 12, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 359.0 s <<< FAILURE! -- in uk.ac.ed.acp.cw2.AcpCw2ApplicationTests
+uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testRabbitShort -- Time elapsed: 0.427 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Failed to receive messages from Kafka ==> expected: <200 OK> but was: <500 INTERNAL_SERVER_ERROR>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:765)
-	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransform(AcpCw2ApplicationTests.java:392)
-	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransformBulk(AcpCw2ApplicationTests.java:419)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-
-uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransormMultiple -- Time elapsed: 11.79 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <806.9364> but was: <899.93536>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:765)
-	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransform(AcpCw2ApplicationTests.java:392)
-	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testTransormMultiple(AcpCw2ApplicationTests.java:410)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
+	at uk.ac.ed.acp.cw2.utilities.http.timeRabbit(http.java:55)
+	at uk.ac.ed.acp.cw2.AcpCw2ApplicationTests.testRabbitShort(AcpCw2ApplicationTests.java:326)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)

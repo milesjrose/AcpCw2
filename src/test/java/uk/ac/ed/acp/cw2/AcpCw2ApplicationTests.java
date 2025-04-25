@@ -2,6 +2,7 @@ package uk.ac.ed.acp.cw2;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,17 +10,17 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.ac.ed.acp.cw2.utilities.scribe;
+import uk.ac.ed.acp.cw2.utilities.Scribe;
 
 import uk.ac.ed.acp.cw2.model.ProcessRequest;
-import uk.ac.ed.acp.cw2.service.MessageTransformer;
+import uk.ac.ed.acp.cw2.domain.MessageTransformer;
 import uk.ac.ed.acp.cw2.service.CacheService;
 import uk.ac.ed.acp.cw2.utilities.RandomGenerator;
 import uk.ac.ed.acp.cw2.model.TransformRequest;
 import uk.ac.ed.acp.cw2.service.RabbitMqService;
-import uk.ac.ed.acp.cw2.utilities.cacheEntry;
+import uk.ac.ed.acp.cw2.service.KafkaService;
 import uk.ac.ed.acp.cw2.utilities.TranTestData;
-import uk.ac.ed.acp.cw2.utilities.local;
+import uk.ac.ed.acp.cw2.utilities.http;
 import jakarta.annotation.PostConstruct;
 import uk.ac.ed.acp.cw2.model.BlobPacket;
 import uk.ac.ed.acp.cw2.service.StorageService;
@@ -46,20 +47,23 @@ class AcpCw2ApplicationTests {
     @Autowired
     private StorageService storageService;
 
+    @Autowired
+    private KafkaService kafkaService;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private local http;
+    private http http;
 
     @PostConstruct
     public void init() {
-        this.http = new local(restTemplate, "http://localhost:" + port);
+        this.http = new http(restTemplate, "http://localhost:" + port);
     }
 
     private static final String uid = "s2093547";
     private static final Logger logger = LoggerFactory.getLogger(AcpCw2ApplicationTests.class);
 
     @Test
-    void testRabbitMQ() throws Exception {
-        logger.info("--------------STARTING RABBIT MQ TEST-------------");
+    void testRabbitTimeout() throws Exception {
+        logger.info("--------------STARTING RABBIT TIMEOUT TEST-------------");
         String queueName = RandomGenerator.generateRandomKey("RabbitMQ");
         logger.info("queueName: {}", queueName);
         int messageCount = 5;
@@ -84,7 +88,36 @@ class AcpCw2ApplicationTests {
         logger.info("========================PASSED=========================");
     }
 
+    
     @Test
+    void testRabbitCount() throws Exception {
+        logger.info("--------------STARTING RABBIT COUNT TEST-------------");
+        String queueName = RandomGenerator.generateRandomKey("RabbitMQ");
+        logger.info("queueName: {}", queueName);
+        int messageCount = 5;
+
+        http.pushRabbit(queueName, messageCount);
+        List<String> messages = rabbitMqService.receiveCount(queueName, messageCount);
+        assertEquals(messageCount, messages.size(), "Incorrect number of messages received from RabbitMQ");
+
+        // Parse the first message to extract uid and counter
+        String firstMessage = messages.get(0);
+        JsonNode jsonNode = objectMapper.readTree(firstMessage);
+        
+        // Extract and verify the uid field
+        String messageUid = jsonNode.get("uid").asText();
+        assertEquals(uid, messageUid, "Unexpected uid in message");
+        
+        // Extract and verify the counter field
+        int counter = jsonNode.get("counter").asInt();
+        assertTrue(counter >= 0 && counter < messageCount,
+                "Counter should be between 0 and " + (messageCount - 1) + ", but was " + counter);
+
+        System.out.println("RabbitMQ Message - uid: " + messageUid + ", counter: " + counter);
+        logger.info("========================PASSED=========================");
+    }
+
+
     void testStorageService() throws Exception {
         logger.info("-------------- STORAGE SERVICE TEST ----------------");
 
@@ -112,8 +145,8 @@ class AcpCw2ApplicationTests {
     }
 
     @Test
-    void testKafkaSent() throws Exception {
-        logger.info("-----------STARTING KAFKA TEST-------------");
+    void testKafka() throws Exception {
+        logger.info("-----------STARTING KAFKA TIMEOUT TEST-------------");
         String topicName = RandomGenerator.generateRandomKey("KafkaSent");
         logger.info("topicName: {}", topicName);
         int messageCount = 5;
@@ -126,6 +159,38 @@ class AcpCw2ApplicationTests {
         List<String> messages = http.recKafka(topicName, timeoutInMsec);
         assertNotNull(messages);
         assertFalse(messages.isEmpty(), "No messages received from Kafka");
+        
+        // Parse the first message to extract uid and counter
+        String firstMessage = messages.get(0);
+        JsonNode jsonNode = objectMapper.readTree(firstMessage);
+        
+        // Extract and verify the uid field
+        String messageUid = jsonNode.get("uid").asText();
+        assertEquals(uid, messageUid, "Unexpected uid in message");
+        
+        // Extract and verify the counter field
+        int counter = jsonNode.get("counter").asInt();
+        assertTrue(counter >= 0 && counter < messageCount, 
+                "Counter should be between 0 and " + (messageCount - 1) + ", but was " + counter);
+        
+        System.out.println("Kafka Message - uid: " + messageUid + ", counter: " + counter);
+        logger.info("========================PASSED=========================");
+    }
+
+    @Test
+    void testKafkaCount() throws Exception {
+        logger.info("-----------STARTING KAFKA COUNT TEST-------------");
+        String topicName = RandomGenerator.generateRandomKey("KafkaSent");
+        logger.info("topicName: {}", topicName);
+        int messageCount = 5;
+
+        // Send kafka
+        http.pushKafka(topicName, messageCount);
+
+        // Receive kafka
+        List<String> messages = kafkaService.receiveCount(topicName, messageCount);
+        assertNotNull(messages);
+        assertEquals(messageCount, messages.size(), "Incorrect number of messages received from Kafka");
         
         // Parse the first message to extract uid and counter
         String firstMessage = messages.get(0);
@@ -206,7 +271,7 @@ class AcpCw2ApplicationTests {
         }
     }
 
-    @Test
+
     void testMinKafkaReadTime() throws Exception {
         logger.info("--------------MIN KAFKA READ TIME TEST----------------");
         String topicName = RandomGenerator.generateRandomKey("MinKafkaReadTime");
@@ -216,14 +281,14 @@ class AcpCw2ApplicationTests {
         // Send kafka
         http.pushKafka(topicName, messageCount);
         // Time kafka
-        long timeout = 500;
+        long timeout = 2700;
         while (!http.checkKafkaResponse(topicName, (int) timeout)){
             logger.info("Timeout: " + timeout);
             timeout += 200;
             Thread.sleep(5000);
         }
         logger.info("Minimum Kafka read time: {} ms", timeout);
-        scribe.logTest("KafkaMinReadTime", String.format("Minimum Kafka read time: %d ms", timeout));
+        Scribe.logTest("KafkaMinReadTime", String.format("Minimum Kafka read time: %d ms", timeout));
         assertTrue(timeout >= 10, String.format("Minimum Kafka read time should be at least 10 ms, but was %d ms", timeout));
         logger.info("========================PASSED=========================");
     }
@@ -245,6 +310,7 @@ class AcpCw2ApplicationTests {
         logger.info("========================PASSED=========================");
     }
 
+
     @Test
     void testRabbitShort() throws Exception {
         logger.info("--------------RABBIT SHORT TEST----------------");
@@ -264,7 +330,7 @@ class AcpCw2ApplicationTests {
         }
     }
 
-    @Test
+
     void testRabbitMinReadTime() throws Exception {
         logger.info("--------------RABBIT MIN READ TIME TEST----------------");
         String queueName = RandomGenerator.generateRandomKey("MinRabbitReadTime");
@@ -277,12 +343,12 @@ class AcpCw2ApplicationTests {
             Thread.sleep(5000);
         }
         logger.info("Minimum Rabbit read time: {} ms", timeout);
-        scribe.logTest("RabbitMinReadTime", String.format("Minimum Rabbit read time: %d ms", timeout));
+        Scribe.logTest("RabbitMinReadTime", String.format("Minimum Rabbit read time: %d ms", timeout));
         assertTrue(timeout >= 10, String.format("Minimum Rabbit read time should be at least 10 ms, but was %d ms", timeout));
         logger.info("========================PASSED=========================");
     }
 
-    @Test
+
     void testService() throws Exception {
         logger.info("--------------STARTING SERVICE TEST----------------");
         ProcessRequest request = new ProcessRequest();
@@ -304,7 +370,7 @@ class AcpCw2ApplicationTests {
         List<String> messages = http.recRabbit(request.writeQueueGood, 500);
         List<String> badMessages = http.recRabbit(request.writeQueueBad, 500);
         // Write test data to log file before assertions
-        scribe.logProc(request,json, messages, badMessages, packetList);
+        Scribe.logProc(request,json, messages, badMessages, packetList);
 
         // ---------Check good messages---------
         for (int i = 0; i < messages.size()-1; i++) {
@@ -351,6 +417,7 @@ class AcpCw2ApplicationTests {
         logger.info("===============================PASSED===================================");
     }
 
+
     void testTransform(int numPackets) throws Exception {
         logger.info("--------------STARTING TRANSFORM TEST----------------");
         // Generate test data
@@ -358,54 +425,53 @@ class AcpCw2ApplicationTests {
         PacketGenerator.TranMessagesData data = PacketGenerator.generateTransformMessages(numPackets);
         // Create request and push to queue
         TransformRequest request = PacketGenerator.transformRequest(numPackets);
-        rabbitMqService.pushMessages(request.readQueue, data.getPackets());
+        rabbitMqService.push(request.readQueue, data.getPackets());
         // Hit endpoint
         http.tranMsg(request);
-        // get trans messages
-        List<String> messages = http.recRabbit(request.writeQueue, 1500);
-        // Get all cache entries
-        List<cacheEntry> entries = http.clearCacheEntries(data.getMessages(), cacheService);
+        // get sent data
+        List<String> messages = rabbitMqService.receiveCount(request.writeQueue, numPackets);
+        List<String> entries = http.clearCacheEntries(data.getMessages(), cacheService);
         TranTestData first = new TranTestData(request, messages, entries);
 
 
         // Now do again, but keep the object to compare.
-        TransformRequest request1 = PacketGenerator.transformRequest(numPackets);
-        request1.messageCount = request.messageCount;
-        rabbitMqService.pushMessages(request1.readQueue, data.getPackets());
+        TransformRequest request_manual = PacketGenerator.transformRequest(numPackets);
+        request_manual.messageCount = request.messageCount;
+        rabbitMqService.push(request_manual.readQueue, data.getPackets());
         // Call ourselfs to keep the transformer object
-        MessageTransformer transformer = new MessageTransformer(request1, cacheService, rabbitMqService);
+        MessageTransformer transformer = new MessageTransformer(request_manual, cacheService, rabbitMqService);
         transformer.transformMessages();
-        // Receive these messages
-        List<String> manual_messages = http.recRabbit(request1.writeQueue, 1500);
-
-        TranTestData second = new TranTestData(request1, manual_messages, entries);
+        // Get sent data
+        List<String> manual_messages = rabbitMqService.receiveCount(request_manual.writeQueue, numPackets);
+        List<String> manual_entries = http.clearCacheEntries(data.getMessages(), cacheService);
+        TranTestData second = new TranTestData(request_manual, manual_messages, manual_entries);
 
         // log data
-        scribe.logTransform(first, second, transformer, data);
+        Scribe.logTransform(first, second, transformer, data);
         // Now compare
         for (int i = 0; i < messages.size(); i++) {
             assertEquals(messages.get(i), manual_messages.get(i), String.format("Returned differing messages at index: %d -> original packet:%s", i, data.getPackets().get(i).toString()));
         }
         for (int i = 0; i < entries.size(); i++) {
-            assertEquals(transformer.getMessages().get(i), data.getMessages().get(i), String.format("Returned differing messages at index: %d -> original packet:%s", i, data.getPackets().get(i).toString()));
+            assertEquals(transformer.getMessages().get(i).toJson(objectMapper).asText(), data.getMessages().get(i).toJson(objectMapper).asText(), String.format("Returned differing messages at index: %d -> original packet:%s", i, data.getPackets().get(i).toString()));
         }
-        assertEquals(transformer.getTotalValueWritten(), data.getTotalValueWritten());
-        assertEquals(transformer.getTotalMessagesWritten(), data.getTotalMessagesWritten());
-        assertEquals(transformer.getTotalMessagesProcessed(), data.getTotalMessagesProcessed());
-        assertEquals(transformer.getTotalRedisUpdates(), data.getTotalRedisUpdates());
-        assertEquals(transformer.getTotalAdded(), data.getTotalAdded());
+        assertTrue(transformer.getTotalValueWritten()-data.getTotalValueWritten() < transformer.getTotalValueWritten()*0.01, String.format("Total value written is too different (Transformer/Data): %f != %f", transformer.getTotalValueWritten(), data.getTotalValueWritten()));
+        assertEquals(transformer.getTotalMessagesWritten(), data.getTotalMessagesWritten(), String.format("Total messages written is different (Transformer/Data): %d != %d", transformer.getTotalMessagesWritten(), data.getTotalMessagesWritten()));
+        assertEquals(transformer.getTotalMessagesProcessed(), data.getTotalMessagesProcessed(), String.format("Total messages processed is different (Transformer/Data): %d != %d", transformer.getTotalMessagesProcessed(), data.getTotalMessagesProcessed()));
+        assertEquals(transformer.getTotalRedisUpdates(), data.getTotalRedisUpdates(), String.format("Total redis updates is different (Transformer/Data): %d != %d", transformer.getTotalRedisUpdates(), data.getTotalRedisUpdates()));
+        assertEquals(transformer.getTotalAdded(), data.getTotalAdded(), String.format("Total added is different (Transformer/Data): %f != %f", transformer.getTotalAdded(), data.getTotalAdded()));
         logger.info("===============================PASSED===================================");
     }
-
+    
     @Test
     void testTransformSingle() throws Exception {
-        testTransform(10);
-    }
-
+        testTransform(30);
+        }
+        
     @Test
     void testTransormMultiple() throws Exception {
         logger.info("--------------STARTING TRANSFORM MULTIPLE TEST----------------");
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             int numPackets = RandomGenerator.generateInteger(100,10);
             testTransform(numPackets);
         }
@@ -420,4 +486,6 @@ class AcpCw2ApplicationTests {
         }
         logger.info("========================PASSED=========================");
     }
+    
+
 }

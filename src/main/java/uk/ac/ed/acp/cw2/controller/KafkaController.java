@@ -1,14 +1,10 @@
 package uk.ac.ed.acp.cw2.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.ed.acp.cw2.model.ProcessMessage;
 import uk.ac.ed.acp.cw2.service.KafkaService;
 import org.springframework.http.ResponseEntity;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +26,7 @@ public class KafkaController {
     @PutMapping("/{writeTopic}/{messageCount}")
     public ResponseEntity<Void> pushToTopic(@PathVariable String writeTopic, @PathVariable int messageCount) {
         try {
-            boolean success = kafkaService.pushToTopic(writeTopic, messageCount);
+            boolean success = kafkaService.pushCountMessages(writeTopic, messageCount);
             return success ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
         } catch (Exception e) {
             logger.error("Error pushing messages to Kafka topic", e);
@@ -41,22 +37,11 @@ public class KafkaController {
     @GetMapping("/{readTopic}/{timeoutInMsec}")
     public ResponseEntity<List<String>> receiveFromTopic(@PathVariable String readTopic, @PathVariable int timeoutInMsec) {
         try {
-            List<String> messages = kafkaService.receiveFromTopicTimeout(readTopic, timeoutInMsec);
+            List<String> messages = kafkaService.receiveTimeout(readTopic, timeoutInMsec);
             return messages != null ? ResponseEntity.ok(messages) : ResponseEntity.internalServerError().build();
         } catch (Exception e) {
             logger.error("Error receiving messages from Kafka topic", e);
             return ResponseEntity.internalServerError().build();
         }
-    }
-
-    @PostMapping("/sendMessage/{topic}")
-    public ResponseEntity<Void> sendMessage(@PathVariable String topic, @RequestBody List<ProcessMessage> processMessages) {
-        List<String> messageStrings = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
-        for (ProcessMessage processMessage : processMessages){
-            messageStrings.add(processMessage.toString(objectMapper));
-        }
-        kafkaService.send(topic, messageStrings);
-        return ResponseEntity.ok().build();
     }
 }

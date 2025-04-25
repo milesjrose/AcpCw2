@@ -26,10 +26,10 @@ public class RabbitMqController {
     @PutMapping("/{queueName}/{messageCount}")
     public ResponseEntity<Void> pushToQueue(@PathVariable String queueName, @PathVariable int messageCount) {
         try {
-            rabbitMqService.pushToQueue(queueName, messageCount);
-            return ResponseEntity.ok().build();
+            boolean success = rabbitMqService.pushToQueue(queueName, messageCount);
+            return success ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
         } catch (Exception e) {
-            logger.error("Error pushing messages to queue", e);
+            logger.error("Uncaught error pushing messages to queue", e);
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -37,10 +37,21 @@ public class RabbitMqController {
     @GetMapping("/{queueName}/{timeoutInMsec}")
     public ResponseEntity<List<String>> receiveFromQueue(@PathVariable String queueName, @PathVariable int timeoutInMsec) {
         try {
-            List<String> messages = rabbitMqService.receiveFromQueueTimeout(queueName, timeoutInMsec);
-            return ResponseEntity.ok(messages);
+            List<String> messages = rabbitMqService.receiveTimeout(queueName, timeoutInMsec);
+            return messages != null ? ResponseEntity.ok(messages) : ResponseEntity.internalServerError().build();
         } catch (Exception e) {
-            logger.error("Error receiving messages from queue", e);
+            logger.error("Uncaught error receiving messages from queue", e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/{queueName}/count")
+    public ResponseEntity<Integer> getQueueMessageCount(@PathVariable String queueName) {
+        try {
+            long count = rabbitMqService.getQueueMessageCount(queueName);
+            return count != -1 ? ResponseEntity.ok((int)count) : ResponseEntity.internalServerError().build();
+        } catch (Exception e) {
+            logger.error("Uncaught error getting queue message count", e);
             return ResponseEntity.internalServerError().build();
         }
     }

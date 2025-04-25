@@ -1,0 +1,137 @@
+=== SERVICE TEST DATA ===
+
+=== SENT JSON ===
+[{"uid": "s2093547", "key": "WDUB", "comment": " ", "value": 22.46}, {"uid": "s2093547", "key": "TZPJO", "comment": " ", "value": 15.84}, {"uid": "s2093547", "key": "IHOGM", "comment": " ", "value": 22.66}, {"uid": "s2093547", "key": "SLTPT", "comment": " ", "value": 8.09}, {"uid": "s2093547", "key": "VZPIU", "comment": " ", "value": 7.81}, {"uid": "s2093547", "key": "YIA", "comment": " ", "value": 5.10}, {"uid": "s2093547", "key": "QRUJH", "comment": " ", "value": 3.70}, {"uid": "s2093547", "key": "UWZW", "comment": " ", "value": 38.28}, {"uid": "s2093547", "key": "AAWZM", "comment": " ", "value": 13.53}, {"uid": "s2093547", "key": "JWJ", "comment": " ", "value": 9.88}, {"uid": "s2093547", "key": "DCCCO", "comment": " ", "value": 40.32}, {"uid": "s2093547", "key": "PNWOG", "comment": " ", "value": 20.75}, {"uid": "s2093547", "key": "GLX", "comment": " ", "value": 41.48}, {"uid": "s2093547", "key": "ICF", "comment": " ", "value": 4.06}, {"uid": "s2093547", "key": "GBTH", "comment": " ", "value": 44.49}, {"uid": "s2093547", "key": "FNK", "comment": " ", "value": 40.22}, {"uid": "s2093547", "key": "MIDHL", "comment": " ", "value": 45.23}, {"uid": "s2093547", "key": "PGA", "comment": " ", "value": 48.03}, {"uid": "s2093547", "key": "OUU", "comment": " ", "value": 31.94}, {"uid": "s2093547", "key": "IPNW", "comment": " ", "value": 34.56}, {"uid": "s2093547", "key": "OKF", "comment": " ", "value": 31.65}, {"uid": "s2093547", "key": "ZWE", "comment": " ", "value": 20.99}, {"uid": "s2093547", "key": "DRC", "comment": " ", "value": 1.34}, {"uid": "s2093547", "key": "OMEIB", "comment": " ", "value": 31.68}, {"uid": "s2093547", "key": "ZVRMR", "comment": " ", "value": 24.14}, {"uid": "s2093547", "key": "FYGH", "comment": " ", "value": 34.35}, {"uid": "s2093547", "key": "SVJU", "comment": " ", "value": 49.36}, {"uid": "s2093547", "key": "YGDBL", "comment": " ", "value": 45.51}, {"uid": "s2093547", "key": "KQRJ", "comment": " ", "value": 3.59}, {"uid": "s2093547", "key": "NAD", "comment": " ", "value": 45.71}, {"uid": "s2093547", "key": "BIASP", "comment": " ", "value": 0.06}, {"uid": "s2093547", "key": "FGLPN", "comment": " ", "value": 13.62}, {"uid": "s2093547", "key": "FQDA", "comment": " ", "value": 42.77}, {"uid": "s2093547", "key": "JYQO", "comment": " ", "value": 39.82}, {"uid": "s2093547", "key": "UGRVW", "comment": " ", "value": 49.22}, {"uid": "s2093547", "key": "RFXI", "comment": " ", "value": 43.26}, {"uid": "s2093547", "key": "LWN", "comment": " ", "value": 14.71}, {"uid": "s2093547", "key": "XLTIC", "comment": " ", "value": 16.74}, {"uid": "s2093547", "key": "GMKJX", "comment": " ", "value": 34.47}, {"uid": "s2093547", "key": "SCS", "comment": " ", "value": 13.04}, {"uid": "s2093547", "key": "YWJK", "comment": " ", "value": 19.17}, {"uid": "s2093547", "key": "QVZ", "comment": " ", "value": 9.06}, {"uid": "s2093547", "key": "DAHRM", "comment": " ", "value": 11.95}, {"uid": "s2093547", "key": "NSD", "comment": " ", "value": 12.75}, {"uid": "s2093547", "key": "IDOMA", "comment": " ", "value": 43.36}, {"uid": "s2093547", "key": "ZFSLU", "comment": " ", "value": 17.85}, {"uid": "s2093547", "key": "EQXCE", "comment": " ", "value": 32.77}, {"uid": "s2093547", "key": "VLJ", "comment": " ", "value": 6.60}, {"uid": "s2093547", "key": "BLNSJ", "comment": " ", "value": 3.96}, {"uid": "s2093547", "key": "NCSFG", "comment": " ", "value": 40.14}, {"uid": "s2093547", "key": "GXK", "comment": " ", "value": 49.80}, {"uid": "s2093547", "key": "EKO", "comment": " ", "value": 46.63}, {"uid": "s2093547", "key": "UMQ", "comment": " ", "value": 19.02}, {"uid": "s2093547", "key": "NBZNW", "comment": " ", "value": 5.24}, {"uid": "s2093547", "key": "DEKCA", "comment": " ", "value": 43.11}, {"uid": "s2093547", "key": "IJPXF", "comment": " ", "value": 42.94}, {"uid": "s2093547", "key": "UZQ", "comment": " ", "value": 2.78}, {"uid": "s2093547", "key": "CTQZC", "comment": " ", "value": 39.36}, {"uid": "s2093547", "key": "KZG", "comment": " ", "value": 29.12}, {"uid": "s2093547", "key": "QCN", "comment": " ", "value": 21.52}, {"uid": "s2093547", "key": "DBIXJ", "comment": " ", "value": 2.41}]
+
+=== GOOD PACKET TOTALS ===
+Index 0: 22.46
+Index 1: 27.56
+Index 2: 65.84
+Index 3: 75.72
+Index 4: 117.20
+Index 5: 121.26
+Index 6: 165.75
+Index 7: 205.97
+Index 8: 254.00
+Index 9: 285.94
+Index 10: 320.50
+Index 11: 352.15
+Index 12: 373.14
+Index 13: 374.48
+Index 14: 408.83
+Index 15: 458.19
+Index 16: 461.78
+Index 17: 507.49
+Index 18: 550.26
+Index 19: 590.08
+Index 20: 633.34
+Index 21: 648.05
+Index 22: 661.09
+Index 23: 680.26
+Index 24: 689.32
+Index 25: 702.07
+Index 26: 708.67
+Index 27: 758.47
+Index 28: 805.10
+Index 29: 824.12
+Index 30: 826.90
+Index 31: 856.02
+Index 32: 877.54
+
+=== BAD PACKET TOTALS ===
+Index 0: 15.84
+Index 1: 38.50
+Index 2: 46.59
+Index 3: 54.40
+Index 4: 58.10
+Index 5: 71.63
+Index 6: 111.95
+Index 7: 132.70
+Index 8: 177.93
+Index 9: 209.61
+Index 10: 233.75
+Index 11: 279.26
+Index 12: 279.32
+Index 13: 292.94
+Index 14: 342.16
+Index 15: 358.90
+Index 16: 393.37
+Index 17: 405.32
+Index 18: 448.68
+Index 19: 466.53
+Index 20: 499.30
+Index 21: 503.26
+Index 22: 543.40
+Index 23: 548.64
+Index 24: 591.75
+Index 25: 634.69
+Index 26: 674.05
+Index 27: 676.46
+
+=== GOOD QUEUE MESSAGES ===
+{"uid":"s2093547","key":"WDUB","comment":" ","value":22.46,"uuid":"aa3efbbb-cbd2-4319-b738-aca8a081f5c2"}
+{"uid":"s2093547","key":"YIA","comment":" ","value":5.1,"uuid":"54c8bc5b-1864-4d97-b5c2-0fac593db2ac"}
+{"uid":"s2093547","key":"UWZW","comment":" ","value":38.28,"uuid":"ad0d9e8b-150b-4953-a34f-0bc2ed9b5837"}
+{"uid":"s2093547","key":"JWJ","comment":" ","value":9.88,"uuid":"f50031a6-f796-4379-8f42-a378a96a118b"}
+{"uid":"s2093547","key":"GLX","comment":" ","value":41.48,"uuid":"7d89e188-7e2e-4c60-8822-fe4cb9131298"}
+{"uid":"s2093547","key":"ICF","comment":" ","value":4.06,"uuid":"991bf710-eb14-44be-9b49-b3c56f4ce1ed"}
+{"uid":"s2093547","key":"GBTH","comment":" ","value":44.49,"uuid":"79de1351-6af9-4be5-9e5c-e07d8f4a74b3"}
+{"uid":"s2093547","key":"FNK","comment":" ","value":40.22,"uuid":"4d7e80e8-86f1-4015-8ee1-305fc1344e5d"}
+{"uid":"s2093547","key":"PGA","comment":" ","value":48.03,"uuid":"36beaa5c-c034-4dc7-b07c-e399cdb3f21a"}
+{"uid":"s2093547","key":"OUU","comment":" ","value":31.94,"uuid":"524ea088-aaf9-4959-8369-9615139335c6"}
+{"uid":"s2093547","key":"IPNW","comment":" ","value":34.56,"uuid":"238421a8-d7cd-4c89-bcaa-446534a0841a"}
+{"uid":"s2093547","key":"OKF","comment":" ","value":31.65,"uuid":"111fa707-541a-4115-a8a7-4c66ae22d1df"}
+{"uid":"s2093547","key":"ZWE","comment":" ","value":20.99,"uuid":"28b0671e-c2e0-4399-8ff5-26679dd26da4"}
+{"uid":"s2093547","key":"DRC","comment":" ","value":1.34,"uuid":"270fc994-981c-46da-8e7a-87e5321747fd"}
+{"uid":"s2093547","key":"FYGH","comment":" ","value":34.35,"uuid":"9d10ac09-2ce7-4fa9-8002-b762bb90f2df"}
+{"uid":"s2093547","key":"SVJU","comment":" ","value":49.36,"uuid":"9c56558f-4885-4eda-862d-5438b8529630"}
+{"uid":"s2093547","key":"KQRJ","comment":" ","value":3.59,"uuid":"69ef7a70-6485-49a4-8a0f-e5fdb4f10dad"}
+{"uid":"s2093547","key":"NAD","comment":" ","value":45.71,"uuid":"72e8dbd5-72d7-4c98-ba08-862a3ca4f864"}
+{"uid":"s2093547","key":"FQDA","comment":" ","value":42.77,"uuid":"813fd4f6-5c88-4b3c-99b8-732d6900bd40"}
+{"uid":"s2093547","key":"JYQO","comment":" ","value":39.82,"uuid":"e8c2f85c-1015-4316-93c1-2da7f5670a7a"}
+{"uid":"s2093547","key":"RFXI","comment":" ","value":43.26,"uuid":"0d7f35c7-e095-4333-9095-41c8f5ada61b"}
+{"uid":"s2093547","key":"LWN","comment":" ","value":14.71,"uuid":"0b7e1034-c8ff-433d-9b0e-724a3d2b1886"}
+{"uid":"s2093547","key":"SCS","comment":" ","value":13.04,"uuid":"04be35d6-2b1a-4453-94de-4065aedd6005"}
+{"uid":"s2093547","key":"YWJK","comment":" ","value":19.17,"uuid":"fa8dd071-69b6-4f15-af24-a07404b5cde5"}
+{"uid":"s2093547","key":"QVZ","comment":" ","value":9.06,"uuid":"3573d8ff-b935-4ef6-b4f4-7ed367f01ec3"}
+{"uid":"s2093547","key":"NSD","comment":" ","value":12.75,"uuid":"05a0d3a9-dc5c-46b2-940c-5952a224db24"}
+{"uid":"s2093547","key":"VLJ","comment":" ","value":6.6,"uuid":"d137a978-39ed-4d8e-88bb-baf7486f44dc"}
+{"uid":"s2093547","key":"GXK","comment":" ","value":49.8,"uuid":"4d1f8df9-467a-47c9-bdc7-2229e540241e"}
+{"uid":"s2093547","key":"EKO","comment":" ","value":46.63,"uuid":"c25d200b-d206-429f-be44-1a8ab5b1b220"}
+{"uid":"s2093547","key":"UMQ","comment":" ","value":19.02,"uuid":"c9c50a02-530c-4a97-a1b5-a7b5d4a06763"}
+{"uid":"s2093547","key":"UZQ","comment":" ","value":2.78,"uuid":"4ff7ed19-6980-4192-bf02-da931af4cfb8"}
+{"uid":"s2093547","key":"KZG","comment":" ","value":29.12,"uuid":"c1a5f59f-c5ce-462c-aa28-278f58004097"}
+{"uid":"s2093547","key":"QCN","comment":" ","value":21.52,"uuid":"4de5e208-ef49-42cb-a859-0f404a052a8b"}
+{"TOTAL":877.54004}
+
+=== BAD QUEUE MESSAGES ===
+{"uid":"s2093547","key":"TZPJO","comment":" ","value":15.84}
+{"uid":"s2093547","key":"IHOGM","comment":" ","value":22.66}
+{"uid":"s2093547","key":"SLTPT","comment":" ","value":8.09}
+{"uid":"s2093547","key":"VZPIU","comment":" ","value":7.81}
+{"uid":"s2093547","key":"QRUJH","comment":" ","value":3.7}
+{"uid":"s2093547","key":"AAWZM","comment":" ","value":13.53}
+{"uid":"s2093547","key":"DCCCO","comment":" ","value":40.32}
+{"uid":"s2093547","key":"PNWOG","comment":" ","value":20.75}
+{"uid":"s2093547","key":"MIDHL","comment":" ","value":45.23}
+{"uid":"s2093547","key":"OMEIB","comment":" ","value":31.68}
+{"uid":"s2093547","key":"ZVRMR","comment":" ","value":24.14}
+{"uid":"s2093547","key":"YGDBL","comment":" ","value":45.51}
+{"uid":"s2093547","key":"BIASP","comment":" ","value":0.06}
+{"uid":"s2093547","key":"FGLPN","comment":" ","value":13.62}
+{"uid":"s2093547","key":"UGRVW","comment":" ","value":49.22}
+{"uid":"s2093547","key":"XLTIC","comment":" ","value":16.74}
+{"uid":"s2093547","key":"GMKJX","comment":" ","value":34.47}
+{"uid":"s2093547","key":"DAHRM","comment":" ","value":11.95}
+{"uid":"s2093547","key":"IDOMA","comment":" ","value":43.36}
+{"uid":"s2093547","key":"ZFSLU","comment":" ","value":17.85}
+{"uid":"s2093547","key":"EQXCE","comment":" ","value":32.77}
+{"uid":"s2093547","key":"BLNSJ","comment":" ","value":3.96}
+{"uid":"s2093547","key":"NCSFG","comment":" ","value":40.14}
+{"uid":"s2093547","key":"NBZNW","comment":" ","value":5.24}
+{"uid":"s2093547","key":"DEKCA","comment":" ","value":43.11}
+{"uid":"s2093547","key":"IJPXF","comment":" ","value":42.94}
+{"uid":"s2093547","key":"CTQZC","comment":" ","value":39.36}
+{"uid":"s2093547","key":"DBIXJ","comment":" ","value":2.41}
+{"TOTAL":676.4599}
+--------------------------------
