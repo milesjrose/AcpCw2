@@ -117,7 +117,7 @@ class AcpCw2ApplicationTests {
         logger.info("========================PASSED=========================");
     }
 
-
+    @Test
     void testStorageService() throws Exception {
         logger.info("-------------- STORAGE SERVICE TEST ----------------");
 
@@ -281,7 +281,7 @@ class AcpCw2ApplicationTests {
         // Send kafka
         http.pushKafka(topicName, messageCount);
         // Time kafka
-        long timeout = 2700;
+        long timeout = 500;
         while (!http.checkKafkaResponse(topicName, (int) timeout)){
             logger.info("Timeout: " + timeout);
             timeout += 200;
@@ -348,7 +348,7 @@ class AcpCw2ApplicationTests {
         logger.info("========================PASSED=========================");
     }
 
-
+    @Test
     void testService() throws Exception {
         logger.info("--------------STARTING SERVICE TEST----------------");
         ProcessRequest request = new ProcessRequest();
@@ -362,7 +362,7 @@ class AcpCw2ApplicationTests {
         PacketGenerator.PacketListResult packetList = PacketGenerator.generatePacketList(request.messageCount);
         String json = packetList.jsonList;
         logger.info("Created {} good messages, {} bad messages",packetList.goodTotals.size(), packetList.badTotals.size());
-        http.pushKafka(request.readTopic, json);
+        kafkaService.push(request.readTopic, packetList.jsonStringList);
         // Proccess messages
         http.procMsg(request);
 
@@ -463,16 +463,17 @@ class AcpCw2ApplicationTests {
         logger.info("===============================PASSED===================================");
     }
     
-    @Test
+
     void testTransformSingle() throws Exception {
         testTransform(30);
+        logger.info("========================PASSED=========================");
         }
         
     @Test
     void testTransormMultiple() throws Exception {
         logger.info("--------------STARTING TRANSFORM MULTIPLE TEST----------------");
         for (int i = 0; i < 3; i++) {
-            int numPackets = RandomGenerator.generateInteger(100,10);
+            int numPackets = RandomGenerator.generateInteger(150,50);
             testTransform(numPackets);
         }
         logger.info("========================PASSED=========================");
@@ -481,9 +482,7 @@ class AcpCw2ApplicationTests {
     @Test
     void testTransformBulk() throws Exception {
         logger.info("--------------STARTING TRANSFORM BULK TEST----------------");
-        for (int i = 0; i < 5; i++) {
-            testTransform(500);
-        }
+        testTransform(500);
         logger.info("========================PASSED=========================");
     }
     

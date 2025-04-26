@@ -23,7 +23,9 @@ public class TransformTombstone extends TransformMessage {
     public ObjectNode toJson(ObjectMapper objectMapper){
         ObjectNode json = objectMapper.createObjectNode();
         json.put("key", key);
-        json.put("TOTAL", value);
+        if (value != 0){
+            json.put("TOTAL", value);
+        }
         return json;
     }
 }

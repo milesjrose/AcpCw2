@@ -21,7 +21,7 @@ public class StorageController {
         BlobPacket packet = new BlobPacket(dataSetName, data);
         BlobPacket uploadedPacket = storageService.pushBlob(packet);
         if (uploadedPacket == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.internalServerError().build();
         }
         return ResponseEntity.ok(uploadedPacket.uuid);
     }

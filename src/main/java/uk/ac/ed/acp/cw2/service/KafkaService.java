@@ -132,16 +132,14 @@ public class KafkaService {
     public List<String> receiveCount(String readTopic, int messageCount, List<String> requiredFields){return receive(readTopic, 0, messageCount, requiredFields);}
 
     private boolean checkCount(int count, int target){
-        boolean result = (count >= target);
-        logger.info("Checking count: {} >= {} -> {}", count, target, result);
-        return result;
+        return (count >= target);
     }
     // ================================ Send ================================
 
     public boolean push(String topic, List<String> messages){
         logger.info("Pushing {} messages to {}", messages.size(), topic);
         for (int i = 0; i < messages.size(); i++){
-            Integer count = 0;
+            int count = 0;
             while (!send(topic, messages.get(i))){
                 count++;
                 logger.error("Error pushing to kafka ({}/{}). Retrying...", i, messages.size());

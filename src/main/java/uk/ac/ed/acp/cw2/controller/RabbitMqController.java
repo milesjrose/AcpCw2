@@ -27,7 +27,7 @@ public class RabbitMqController {
     public ResponseEntity<Void> pushToQueue(@PathVariable String queueName, @PathVariable int messageCount) {
         try {
             boolean success = rabbitMqService.pushToQueue(queueName, messageCount);
-            return success ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
+            return success ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
         } catch (Exception e) {
             logger.error("Uncaught error pushing messages to queue", e);
             return ResponseEntity.internalServerError().build();
@@ -38,7 +38,7 @@ public class RabbitMqController {
     public ResponseEntity<List<String>> receiveFromQueue(@PathVariable String queueName, @PathVariable int timeoutInMsec) {
         try {
             List<String> messages = rabbitMqService.receiveTimeout(queueName, timeoutInMsec);
-            return messages != null ? ResponseEntity.ok(messages) : ResponseEntity.internalServerError().build();
+            return messages != null ? ResponseEntity.ok(messages) : ResponseEntity.notFound().build();
         } catch (Exception e) {
             logger.error("Uncaught error receiving messages from queue", e);
             return ResponseEntity.internalServerError().build();
@@ -49,7 +49,7 @@ public class RabbitMqController {
     public ResponseEntity<Integer> getQueueMessageCount(@PathVariable String queueName) {
         try {
             long count = rabbitMqService.getQueueMessageCount(queueName);
-            return count != -1 ? ResponseEntity.ok((int)count) : ResponseEntity.internalServerError().build();
+            return count != -1 ? ResponseEntity.ok((int)count) : ResponseEntity.notFound().build();
         } catch (Exception e) {
             logger.error("Uncaught error getting queue message count", e);
             return ResponseEntity.internalServerError().build();

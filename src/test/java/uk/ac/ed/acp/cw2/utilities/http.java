@@ -15,6 +15,7 @@ import uk.ac.ed.acp.cw2.Utilities.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.commons.lang3.math.NumberUtils.min;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class http {
@@ -52,7 +53,7 @@ public class http {
                 null,
                 new ParameterizedTypeReference<List<String>>() {}
         );
-        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Kafka");
+        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Rabbit");
         long endTime = System.currentTimeMillis();
         return endTime-startTime;
     }
@@ -84,7 +85,9 @@ public class http {
         );
         long endTime = System.currentTimeMillis();
         long timeTaken = endTime - startTime;
-        if (timeTaken > timeout){
+        double low_thresh = timeout * 0.15;
+        long threshold = min((long) low_thresh, 200);
+        if (timeTaken - timeout > threshold){
             System.out.println("Timeout: " + timeout);
             return false;
         }
@@ -124,18 +127,26 @@ public class http {
     }
 
     public boolean checkKafkaResponse(String topic, Integer timeout){
+        long startTime = System.currentTimeMillis();
         ResponseEntity<List<String>> response = restTemplate.exchange(
                 kafka + "/" + topic + "/" + timeout,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<String>>() {}
         );
+        long timeTaken = System.currentTimeMillis() - startTime;
         assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to receive messages from Kafka");
+        double low_thresh = timeout * 0.15;
+        long threshold = min((long) low_thresh, 200);
+        if (timeTaken - timeout > threshold){
+            System.out.println("Timeout: " + timeout);
+            return false;
+        }
         try{
             List<String> messages = response.getBody();
             return !messages.isEmpty();
         } catch (Exception e){
-            System.out.println("Error checking Rabbit response: " + e.getMessage());
+            System.out.println("Error checking Kafka response: " + e.getMessage());
             return false;
         }
     }
@@ -154,16 +165,6 @@ public class http {
         assertFalse(messages.isEmpty(), "No messages received from Kafka");
 
         return messages;
-    }
-
-    public void pushKafka(String topic, String json){
-        ResponseEntity<Void> response = restTemplate.exchange(
-                kafka + "/sendMessage/" + topic,
-                HttpMethod.POST,
-                new HttpEntity<>(json, PacketGenerator.createJsonHeaders()),
-                Void.class
-        );
-        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode(), "Failed to push messages to Kafka");
     }
 
     public void procMsg(ProcessRequest request){

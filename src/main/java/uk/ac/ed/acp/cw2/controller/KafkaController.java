@@ -27,7 +27,7 @@ public class KafkaController {
     public ResponseEntity<Void> pushToTopic(@PathVariable String writeTopic, @PathVariable int messageCount) {
         try {
             boolean success = kafkaService.pushCountMessages(writeTopic, messageCount);
-            return success ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
+            return success ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
         } catch (Exception e) {
             logger.error("Error pushing messages to Kafka topic", e);
             return ResponseEntity.internalServerError().build();
@@ -38,7 +38,7 @@ public class KafkaController {
     public ResponseEntity<List<String>> receiveFromTopic(@PathVariable String readTopic, @PathVariable int timeoutInMsec) {
         try {
             List<String> messages = kafkaService.receiveTimeout(readTopic, timeoutInMsec);
-            return messages != null ? ResponseEntity.ok(messages) : ResponseEntity.internalServerError().build();
+            return messages != null ? ResponseEntity.ok(messages) : ResponseEntity.notFound().build();
         } catch (Exception e) {
             logger.error("Error receiving messages from Kafka topic", e);
             return ResponseEntity.internalServerError().build();

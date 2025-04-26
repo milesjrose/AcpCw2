@@ -41,7 +41,7 @@ public class StorageService {
             ResponseEntity<String> response = restTemplate.postForEntity(pushUrl, request, String.class);
             if (response.getStatusCode().equals(HttpStatus.valueOf(200))) {
                 packet.uuid = Parser.parseString(response.getBody());
-                logger.info("Pushed to {} in {}: {} ", packet.datasetName, packet.uuid, response.getBody());
+                logger.debug("Pushed to {} in {}: {} ", packet.datasetName, packet.uuid, response.getBody());
                 return packet;
             } else {
                     throw new Exception(String.format("Bad response: %s", response.getStatusCode()));
@@ -82,7 +82,7 @@ public class StorageService {
                 if (receivedPacket != null) {
                     packet.datasetName = receivedPacket.datasetName;
                     packet.data = receivedPacket.data;
-                    logger.info("Received from {} in {}: {}", packet.uuid, packet.datasetName, packet.data);
+                    logger.debug("Received from {} in {}: {}", packet.uuid, packet.datasetName, packet.data);
                     return packet;
                 } else {
                     throw new Exception(String.format("Null blob: %s", response.getStatusCode()));
@@ -119,7 +119,7 @@ public class StorageService {
             );
 
             if (response.getStatusCode().equals(HttpStatus.valueOf(200))) {
-                logger.info("Deleted blob: {}", uuid);
+                logger.debug("Deleted blob: {}", uuid);
                 return true;
             } else {
                 throw new Exception(String.format("Bad response: %s", response.getStatusCode()));

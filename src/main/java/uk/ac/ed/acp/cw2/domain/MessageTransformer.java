@@ -115,7 +115,6 @@ public class MessageTransformer {
     }
     private void deCache(TransformTombstone message){
         if (cacheService.checkKey(message.key)){
-            totalRedisUpdates++;
             cacheService.removeFromCache(message.key);
         }
     }

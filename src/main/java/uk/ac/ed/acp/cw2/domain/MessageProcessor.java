@@ -69,15 +69,22 @@ public class MessageProcessor {
     private void checkMessages() {
         logger.info("goodTotal: {}, badTotal: {}", goodTotalValue, badTotalValue);
         try{
+            int quarter = (int) ((uncheckedMessages.size()+1) / 4);
+            int i = 0;
             for (ProcMessage message : uncheckedMessages) {
                 if (message.checkGood(goodTotalValue)) {
                     goodMessages.add(message);
-                goodTotalValue += message.getValue();
-            } else {
-                badMessages.add(message);
-                badTotalValue += message.getValue();
+                    goodTotalValue += message.getValue();
+                } else {
+                    badMessages.add(message);
+                    badTotalValue += message.getValue();
+                }
+                if (i % quarter == 0){
+                    logger.info("Checking Messages... {}%", i/quarter * 25);
+                }
+                i++;
             }
-            }
+            logger.info("Checked Messages.    100%");
             uncheckedMessages.clear();
         }
         catch (Exception e){
@@ -88,18 +95,20 @@ public class MessageProcessor {
     // Store and queue good and bad messages
     private void queueStoreMessages() {
         try{
+            logger.info("Storing {} good messages", goodMessages.size());
             // Store and queue good messages
             for (ProcMessage message : goodMessages) {
                 message.setUuid(storeMessage(message));
-        }
-        queueGood();
-        // Queue bad messages
-        queueBad();
-        // Clear lists
+            }
+            logger.info("Queueing {} good messages", goodMessages.size());
+            queueGood();
+            // Queue bad messages
+            logger.info("Queueing {} bad messages", badMessages.size());
+            queueBad();
+            // Clear lists
             goodMessages.clear();
             badMessages.clear();
-        }
-        catch (Exception e){
+        } catch (Exception e){
             logger.error("Error processing messages", e);
         }
     }
@@ -109,11 +118,12 @@ public class MessageProcessor {
         try{
             ObjectNode goodTotalMessage = objectMapper.createObjectNode();
             goodTotalMessage.put("TOTAL", goodTotalValue);
+            ObjectNode badTotalMessage = objectMapper.createObjectNode();
+            badTotalMessage.put("TOTAL", badTotalValue);
 
-        ObjectNode badTotalMessage = objectMapper.createObjectNode();
-        badTotalMessage.put("TOTAL", badTotalValue);
-
+            logger.info("Sending Good total");
             rabbitMqService.push(request.writeQueueGood, goodTotalMessage);
+            logger.info("Sending Bad total");
             rabbitMqService.push(request.writeQueueBad, badTotalMessage);
         }
         catch (Exception e){

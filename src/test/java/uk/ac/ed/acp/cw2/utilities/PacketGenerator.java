@@ -131,15 +131,12 @@ public class PacketGenerator {
         public void add(TransformTombstone msg){
             // Remove from redis cache
             redisRemove(msg.key);
-            // Add self to written indices
-            writtenIndices.add(messages.size());
             // Update totals
             totalValueWritten += msg.value;
             tombstoneValueWritten += msg.value;
             // Add to packets and messages
             messages.add(msg);
             packets.add(msg.toJson(objectMapper));
-            writtenIndices.add(messages.size());
             // Update total messages processed
             totalMessagesProcessed += 1;
         }
@@ -176,7 +173,6 @@ public class PacketGenerator {
             int index = redisGetKeyIndex(key);
             if (index != -1){
                 redisCache.remove(index);
-                totalRedisUpdates += 1;
                 return true;
             }
             return false;
@@ -184,7 +180,7 @@ public class PacketGenerator {
 
         public Integer redisGetKeyIndex(String key){
             for (int i = 0; i < redisCache.size(); i++){
-                if (redisCache.get(i).key == key){
+                if (redisCache.get(i).key.equals(key)){
                     return i;
                 }
             }
@@ -315,7 +311,7 @@ public class PacketGenerator {
 
 
     public static class PacketListResult {
-
+        public List<String> jsonStringList;
         public String jsonList;
         public List<Float> goodTotals;
         public List<Float> badTotals;
@@ -358,6 +354,7 @@ public class PacketGenerator {
         String jsonList = "[" + String.join(", ", packets) + "]";
 
         PacketListResult result = new PacketListResult();
+        result.jsonStringList = packets;
         result.jsonList = jsonList;
         result.goodTotals = goodTotals;
         result.badTotals = badTotals;
